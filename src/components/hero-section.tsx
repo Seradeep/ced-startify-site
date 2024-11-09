@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import GradientButton from "@/components/gradient-button";
 
 export default function HeroSection() {
   return (
@@ -17,7 +17,7 @@ export default function HeroSection() {
             Conference 2023!
           </p>
           <div className="flex items-center gap-4">
-            <Button size="lg">Get started</Button>
+            <GradientButton label="Get Started" />
           </div>
         </div>
       </div>
