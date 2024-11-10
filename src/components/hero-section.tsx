@@ -132,9 +132,9 @@ export default function HeroSection() {
           </motion.h1>
           <motion.p
             variants={fadeInUp}
-            className="text-sm font-semibold uppercase"
+            className="text-sm font-bold uppercase"
           >
-            National Level Startup Summit
+            National Level Student Startup Ecosystem Conclave 
           </motion.p>
           <motion.div
             variants={fadeInUp}

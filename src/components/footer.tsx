@@ -87,11 +87,13 @@ export default function Footer() {
                 alt="Logo 3"
                 className="size-14"
               />
+               
                <img
                 src="/images/footer_logo.png"
-                alt="Logo 4"
+                alt="Logo 5"
                 className="h-16 w-50"
               />
+              
             </div>
             
           </div>
