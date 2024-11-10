@@ -163,7 +163,7 @@ export default function HeroSection() {
             variants={fadeInUp}
             className="italic text-center text-md sm:text-lg"
           >
-            "Startify 3.0: Empowering Entrepreneurs, Inspiring Innovation."
+            "Startify 3.0: Empowering Stupreneurs, Inspiring Innovation."
           </motion.p>
           <motion.div
             variants={fadeInUp}
