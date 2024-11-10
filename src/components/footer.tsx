@@ -118,7 +118,7 @@ export default function Footer() {
           <p className="flex items-center text-sm text-muted-foreground">
             Designed with{" "}
             <Heart className="mx-1 size-4 text-red-500" aria-label="love" /> by
-            <span className="ml-1 font-bold italic"> CED</span>
+            <span className="ml-1 font-bold italic"> Cibi & Om</span>
           </p>
         </div>
       </CardContent>
