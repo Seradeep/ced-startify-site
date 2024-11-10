@@ -10,13 +10,13 @@ export default function AboutCard({ description, title }: AboutCardProps) {
   return (
     <div
       key={title}
-      className="relative bg-gradient-to-b from-neutral-100 to-white p-6 rounded-3xl border overflow-hidden"
+      className="relative bg-purple-700 p-6 rounded-3xl border border-purple-900 overflow-hidden"
     >
       <Grid size={20} />
-      <TypographyH4 className="text-[22px] underline underline-offset-2 decoration-purple-900 text-purple-800">
+      <TypographyH4 className="text-[22px] underline underline-offset-2 decoration-purple-300 text-white">
         {title}
       </TypographyH4>
-      <TypographyP> {description}</TypographyP>
+      <TypographyP className="text-white">{description}</TypographyP>
     </div>
   );
 }
@@ -36,15 +36,15 @@ export const Grid = ({
     [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
   ];
   return (
-    <div className="pointer-events-none absolute left-1/2 top-0  -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
-      <div className="absolute inset-0 bg-gradient-to-r  [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-zinc-900/30 from-zinc-100/30 to-zinc-300/30 dark:to-zinc-900/30 opacity-100">
+    <div className="pointer-events-none absolute left-1/2 top-0 -ml-20 -mt-2 h-full w-full [mask-image:linear-gradient(white,transparent)]">
+      <div className="absolute inset-0 bg-gradient-to-r [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-zinc-900/30 from-zinc-100/30 to-zinc-300/30 dark:to-zinc-900/30 opacity-100">
         <GridPattern
           width={size ?? 20}
           height={size ?? 20}
           x="-12"
           y="4"
           squares={p}
-          className="absolute inset-0 h-full w-full  mix-blend-overlay dark:fill-white/10 dark:stroke-white/10 stroke-black/10 fill-black/10"
+          className="absolute inset-0 h-full w-full mix-blend-overlay dark:fill-white/10 dark:stroke-white/10 stroke-black/10 fill-black/10"
         />
       </div>
     </div>

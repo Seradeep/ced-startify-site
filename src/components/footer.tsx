@@ -87,10 +87,13 @@ export default function Footer() {
                 alt="Logo 3"
                 className="size-14"
               />
+               <img
+                src="/images/footer_logo.png"
+                alt="Logo 4"
+                className="h-16 w-50"
+              />
             </div>
-            <span className="mt-2 text-xl font-bold text-purple-600">
-              Startify 3.0
-            </span>
+            
           </div>
           <div className="flex flex-col items-center sm:items-start">
             <h2 className="mb-4 text-lg font-semibold">Quick Links</h2>
