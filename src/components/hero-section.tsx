@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
