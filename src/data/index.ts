@@ -12,13 +12,13 @@ export const navlinks = [
     href: "#schedule",
   },
   {
-    name: "Sponsors",
-    href: "#sponsors",
-  },
-  {
     name: "FAQs",
     href: "#faqs",
   },
+  {
+    name: "Contact",
+    href: "#contact",
+  }
 ];
 
 export const stats = [

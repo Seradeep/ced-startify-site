@@ -95,107 +95,113 @@ export default function HeroSection() {
   const targetDate = new Date("2025-02-21T09:00:00");
 
   return (
-    <div className="relative min-h-screen w-full bg-[#a81d8e] text-white">
-      <div className="absolute inset-0 h-full w-full bg-gray-900/60 " />
+    <section id="home" className="relative min-h-screen w-full bg-[#a81d8e] text-white rounded-b-lg">
+      <div className="absolute inset-0 h-full w-full bg-gray-900/60 rounded-b-lg" />
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
-        <motion.div
-          className="max-sm:text-left text-center max-w-3xl mt-4"
-          initial="initial"
-          animate="animate"
-          variants={{
-            animate: { transition: { staggerChildren: 0.1 } },
-          }}
-        >
-          <motion.h3
-            variants={fadeInUp}
-            className="mt-2 text-xl sm:text-2xl font-bold text-white-500"
-          >
-            Centre for Entrepreneurship Development, Anna University
-          </motion.h3>
-          <motion.p
-            variants={fadeInUp}
-            className="text-sm uppercase tracking-wide text-white"
-          >
-            Presents
-          </motion.p>
-          <motion.h1
-            variants={fadeInUp}
-            className="max-sm:flex max-sm:items-start"
-          >
-            <TypeWriterEffect
-              words={[
-                { text: "Startify", className: "text-yellow-500" },
-                { text: " 3.0", className: "text-white" },
-              ]}
-              className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4"
-            />
-          </motion.h1>
-          <motion.p
-            variants={fadeInUp}
-            className="text-sm font-bold uppercase"
-          >
-            National Level Student Startup Ecosystem Conclave
-          </motion.p>
+        <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between">
           <motion.div
-            variants={fadeInUp}
-            className="flex max-sm:items-start sm:justify-center mt-2"
+            className="lg:w-1/2 text-left max-w-3xl mt-4"
+            initial="initial"
+            animate="animate"
+            variants={{
+              animate: { transition: { staggerChildren: 0.1 } },
+            }}
           >
-            <GradientButton
-              className="max-sm:w-fit pointer-events-none"
-              label={
-                <span className="flex items-center">
-                  <MapPin className="mr-2" size={16} />
-                  Anna University, Chennai
-                </span>
-              }
-            />
+            <motion.h3
+              variants={fadeInUp}
+              className="max-sm:mt-4 mt-2 text-xl sm:text-2xl font-bold text-white-500"
+            >
+              Centre for Entrepreneurship Development, Anna University
+            </motion.h3>
+            <motion.p
+              variants={fadeInUp}
+              className="text-sm uppercase tracking-wide text-white"
+            >
+              Presents
+            </motion.p>
+            <motion.h1 variants={fadeInUp} className="flex items-start">
+              <TypeWriterEffect
+                words={[
+                  { text: "Startify", className: "text-yellow-500" },
+                  { text: " 3.0", className: "text-white" },
+                ]}
+                className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight max-sm:mt-3 max-sm:mb-1 my-4"
+              />
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              className="text-sm font-bold uppercase"
+            >
+              National Level Student Startup Ecosystem Conclave
+            </motion.p>
+            <motion.div variants={fadeInUp} className="flex items-start mt-2">
+              <GradientButton
+                className="w-fit pointer-events-none"
+                label={
+                  <span className="flex items-center">
+                    <MapPin className="mr-2" size={16} />
+                    Anna University, Chennai
+                  </span>
+                }
+              />
+            </motion.div>
+            <motion.div variants={fadeInUp}>
+              <Separator className="my-6 bg-gray-400" />
+            </motion.div>
+            <motion.p
+              variants={fadeInUp}
+              className="italic text-left text-md sm:text-lg"
+            >
+              "Startify 3.0: Empowering Stupreneurs, Inspiring Innovation."
+            </motion.p>
+            <motion.div variants={fadeInUp} className="flex gap-4 mt-6">
+              <GradientButton className="w-[30%]" label="Register Now" />
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="mt-8 flex flex-col items-center sm:w-3/4"
+            >
+              <p className="text-base text-white">In Association with</p>
+              <div className="flex flex-row items-center justify-between gap-10">
+                <img
+                  src="/images/startuptn_logo.webp"
+                  alt="StartupTN Logo"
+                  className="w-40 sm:w-60 h-auto"
+                />
+                <img
+                  src="/images/edii_logo.webp"
+                  alt="Edii Logo"
+                  className="w-16 sm:w-24 h-16"
+                />
+              </div>
+            </motion.div>
           </motion.div>
-          <motion.div variants={fadeInUp}>
-            <Separator className="my-6 bg-gray-400" />
-          </motion.div>
-          <motion.p
-            variants={fadeInUp}
-            className="italic text-center text-md sm:text-lg"
-          >
-            "Startify 3.0: Empowering Stupreneurs, Inspiring Innovation."
-          </motion.p>
+
           <motion.div
-            variants={fadeInUp}
-            className="flex justify-center gap-4 mt-6"
-          >
-            <GradientButton className="w-1/2" label="Register Now" />
-          </motion.div>
-          <motion.div
-            variants={fadeInUp}
-            className="mt-8 w-full flex items-center justify-center"
+            className="lg:w-1/2 mt-8 lg:mt-0"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <CountdownTimer targetDate={targetDate} />
-          </motion.div>
-
-          {/* In Association With Section */}
-          <motion.div
-            variants={fadeInUp}
-            className="mt-8 text-center"
-          >
-            <p className="text-sm text-white">In Association with</p>
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-2">
-              <img
-                src="/images/tn.png"
-                alt="Logo 1"
-                className="w-60 sm:w-60 h-auto"
-              />
-              <img
-                src="/images/EDII.png"
-                alt="Logo 2"
-                className="w-24 sm:w-24 h-24"
-              />
+            <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                <source src="/videos/hero_vid.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div className="mt-8 w-full flex items-center justify-center">
+              <CountdownTimer targetDate={targetDate} />
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

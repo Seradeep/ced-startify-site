@@ -7,7 +7,7 @@ import DaySchedule from "./day-schedule";
 
 export default function Schedule() {
   return (
-    <section className="container mx-auto pb-8 px-8 lg:pb-20 flex flex-col items-center justify-center">
+    <section id="schedule" className="container mx-auto pb-8 px-8 lg:pb-20 flex flex-col items-center justify-center">
       <h4 className="scroll-m-20 text-4xl font-extrabold text-[#263238] tracking-tight lg:text-5xl pb-2">
         Schedule
       </h4>

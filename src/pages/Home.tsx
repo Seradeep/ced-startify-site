@@ -6,7 +6,6 @@ import HeroSection from "@/components/hero-section";
 import Navbar from "@/components/navbar";
 import OurStats from "@/components/our-stats";
 import Schedule from "@/components/schedule";
-import Sponsors from "@/components/sponsors";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
       <AboutEvent />
       <OurStats />
       <Schedule />
-      <Sponsors />
       <FAQSection />
       <Footer />
     </>

@@ -14,7 +14,7 @@ import { faqs } from "@/data";
 
 export default function FAQSection() {
   return (
-    <section className="py-8 px-8 lg:py-20">
+    <section id="faqs" className="py-8 px-8 lg:py-20">
       <div className="container mx-auto">
         <div className="text-center">
           <TypographyH1 className="mb-2 text-[#263238]">

@@ -71,12 +71,14 @@ const Address = () => (
 
 export default function Footer() {
   return (
-    <Card className="w-full rounded-t-xl border-t bg-secondary/50 shadow-lg">
+    <Card
+      id="contact"
+      className="w-full rounded-t-xl border-t bg-secondary/50 shadow-lg"
+    >
       <CardContent className="p-6 pb-1">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col items-center sm:items-start">
             <div className="flex items-center space-x-4">
-              {/* <img src="/vite.svg" alt="Startify Logo" className="size-14" /> */}
               <img
                 src="/images/anna_univ_logo.webp"
                 alt="Logo 2"
@@ -87,15 +89,13 @@ export default function Footer() {
                 alt="Logo 3"
                 className="size-14"
               />
-               
-               <img
+
+              <img
                 src="/images/footer_logo.png"
                 alt="Logo 5"
                 className="h-16 w-50"
               />
-              
             </div>
-            
           </div>
           <div className="flex flex-col items-center sm:items-start">
             <h2 className="mb-4 text-lg font-semibold">Quick Links</h2>

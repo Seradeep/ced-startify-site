@@ -5,7 +5,7 @@ import { TypographyH1, TypographyH2, TypographyLead } from "./ui/typography";
 
 export default function AboutEvent() {
   return (
-    <section className="container mx-auto flex flex-col items-center px-4 py-10">
+    <section id="about" className="container mx-auto flex flex-col items-center px-4 py-10">
       <TypographyH1 className="pb-4">
         About <span className="text-purple-600">Startify 3.0</span>
       </TypographyH1>
