@@ -95,7 +95,7 @@ export default function HeroSection() {
   const targetDate = new Date("2025-02-21T09:00:00");
 
   return (
-    <div className="relative min-h-screen w-full bg-[url('/images/hero-bg.jpeg')] bg-cover bg-center bg-no-repeat text-white">
+    <div className="relative min-h-screen w-full bg-[url('/images/hero-bg.jpg')] bg-cover bg-center bg-no-repeat text-white">
       <div className="absolute inset-0 h-full w-full bg-gray-900/60" />
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
         <motion.div
