@@ -99,7 +99,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 h-full w-full bg-gray-900/60" />
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
         <motion.div
-          className="text-center max-w-3xl mt-4"
+          className=" max-sm:text-left text-center max-w-3xl mt-4"
           initial="initial"
           animate="animate"
           variants={{
@@ -108,25 +108,26 @@ export default function HeroSection() {
         >
           <motion.h3
             variants={fadeInUp}
-            className="mt-2 text-xl font-semibold text-blue-300"
+            className="mt-2 text-xl sm:text-2xl font-semibold text-blue-500"
           >
             Centre for Entrepreneurship Development
           </motion.h3>
           <motion.p
             variants={fadeInUp}
-            className="text-sm uppercase tracking-wide"
+            className="text-sm uppercase tracking-wide underline underline-offset-2 text-black"
           >
             Presents
           </motion.p>
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4"
+            className="max-sm:flex max-sm:items-start"
           >
             <TypeWriterEffect
               words={[
                 { text: "Startify", className: "text-purple-400" },
                 { text: " 3.0" },
               ]}
+              className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4"
             />
           </motion.h1>
           <motion.p
@@ -135,8 +136,12 @@ export default function HeroSection() {
           >
             National Level Startup Summit
           </motion.p>
-          <motion.div variants={fadeInUp} className="flex justify-center mt-2">
+          <motion.div
+            variants={fadeInUp}
+            className="flex max-sm:items-start sm:justify-center mt-2"
+          >
             <GradientButton
+              className="max-sm:w-fit pointer-events-none"
               label={
                 <span className="flex items-center">
                   <MapPin className="mr-2" size={16} />
@@ -150,11 +155,14 @@ export default function HeroSection() {
           </motion.div>
           <motion.p
             variants={fadeInUp}
-            className="text-lg sm:text-xl font-semibold"
+            className="text-lg text-center sm:text-xl font-semibold"
           >
             South India's Largest Startup Hackathon
           </motion.p>
-          <motion.p variants={fadeInUp} className="italic text-md sm:text-lg">
+          <motion.p
+            variants={fadeInUp}
+            className="italic text-center text-md sm:text-lg"
+          >
             "Startify 3.0: Empowering Entrepreneurs, Inspiring Innovation."
           </motion.p>
           <motion.div

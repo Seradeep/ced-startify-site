@@ -14,10 +14,10 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <CMQuote />
-      <Sponsors />
       <AboutEvent />
       <OurStats />
       <Schedule />
+      <Sponsors />
       <FAQSection />
       <Footer />
     </>

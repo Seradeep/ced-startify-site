@@ -5,13 +5,13 @@ export default function Sponsors() {
         <h4 className="text-[#263238] scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
           SPONSORED BY
         </h4>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-          {[...Array(6)].map((_, key) => (
+        <div className="flex gap-6 mt-6 items-center justify-center">
+          {[...Array(2)].map((_, key) => (
             <img
               key={key}
-              src={`${key % 2 === 0 ? "/images/google.svg" : "/images/amazon.svg"}`}
+              src={`${key % 2 === 0 ? "/images/ced_logo.webp" : "/images/anna_univ_logo.webp"}`}
               alt={`Sponsor ${key + 1}`}
-              className="w-40 h-full mx-auto"
+              className="w-28 sm:w-40 h-full mx-auto"
             />
           ))}
         </div>
