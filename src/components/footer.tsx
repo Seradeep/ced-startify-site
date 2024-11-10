@@ -48,7 +48,7 @@ const NavLinks = () => (
 const Address = () => (
   <address className="flex flex-col space-y-2 text-sm text-muted-foreground not-italic max-sm:pl-4">
     <div className="flex items-start">
-      <MapPin className="mr-2 size-12 sm:size-10" />
+      <MapPin className="mr-2 size-16 sm:size-10" />
       <span>
         302, 2nd Floor, Platinum Jubilee Building AC Tech Campus, Sardar Patel
         Rd, Anna University, Guindy, Chennai, Tamil Nadu, 600025
