@@ -95,11 +95,11 @@ export default function HeroSection() {
   const targetDate = new Date("2025-02-21T09:00:00");
 
   return (
-    <div className="relative min-h-screen w-full bg-[url('/images/hero-bg.jpg')] bg-cover bg-center bg-no-repeat text-white">
-      <div className="absolute inset-0 h-full w-full bg-gray-900/60" />
+    <div className="relative min-h-screen w-full bg-[#a81d8e] text-white">
+      <div className="absolute inset-0 h-full w-full bg-gray-900/60 " />
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
         <motion.div
-          className=" max-sm:text-left text-center max-w-3xl mt-4"
+          className="max-sm:text-left text-center max-w-3xl mt-4"
           initial="initial"
           animate="animate"
           variants={{
@@ -108,13 +108,13 @@ export default function HeroSection() {
         >
           <motion.h3
             variants={fadeInUp}
-            className="mt-2 text-xl sm:text-2xl font-semibold text-blue-500"
+            className="mt-2 text-xl sm:text-2xl font-bold text-white-500"
           >
-            Centre for Entrepreneurship Development
+            Centre for Entrepreneurship Development, Anna University
           </motion.h3>
           <motion.p
             variants={fadeInUp}
-            className="text-sm uppercase tracking-wide underline underline-offset-2 text-black"
+            className="text-sm uppercase tracking-wide text-white"
           >
             Presents
           </motion.p>
@@ -124,17 +124,17 @@ export default function HeroSection() {
           >
             <TypeWriterEffect
               words={[
-                { text: "Startify", className: "text-purple-400" },
-                { text: " 3.0" },
+                { text: "Startify", className: "text-yellow-500" },
+                { text: " 3.0", className: "text-white" },
               ]}
               className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4"
             />
           </motion.h1>
           <motion.p
             variants={fadeInUp}
-            className="text-sm font-semibold uppercase"
+            className="text-sm font-bold uppercase"
           >
-            National Level Startup Summit
+            National Level Student Startup Ecosystem Conclave
           </motion.p>
           <motion.div
             variants={fadeInUp}
@@ -155,15 +155,9 @@ export default function HeroSection() {
           </motion.div>
           <motion.p
             variants={fadeInUp}
-            className="text-lg text-center sm:text-xl font-semibold"
-          >
-            South India's Largest Startup Hackathon
-          </motion.p>
-          <motion.p
-            variants={fadeInUp}
             className="italic text-center text-md sm:text-lg"
           >
-            "Startify 3.0: Empowering Entrepreneurs, Inspiring Innovation."
+            "Startify 3.0: Empowering Stupreneurs, Inspiring Innovation."
           </motion.p>
           <motion.div
             variants={fadeInUp}
@@ -179,6 +173,26 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <CountdownTimer targetDate={targetDate} />
+          </motion.div>
+
+          {/* In Association With Section */}
+          <motion.div
+            variants={fadeInUp}
+            className="mt-8 text-center"
+          >
+            <p className="text-sm text-white">In Association with</p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-2">
+              <img
+                src="/images/tn.png"
+                alt="Logo 1"
+                className="w-60 sm:w-60 h-auto"
+              />
+              <img
+                src="/images/EDII.png"
+                alt="Logo 2"
+                className="w-24 sm:w-24 h-24"
+              />
+            </div>
           </motion.div>
         </motion.div>
       </div>

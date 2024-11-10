@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import GradientButton from "./gradient-button";
+
 const navItems = [
   { name: "Home", href: "#" },
   { name: "About", href: "#about" },
@@ -14,26 +15,15 @@ const navItems = [
   { name: "Contact", href: "#contact" },
 ];
 
-const NavLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => {
+const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   return (
     <Link href={href}>
-      <motion.a
-        className="relative text-neutral-100 transition-colors duration-200"
-        whileHover="hover"
-      >
+      <motion.a className="relative text-neutral-100 transition-colors duration-200" whileHover="hover">
         {children}
         <motion.span
           className="absolute left-0 bottom-0 w-full h-0.5 bg-gray-900"
           initial={{ scaleX: 0 }}
-          variants={{
-            hover: { scaleX: 1 },
-          }}
+          variants={{ hover: { scaleX: 1 } }}
           transition={{ duration: 0.2 }}
         />
       </motion.a>
@@ -94,16 +84,17 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, type: "spring" }}
             >
-              <Link href="/" className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center space-x-4">
                 <img
-                  src="/images/ced_logo.webp"
+                  src="/images/logo.webp"
                   alt="Startify Logo"
-                  className="h-8 w-auto"
+                  className="h-16 w-50"
                 />
-                <span className="text-xl font-bold text-purple-600">
-                  Startify
-                </span>
               </Link>
+              {/* Add text below the logo */}
+              {/*<p className="text-[9px] text-center text-white mt-1 ml-6 -mt-1">
+                By CED, Anna University
+              </p>*/}
             </motion.div>
 
             <div className="hidden md:flex items-center space-x-6 text-white">
@@ -112,14 +103,8 @@ export default function Navbar() {
                   {item.name}
                 </NavLink>
               ))}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <GradientButton
-                  className="max-sm:w-full"
-                  label={"Register Now"}
-                />
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <GradientButton className="max-sm:w-full" label={"Register Now"} />
               </motion.div>
             </div>
 
@@ -131,24 +116,14 @@ export default function Navbar() {
                     <span className="sr-only">Toggle menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent
-                  className="w-1/2 rounded-tl-md rounded-bl-md"
-                  side="right"
-                >
+                <SheetContent className="w-1/2 rounded-tl-md rounded-bl-md" side="right">
                   <nav className="flex flex-col space-y-4 mt-6">
                     {navItems.map((item) => (
-                      <MobileNavLink
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                      >
+                      <MobileNavLink key={item.name} href={item.href} onClick={() => setIsOpen(false)}>
                         {item.name}
                       </MobileNavLink>
                     ))}
-                    <GradientButton
-                      className="max-sm:w-full"
-                      label={"Register Now"}
-                    />
+                    <GradientButton className="max-sm:w-full" label={"Register Now"} />
                   </nav>
                 </SheetContent>
               </Sheet>
