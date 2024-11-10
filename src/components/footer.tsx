@@ -32,7 +32,7 @@ const SocialMediaLinks = () => (
 );
 
 const NavLinks = () => (
-  <div className="flex max-sm:flex-col flex-row flex-wrap items-center justify-center gap-4 sm:justify-end">
+  <div className="flex flex-col flex-wrap items-center justify-center gap-4 sm:justify-end">
     {["About Startify 3.0", "Schedule", "Highlights", "FAQs"].map((text) => (
       <a
         key={text}
@@ -46,9 +46,9 @@ const NavLinks = () => (
 );
 
 const Address = () => (
-  <address className="flex flex-col space-y-2 text-sm text-muted-foreground not-italic max-sm:pl-4">
+  <address className="flex flex-col space-y-2 text-sm text-muted-foreground not-italic max-sm:px-4">
     <div className="flex items-start">
-      <MapPin className="mr-2 size-16 sm:size-10" />
+      <MapPin className="mr-2 size-7 sm:size-10" />
       <span>
         302, 2nd Floor, Platinum Jubilee Building AC Tech Campus, Sardar Patel
         Rd, Anna University, Guindy, Chennai, Tamil Nadu, 600025
@@ -92,15 +92,13 @@ export default function Footer() {
               Startify 3.0
             </span>
           </div>
-          <div className="flex flex-row gap-x-4 justify-between">
-            <div className="flex flex-col items-center sm:items-start">
-              <h2 className="mb-4 text-lg font-semibold">Quick Links</h2>
-              <NavLinks />
-            </div>
-            <div className="max-sm:ml-4 flex flex-1 flex-col items-center sm:items-start">
-              <h2 className="mb-4 text-lg font-semibold">Contact Us</h2>
-              <Address />
-            </div>
+          <div className="flex flex-col items-center sm:items-start">
+            <h2 className="mb-4 text-lg font-semibold">Quick Links</h2>
+            <NavLinks />
+          </div>
+          <div className="flex flex-1 flex-col items-center sm:items-start">
+            <h2 className="mb-4 text-lg font-semibold">Contact Us</h2>
+            <Address />
           </div>
           <div className="flex flex-col items-center sm:items-start">
             <h2 className="mb-4 text-lg font-semibold">Follow Us</h2>
