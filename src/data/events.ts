@@ -10,7 +10,7 @@ export const events = [
       "A platform for student startups and alumni (up to 3 years) startups to pitch their business plans to a panel of investors, providing opportunities for funding, mentorship, and networking.",
   },
   {
-    title: "Startup Mugavari",
+    title: "Mughavari",
     description:
       "Aimed at helping students with validated innovations to register their startups, the startup sprint drive will be held three times during the conclave to assist in different stages (early-stage ideas, mid-stage validation, incorporation) of company formation and patent filing.",
   },
@@ -20,7 +20,7 @@ export const events = [
       "Awards to recognize colleges with exceptional Entrepreneurship Cells that have demonstrated outstanding performance in promoting entrepreneurship activities. Award Categories: 1. Super Star 2. Rising Star",
   },
   {
-    title: "Guru's Speech",
+    title: "Guru's Pitch",
     description:
       "To recognize and celebrate the entrepreneurial spirit within academia. This award will highlight successful faculty-led startups that have made significant contributions to innovation and societal impact.",
   },
