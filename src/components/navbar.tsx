@@ -92,9 +92,9 @@ export default function Navbar() {
                 />
               </Link>
               {/* Add text below the logo */}
-              <p className="text-[9px] text-center text-white mt-1 ml-6 -mt-1">
+              {/*<p className="text-[9px] text-center text-white mt-1 ml-6 -mt-1">
                 By CED, Anna University
-              </p>
+              </p>*/}
             </motion.div>
 
             <div className="hidden md:flex items-center space-x-6 text-white">

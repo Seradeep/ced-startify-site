@@ -99,7 +99,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 h-full w-full bg-gray-900/60 " />
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
         <motion.div
-          className=" max-sm:text-left text-center max-w-3xl mt-4"
+          className="max-sm:text-left text-center max-w-3xl mt-4"
           initial="initial"
           animate="animate"
           variants={{
@@ -110,7 +110,7 @@ export default function HeroSection() {
             variants={fadeInUp}
             className="mt-2 text-xl sm:text-2xl font-bold text-white-500"
           >
-            Centre for Entrepreneurship Development
+            Centre for Entrepreneurship Development, Anna University
           </motion.h3>
           <motion.p
             variants={fadeInUp}
@@ -125,7 +125,7 @@ export default function HeroSection() {
             <TypeWriterEffect
               words={[
                 { text: "Startify", className: "text-yellow-500" },
-                { text: " 3.0", className: "text-white"  },
+                { text: " 3.0", className: "text-white" },
               ]}
               className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4"
             />
@@ -134,7 +134,7 @@ export default function HeroSection() {
             variants={fadeInUp}
             className="text-sm font-bold uppercase"
           >
-            National Level Student Startup Ecosystem Conclave 
+            National Level Student Startup Ecosystem Conclave
           </motion.p>
           <motion.div
             variants={fadeInUp}
@@ -155,12 +155,6 @@ export default function HeroSection() {
           </motion.div>
           <motion.p
             variants={fadeInUp}
-            className="text-lg text-center sm:text-xl font-semibold"
-          >
-            South India's Largest Startup Hackathon
-          </motion.p>
-          <motion.p
-            variants={fadeInUp}
             className="italic text-center text-md sm:text-lg"
           >
             "Startify 3.0: Empowering Stupreneurs, Inspiring Innovation."
@@ -179,6 +173,19 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <CountdownTimer targetDate={targetDate} />
+          </motion.div>
+
+          {/* Powered by Section */}
+          <motion.div
+            variants={fadeInUp}
+            className="mt-8 text-center"
+          >
+            <p className="text-sm text-white">Powered by</p>
+            <img
+              src="/images/tn.png"
+              alt="Powered by"
+              className="mx-auto mt-2 w-48 sm:w-60 h-auto"
+            />
           </motion.div>
         </motion.div>
       </div>
