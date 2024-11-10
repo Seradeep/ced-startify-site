@@ -9,7 +9,7 @@ import { stats } from "@/data";
 
 export default function OurStats() {
   return (
-    <section className="container mx-auto grid gap-10 px-8 pt-28 pb-44 lg:grid-cols-1 lg:gap-20 xl:grid-cols-2 xl:place-items-center">
+    <section className="container grid gap-10 px-4 sm:px-24 pt-28 pb-44 md:grid-cols-2 md:gap-20">
       <div>
         <h4 className="text-orange-600 mb-4 font-medium">Our Stats</h4>
         <p className="text-5xl font-bold leading-tight lg:w-3/4">

@@ -1,3 +1,26 @@
+export const navlinks = [
+  {
+    name: "Home",
+    href: "#home",
+  },
+  {
+    name: "About",
+    href: "#about",
+  },
+  {
+    name: "Schedule",
+    href: "#schedule",
+  },
+  {
+    name: "Sponsors",
+    href: "#sponsors",
+  },
+  {
+    name: "FAQs",
+    href: "#faqs",
+  },
+];
+
 export const stats = [
   {
     count: "1,500+",

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { CalendarClock, MapPin } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import GradientButton from "./gradient-button";
 
