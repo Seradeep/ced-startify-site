@@ -71,6 +71,19 @@ export default function CMQuote() {
               />
             </CardContent>
           </Card>
+           {/* Second Image: Positioned below on mobile, overlaps on larger screens */}
+  <Card className="bg-transparent border-none shadow-none overflow-hidden sm:absolute sm:bottom-[-190] sm:right-0 sm:transform sm:translate-x-4 sm:translate-y-4">
+    <CardContent className="p-0">
+      <img
+        src="/images/dcm.webp"
+        alt="Thiru. M.K. Stalin, Hon'ble Chief Minister of Tamil Nadu"
+        className="max-w-full h-auto rounded-lg shadow-lg w-[260px] h-[200px] sm:w-[200px] sm:h-[200px] md:w-[250px] md:h-[250px]"
+        width={200} // Adjusted size for mobile
+        height={200}
+        
+      />
+    </CardContent>
+  </Card>
         </motion.div>
       </div>
     </div>

@@ -95,8 +95,8 @@ export default function HeroSection() {
   const targetDate = new Date("2025-02-21T09:00:00");
 
   return (
-    <div className="relative min-h-screen w-full bg-[url('/images/hero-bg.jpg')] bg-cover bg-center bg-no-repeat text-white">
-      <div className="absolute inset-0 h-full w-full bg-gray-900/60" />
+    <div className="relative min-h-screen w-full bg-[#a81d8e] text-white">
+      <div className="absolute inset-0 h-full w-full bg-gray-900/60 " />
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
         <motion.div
           className=" max-sm:text-left text-center max-w-3xl mt-4"
@@ -108,13 +108,13 @@ export default function HeroSection() {
         >
           <motion.h3
             variants={fadeInUp}
-            className="mt-2 text-xl sm:text-2xl font-semibold text-blue-500"
+            className="mt-2 text-xl sm:text-2xl font-bold text-white-500"
           >
             Centre for Entrepreneurship Development
           </motion.h3>
           <motion.p
             variants={fadeInUp}
-            className="text-sm uppercase tracking-wide underline underline-offset-2 text-black"
+            className="text-sm uppercase tracking-wide text-white"
           >
             Presents
           </motion.p>
@@ -124,8 +124,8 @@ export default function HeroSection() {
           >
             <TypeWriterEffect
               words={[
-                { text: "Startify", className: "text-purple-400" },
-                { text: " 3.0" },
+                { text: "Startify", className: "text-yellow-500" },
+                { text: " 3.0", className: "text-white"  },
               ]}
               className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4"
             />

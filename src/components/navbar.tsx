@@ -94,15 +94,13 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, type: "spring" }}
             >
-              <Link href="/" className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center space-x-4">
                 <img
-                  src="/images/ced_logo.webp"
+                  src="/images/logo.webp"
                   alt="Startify Logo"
-                  className="h-8 w-auto"
+                  className="h-16 w-60"
                 />
-                <span className="text-xl font-bold text-purple-600">
-                  Startify
-                </span>
+                
               </Link>
             </motion.div>
 
