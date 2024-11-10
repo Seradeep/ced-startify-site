@@ -5,6 +5,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import GradientButton from "./gradient-button";
 const navItems = [
   { name: "Home", href: "#" },
   { name: "About", href: "#about" },
@@ -23,7 +24,7 @@ const NavLink = ({
   return (
     <Link href={href}>
       <motion.a
-        className="relative text-gray-900 transition-colors duration-200"
+        className="relative text-neutral-100 transition-colors duration-200"
         whileHover="hover"
       >
         {children}
@@ -83,7 +84,7 @@ export default function Navbar() {
           className={cn(
             "mx-auto max-sm:px-2 sm:px-24",
             isScrolled
-              ? "max-w-5xl backdrop-blur-md shadow-md rounded-md py-4 max-sm:mx-3 sm:px-4"
+              ? "max-w-5xl backdrop-blur-md shadow-md rounded-md py-4 max-sm:mx-3 sm:px-4 bg-neutral-900/35"
               : "container"
           )}
         >
@@ -99,7 +100,7 @@ export default function Navbar() {
                   alt="Startify Logo"
                   className="h-8 w-auto"
                 />
-                <span className="text-xl font-bold text-purple-900">
+                <span className="text-xl font-bold text-purple-600">
                   Startify
                 </span>
               </Link>
@@ -115,9 +116,10 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700">
-                  Apply Now
-                </Button>
+                <GradientButton
+                  className="max-sm:w-full"
+                  label={"Register Now"}
+                />
               </motion.div>
             </div>
 
@@ -129,7 +131,10 @@ export default function Navbar() {
                     <span className="sr-only">Toggle menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent className="w-1/2" side="right">
+                <SheetContent
+                  className="w-1/2 rounded-tl-md rounded-bl-md"
+                  side="right"
+                >
                   <nav className="flex flex-col space-y-4 mt-6">
                     {navItems.map((item) => (
                       <MobileNavLink
@@ -140,9 +145,10 @@ export default function Navbar() {
                         {item.name}
                       </MobileNavLink>
                     ))}
-                    <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 w-full">
-                      Apply Now
-                    </Button>
+                    <GradientButton
+                      className="max-sm:w-full"
+                      label={"Register Now"}
+                    />
                   </nav>
                 </SheetContent>
               </Sheet>
