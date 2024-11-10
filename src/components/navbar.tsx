@@ -98,7 +98,7 @@ export default function Navbar() {
                 <img
                   src="/images/logo.webp"
                   alt="Startify Logo"
-                  className="h-16 w-60"
+                  className="h-16 w-50"
                 />
                 
               </Link>
