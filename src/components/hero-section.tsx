@@ -175,17 +175,24 @@ export default function HeroSection() {
             <CountdownTimer targetDate={targetDate} />
           </motion.div>
 
-          {/* Powered by Section */}
+          {/* In Association With Section */}
           <motion.div
             variants={fadeInUp}
             className="mt-8 text-center"
           >
-            <p className="text-sm text-white">Powered by</p>
-            <img
-              src="/images/tn.png"
-              alt="Powered by"
-              className="mx-auto mt-2 w-48 sm:w-60 h-auto"
-            />
+            <p className="text-sm text-white">In Association with</p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-2">
+              <img
+                src="/images/tn.png"
+                alt="Logo 1"
+                className="w-60 sm:w-60 h-auto"
+              />
+              <img
+                src="/images/EDII.png"
+                alt="Logo 2"
+                className="w-24 sm:w-24 h-24"
+              />
+            </div>
           </motion.div>
         </motion.div>
       </div>
