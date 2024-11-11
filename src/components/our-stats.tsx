@@ -11,7 +11,7 @@ export default function OurStats() {
   return (
     <section className="container grid gap-10 px-4 sm:px-24 pt-28 pb-44 md:grid-cols-2 md:gap-20">
       <div>
-        <h4 className="text-orange-600 mb-4 font-medium">Our Stats</h4>
+        <h4 className="text-purple-900 mb-4 font-medium">Our Stats</h4>
         <p className="text-5xl font-bold leading-tight lg:w-3/4">
           Startify 3.0 Highlights
         </p>
@@ -25,7 +25,7 @@ export default function OurStats() {
           {stats.map((stat, index) => (
             <Card className="bg-transparent w-full" key={index}>
               <CardHeader>
-                <CardTitle className="text-orange-500 text-3xl font-semibold">
+                <CardTitle className="text-purple-900 text-3xl font-semibold">
                   {stat.count}
                 </CardTitle>
                 <CardDescription className="text-[#263238] mt-1 font-medium">
