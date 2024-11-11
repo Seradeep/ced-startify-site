@@ -51,20 +51,33 @@ const Address = () => (
     <div className="flex items-start">
       <MapPin className="mr-2 size-7 sm:size-10" />
       <span>
+      <a
+      href="https://www.google.com/maps/dir//302,+2nd+Floor,+Platinum+Jubilee+Building+AC+Tech+Campus,+Sardar+Patel+Rd,+Anna+University,+Guindy,+Chennai,+Tamil+Nadu+600025/@13.0087452,80.1550457,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a5267c89a1b24f9:0x7941fa43c361fff0!2m2!1d80.2374476!2d13.0087582?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-purple-700"
+    >
         302, 2nd Floor, Platinum Jubilee Building AC Tech Campus, Sardar Patel
         Rd, Anna University, Guindy, Chennai, Tamil Nadu, 600025
+        </a>
       </span>
     </div>
     <div className="flex items-center">
       <Phone className="mr-2 size-4" />
-      <a href="tel:+917894512345" className="hover:text-purple-700">
-        +91 78945 12345
-      </a>
+      <a href="tel:044 22359289/87" className="hover:text-purple-700">
+      044 22359289
+        </a>
+    </div>
+    <div className="flex items-center">
+      <Phone className="mr-2 size-4" />
+      <a href="tel:044 22359287" className="hover:text-purple-700">
+      044 22359287
+        </a>
     </div>
     <div className="flex items-center">
       <Mail className="mr-2 size-4" />
-      <a href="mailto:info@startify.com" className="hover:text-purple-700">
-        info@startify.com
+      <a href="mailto:cedau.outreach@gmail.com" className="hover:text-purple-700">
+      cedau.outreach@gmail.com
       </a>
     </div>
   </address>

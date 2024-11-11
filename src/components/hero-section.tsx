@@ -141,7 +141,7 @@ export default function HeroSection() {
               variants={fadeInUp}
               className="text-sm font-bold uppercase"
             >
-              International Level Student Startup Ecosystem Conclave
+              International Student Startup Ecosystem Conclave
             </motion.p>
             <motion.div variants={fadeInUp} className="flex items-start mt-2">
               <GradientButton
@@ -165,6 +165,24 @@ export default function HeroSection() {
             </motion.p>
             <motion.div variants={fadeInUp} className="flex gap-4 mt-6">
               <GradientButton className="w-[30%]" label="Register Now" />
+            </motion.div>
+            <motion.div
+              variants={fadeInUp}
+              className="mt-8 flex flex-col items-center lg:w-3/4"
+            >
+              <p className="text-base text-white">An Initiative by</p>
+              <div className="flex flex-row items-center justify-between gap-10">
+                <img
+                  src="/images/anna_univ_logo.webp"
+                  alt="AnnaLogo"
+                  className="size-16"
+                />
+                <img
+                  src="/images/ced_logo.webp"
+                  alt="ced Logo"
+                  className="size-16"
+                />
+              </div>
             </motion.div>
 
             <motion.div
