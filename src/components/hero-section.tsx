@@ -101,7 +101,7 @@ export default function HeroSection() {
       className="relative min-h-screen w-full bg-[#a81d8e] text-white rounded-b-lg"
     >
       <div className="absolute inset-0 h-full w-full bg-gray-900/60 rounded-b-lg" />
-      <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
+      <div className="relative z-10 container mx-auto px-4 lg:px-16 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
         <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-x-10">
           <motion.div
             className="lg:w-1/2 text-left max-w-3xl mt-4"
