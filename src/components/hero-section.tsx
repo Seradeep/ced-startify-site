@@ -119,20 +119,25 @@ export default function HeroSection() {
             >
               Presents
             </motion.p>
-            <motion.h1 variants={fadeInUp} className="flex items-start">
-              <TypeWriterEffect
-                words={[
-                  { text: "Startify", className: "text-yellow-500" },
-                  { text: " 3.0", className: "text-white" },
-                ]}
-                className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight max-sm:mt-3 max-sm:mb-1 my-4"
-              />
-            </motion.h1>
+             <motion.h1
+               variants={fadeInUp}
+                 className="flex items-center justify-start text-6xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4 space-x-2"
+                 >
+                <img
+                   src="/images/herologo.png" // Replace with the actual path to your logo
+                   alt="Startify Logo"
+                   className="h-16 w-auto sm:h-20 md:h-24" // Responsive height for different screens
+                 />
+                  <span className="text-yellow-400 text-6xl sm:text-5xl md:text-6xl md:mt-2">
+                   3.0
+                 </span>
+              </motion.h1>
+
             <motion.p
               variants={fadeInUp}
               className="text-sm font-bold uppercase"
             >
-              National Level Student Startup Ecosystem Conclave
+              International Level Student Startup Ecosystem Conclave
             </motion.p>
             <motion.div variants={fadeInUp} className="flex items-start mt-2">
               <GradientButton

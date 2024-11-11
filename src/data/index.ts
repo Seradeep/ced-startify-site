@@ -24,7 +24,7 @@ export const navlinks = [
 export const stats = [
   {
     count: "1,500+",
-    title: "Participants",
+    title: "Higher Education Institutions",
   },
   {
     count: "20+",

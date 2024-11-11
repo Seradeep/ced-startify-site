@@ -10,9 +10,9 @@ export const events = [
       "A platform for student startups and alumni (up to 3 years) startups to pitch their business plans to a panel of investors, providing opportunities for funding, mentorship, and networking.",
   },
   {
-    title: "Mughavari",
+    title: "Startup Mughavari",
     description:
-      "Aimed at helping students with validated innovations to register their startups, the startup sprint drive will be held three times during the conclave to assist in different stages (early-stage ideas, mid-stage validation, incorporation) of company formation and patent filing.",
+      "Aimed at helping students with validated innovations to register their startups, the startup sprint drive will be held during the conclave to assist in different stages (early-stage ideas, mid-stage validation, incorporation) of company formation and patent filing.",
   },
   {
     title: "Golden Star E-Cell Awards",
@@ -50,7 +50,7 @@ export const events = [
       "To provide startups with a platform to showcase their products and innovations to potential investors, customers, and partners. One team/incubator in Tamil Nadu will be offered a reserved slot in the startup showroom. This event will serve as a launchpad for scaling up.",
   },
   {
-    title: "Scholar's spin off",
+    title: "Scholar's Spin off",
     description:
       "The Research to Startup initiative aims to empower Ph.D. scholars from Tamil Nadu by bridging the gap between academic research and entrepreneurial ventures. This event is designed to provide a platform for 100 selected Ph.D. scholars to transform their research into viable startups through mentorship, networking, and hands-on guidance.",
   },
