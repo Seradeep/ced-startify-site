@@ -48,14 +48,29 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [eventStarted, setEventStarted] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      const newTimeLeft = calculateTimeLeft();
+      setTimeLeft(newTimeLeft);
+      if (
+        newTimeLeft.days === 0 &&
+        newTimeLeft.hours === 0 &&
+        newTimeLeft.minutes === 0 &&
+        newTimeLeft.seconds === 0
+      ) {
+        setEventStarted(true);
+        clearInterval(timer);
+      }
     }, 1000);
 
     return () => clearInterval(timer);
   }, [targetDate]);
+
+  if (eventStarted) {
+    return ;
+  }
 
   const timeUnits = [
     { label: "Days", value: timeLeft.days },
