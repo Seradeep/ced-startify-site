@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import GradientButton from "@/components/gradient-button";
-import TypeWriterEffect from "./typewritter-effect";
+{/*import TypeWriterEffect from "./typewritter-effect";*/}
 
 function AnimatedDigit({ value }: { value: number }) {
   return (
