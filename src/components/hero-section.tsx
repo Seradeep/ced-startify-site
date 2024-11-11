@@ -95,10 +95,13 @@ export default function HeroSection() {
   const targetDate = new Date("2025-02-21T09:00:00");
 
   return (
-    <section id="home" className="relative min-h-screen w-full bg-[#a81d8e] text-white rounded-b-lg">
+    <section
+      id="home"
+      className="relative min-h-screen w-full bg-[#a81d8e] text-white rounded-b-lg"
+    >
       <div className="absolute inset-0 h-full w-full bg-gray-900/60 rounded-b-lg" />
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
-        <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between">
+        <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-x-10">
           <motion.div
             className="lg:w-1/2 text-left max-w-3xl mt-4"
             initial="initial"
@@ -177,7 +180,7 @@ export default function HeroSection() {
                 <img
                   src="/images/edii_logo.webp"
                   alt="Edii Logo"
-                  className="w-16 sm:w-24 h-16"
+                  className="w-16 sm:w-24 h-16 sm:h-24"
                 />
               </div>
             </motion.div>
@@ -189,7 +192,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+            <div className="rounded-lg overflow-hidden h-full">
               <video
                 className="w-full h-full object-cover"
                 autoPlay
