@@ -6,7 +6,7 @@ import ShineBorder from "@/components/shine-border";
 export default function CMQuote() {
   return (
     <div className="container mx-auto px-4 sm:px-20 py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14 gap-y-6 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
