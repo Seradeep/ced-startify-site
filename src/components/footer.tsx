@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { navlinks } from "@/data";
 
 const SocialMediaLinks = () => (
   <div className="flex items-center space-x-4">
@@ -33,13 +34,13 @@ const SocialMediaLinks = () => (
 
 const NavLinks = () => (
   <div className="flex flex-col flex-wrap items-center justify-center gap-4 sm:justify-end">
-    {["About Startify 3.0", "Schedule", "Highlights", "FAQs"].map((text) => (
+    {navlinks.map((navlink) => (
       <a
-        key={text}
-        href="#"
+        key={navlink.name}
+        href={navlink.href}
         className="text-sm text-muted-foreground transition-all duration-300 ease-in-out hover:text-purple-700 hover:scale-110"
       >
-        {text}
+        {navlink.name}
       </a>
     ))}
   </div>

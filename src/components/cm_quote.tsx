@@ -1,20 +1,19 @@
 import { motion } from "framer-motion";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ShineBorder from "@/components/shine-border";
 
 export default function CMQuote() {
   return (
-    <div className="container mx-auto px-4 sm:px-24 py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div className="container mx-auto px-4 sm:px-20 py-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <ShineBorder
-            className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl p-8"
+            className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl p-12"
             color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
           >
             <motion.div
@@ -54,33 +53,21 @@ export default function CMQuote() {
             </motion.div>
           </ShineBorder>
         </motion.div>
-        <motion.div
-          className="flex justify-center lg:justify-end"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        <ShineBorder
+          className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl"
+          color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
         >
-          <Card className="bg-transparent border-none shadow-none overflow-hidden">
-            <CardContent className="p-0">
-              <img
-                src="/images/cm_image.webp"
-                alt="Thiru. M.K. Stalin, Hon'ble Chief Minister of Tamil Nadu"
-                className="max-w-full h-auto rounded-lg shadow-lg"
-                width={370}
-              />
-            </CardContent>
-          </Card>
-          <Card className="bg-transparent border-none shadow-none overflow-hidden">
-            <CardContent className="p-0">
-              <img
-                src="/images/dcm_image.webp"
-                alt="Thiru. Udhayanidhi Stalin, Hon'ble Deputy Chief Minister of Tamil Nadu"
-                className="rounded-lg shadow-lg"
-                width={150}
-              />
-            </CardContent>
-          </Card>
-        </motion.div>
+          <video
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/videos/hero_vid.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </ShineBorder>
       </div>
     </div>
   );

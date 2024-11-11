@@ -69,7 +69,7 @@ export default function Navbar() {
       <motion.header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
-          isScrolled ? "py-0 top-2" : "py-4"
+          isScrolled ? "py-0 top-2" : "pt-2 pb-4"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -77,9 +77,9 @@ export default function Navbar() {
       >
         <motion.div
           className={cn(
-            "mx-auto max-sm:px-2 sm:px-24",
+            "mx-auto px-3 sm:px-10 md:px-16",
             isScrolled
-              ? "max-w-5xl backdrop-blur-md shadow-md rounded-md py-1 max-sm:mx-3 sm:px-4 bg-neutral-900/35"
+              ? "max-w-5xl backdrop-blur-md shadow-md rounded-md py-1 max-sm:mx-3 !px-6 bg-neutral-900/35"
               : "container"
           )}
         >
@@ -89,7 +89,7 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, type: "spring" }}
             >
-              <Link href="/" className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center">
                 <img
                   src="/images/logo.webp"
                   alt="Startify Logo"

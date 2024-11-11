@@ -8,8 +8,8 @@ export const navlinks = [
     href: "#about",
   },
   {
-    name: "Schedule",
-    href: "#schedule",
+    name: "Highlights",
+    href: "#highlights",
   },
   {
     name: "FAQs",
@@ -35,7 +35,7 @@ export const stats = [
     title: "Events",
   },
   {
-    count: "2",
+    count: "Nov 12, 2024 - Feb 22, 2025",
     title: "Days",
   },
 ];

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import GradientButton from "@/components/gradient-button";
-{/*import TypeWriterEffect from "./typewritter-effect";*/}
 
 function AnimatedDigit({ value }: { value: number }) {
   return (
@@ -92,7 +93,7 @@ const fadeInUp = {
 };
 
 export default function HeroSection() {
-  const targetDate = new Date("2025-02-21T09:00:00");
+  const targetDate = new Date("2024-11-12T10:30:00");
 
   return (
     <section
@@ -122,19 +123,19 @@ export default function HeroSection() {
             >
               Presents
             </motion.p>
-             <motion.h1
-               variants={fadeInUp}
-                 className="flex items-center justify-start text-6xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4 space-x-2"
-                 >
-                <img
-                   src="/images/herologo.png" // Replace with the actual path to your logo
-                   alt="Startify Logo"
-                   className="h-16 w-auto sm:h-20 md:h-24" // Responsive height for different screens
-                 />
-                  <span className="text-yellow-400 text-6xl sm:text-5xl md:text-6xl md:mt-2">
-                   3.0
-                 </span>
-              </motion.h1>
+            <motion.h1
+              variants={fadeInUp}
+              className="flex items-center justify-start text-6xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4 space-x-2"
+            >
+              <img
+                src="/images/hero_logo.webp"
+                alt="Startify Logo"
+                className="h-16 w-auto sm:h-20 md:h-24"
+              />
+              <span className="text-yellow-400 text-6xl sm:text-5xl md:text-6xl md:mt-2">
+                3.0
+              </span>
+            </motion.h1>
 
             <motion.p
               variants={fadeInUp}
@@ -160,7 +161,7 @@ export default function HeroSection() {
               variants={fadeInUp}
               className="italic text-left text-md sm:text-lg"
             >
-              "Startify 3.0: Empowering Stupreneurs, Inspiring Innovation."
+              "Startify 3.0: Empowering Stupreneurs, Inspiring Innovations."
             </motion.p>
             <motion.div variants={fadeInUp} className="flex gap-4 mt-6">
               <GradientButton className="w-[30%]" label="Register Now" />
@@ -168,7 +169,7 @@ export default function HeroSection() {
 
             <motion.div
               variants={fadeInUp}
-              className="mt-8 flex flex-col items-center sm:w-3/4"
+              className="mt-8 flex flex-col items-center lg:w-3/4"
             >
               <p className="text-base text-white">In Association with</p>
               <div className="flex flex-row items-center justify-between gap-10">
@@ -187,23 +188,39 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div
-            className="lg:w-1/2 mt-8 lg:mt-0"
+            className="w-full flex flex-col items-center lg:w-1/2 mt-8 lg:mt-0"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="rounded-lg overflow-hidden h-full">
-              <video
-                className="w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                <source src="/videos/hero_vid.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <motion.div
+              className="flex justify-center lg:justify-end"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <Card className="bg-transparent border-none shadow-none overflow-hidden">
+                <CardContent className="p-0">
+                  <img
+                    src="/images/cm_image.webp"
+                    alt="Thiru. M.K. Stalin, Hon'ble Chief Minister of Tamil Nadu"
+                    className="max-w-full h-auto rounded-lg shadow-lg"
+                    width={400}
+                    height={600}
+                  />
+                </CardContent>
+              </Card>
+              <Card className="bg-transparent border-none shadow-none overflow-hidden">
+                <CardContent className="p-0">
+                  <img
+                    src="/images/dcm_image.webp"
+                    alt="Thiru. Udhayanidhi Stalin, Hon'ble Deputy Chief Minister of Tamil Nadu"
+                    className="rounded-lg shadow-lg"
+                    width={170}
+                  />
+                </CardContent>
+              </Card>
+            </motion.div>
             <div className="mt-8 w-full flex items-center justify-center">
               <CountdownTimer targetDate={targetDate} />
             </div>
