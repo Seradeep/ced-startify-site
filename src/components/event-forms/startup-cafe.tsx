@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,10 +12,11 @@ import {
   RadioInput,
   TextareaInput,
   FormActions,
-  ReviewSection,
-  SelectInput,
   MemberDetails,
 } from "@/components/ui/form-components";
+import { TypographyP } from "@/components/ui/typography";
+import { toast } from "sonner";
+import { apiCreateStartupCafeProject } from "@/api/events";
 
 const teamMemberSchema = z.object({
   name: z.string().min(2, { message: "Name is required." }),
@@ -21,10 +24,9 @@ const teamMemberSchema = z.object({
   phone: z.string().min(10, { message: "Invalid phone number." }),
   degree: z.string().min(2, { message: "Degree is required." }),
   department: z.string().min(2, { message: "Department is required." }),
-  yearOfStudy: z.enum(["1", "2", "3", "4"], {
+  yearOfStudy: z.enum(["1", "2", "3", "4", "5"], {
     required_error: "Year of study is required.",
   }),
-  bio: z.string().min(10).max(200).describe("textarea"),
 });
 
 const formSchema = z.object({
@@ -32,23 +34,22 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "Startup name must be at least 2 characters." }),
   collegeName: z.string().min(2, { message: "College name is required." }),
-  collegeDistrict: z
-    .string()
-    .min(2, { message: "College district is required." }),
   collegeEmail: z.string().email({ message: "Invalid email address." }),
   collegePhone: z.string().min(10, { message: "Invalid phone number." }),
   sameInstitution: z.enum(["yes", "no"], {
     required_error:
       "Please select if all team members are from the same institution.",
   }),
-  memberCount: z
-    .string()
-    .min(1, { message: "Please select the number of team members." }),
+  memberCount: z.string().refine((val) => ["3", "4"].includes(val), {
+    message: "Please select either 3 or 4 team members.",
+  }),
   teamMembers: z
     .array(teamMemberSchema)
-    .min(1, { message: "At least one team member is required." })
-    .max(3, { message: "Maximum 3 team members allowed." }),
-  sdg: z.string().min(2, { message: "SDG is required." }),
+    .min(3, { message: "At least three team members are required." })
+    .max(4, { message: "Maximum 4 team members allowed." }),
+  sdg: z
+    .string()
+    .min(2, { message: "Sustainable Development Goal is required." }),
   problemStatement: z
     .string()
     .max(100, { message: "Problem statement should not exceed 100 words." })
@@ -59,29 +60,32 @@ const formSchema = z.object({
     .describe("textarea"),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type FormValues = z.infer<typeof formSchema>;
 
-export default function StartupCafeForm() {
+export default function StartupCafeForm({
+  onPaymentBtnOpen,
+}: {
+  onPaymentBtnOpen: (value: boolean) => void;
+}) {
   const [step, setStep] = useState(1);
-  const totalSteps = 4;
+  const totalSteps = 3;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      memberCount: "1",
-      teamMembers: [{}],
+      memberCount: "3",
+      teamMembers: [{}, {}, {}],
     },
   });
 
-  const { fields: members } = useFieldArray({
+  const {
+    fields: members,
+    remove,
+    append,
+  } = useFieldArray({
     name: "teamMembers",
     control: form.control,
   });
-
-  // function onSubmit(values: FormValues) {
-  //   console.log(values);
-  //   alert("Form submitted successfully!");
-  // }
 
   const nextStep = async () => {
     const fields = getFieldsForStep(step);
@@ -101,7 +105,6 @@ export default function StartupCafeForm() {
         return [
           "startupName",
           "collegeName",
-          "collegeDistrict",
           "collegeEmail",
           "collegePhone",
           "sameInstitution",
@@ -120,26 +123,43 @@ export default function StartupCafeForm() {
     const currentMembers = form.getValues("teamMembers").length;
     if (memberCount > currentMembers) {
       for (let i = currentMembers; i < memberCount; i++) {
-        form.setValue(`teamMembers.${i}`, {
+        append({
           name: "",
           email: "",
           phone: "",
           degree: "",
           department: "",
           yearOfStudy: "1",
-          bio: "",
         });
       }
     } else if (memberCount < currentMembers) {
       for (let i = currentMembers - 1; i >= memberCount; i--) {
-        form.unregister(`teamMembers.${i}`);
+        remove(i);
       }
     }
-  }, [form.watch("memberCount")]);
+  }, [form.watch("memberCount"), append, remove, form]);
+
+  function handleSubmit(paymentId: string) {
+    toast.promise(
+      apiCreateStartupCafeProject({
+        paymentId,
+        ...form.getValues(),
+      }),
+      {
+        loading: "Creating...",
+        success: () => "Application submitted successfully!!",
+        error: () => "Failed to submit your application",
+      }
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto p-4 sm:p-6">
-      <h1 className="text-3xl font-bold mb-6">Startup Cafe Application</h1>
+      <h1 className="text-3xl font-bold mb-2">Startup Cafe Application</h1>
+      <TypographyP className="!mt-0 mb-4">
+        You need to pay Rs.500/-(excluding taxes) at the time of submission of
+        your applications
+      </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
       <FormLayout form={form}>
@@ -153,25 +173,19 @@ export default function StartupCafeForm() {
             />
             <TextInput
               name="collegeName"
-              label="College Name (Team Leader Institution)"
-              placeholder="Enter college name"
-              description="The name of the institution of the team leader"
-            />
-            <TextInput
-              name="collegeDistrict"
-              label="College District"
-              placeholder="Enter college district"
+              label="College Name"
+              placeholder="Enter your college name"
             />
             <TextInput
               name="collegeEmail"
               label="College Email ID"
-              placeholder="Enter college email"
+              placeholder="Enter your college email"
               description="Official email address of the college"
             />
             <TextInput
               name="collegePhone"
               label="College Phone Number"
-              placeholder="Enter college phone number"
+              placeholder="Enter your college phone number"
             />
             <RadioInput
               name="sameInstitution"
@@ -187,13 +201,12 @@ export default function StartupCafeForm() {
 
         {step === 2 && (
           <div className="space-y-4">
-            <SelectInput
+            <RadioInput
               name="memberCount"
               label="Number of Team Members"
               options={[
-                { value: "1", label: "1 Member" },
-                { value: "2", label: "2 Members" },
                 { value: "3", label: "3 Members" },
+                { value: "4", label: "4 Members" },
               ]}
               description="Select the total number of members in your team (including yourself)"
             />
@@ -236,55 +249,17 @@ export default function StartupCafeForm() {
           </div>
         )}
 
-        {step === 4 && (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">Review and Submit</h2>
-            <p className="text-muted-foreground mb-4">
-              Please review your application before submitting. If you need to
-              make changes, use the "Previous" button to go back to the relevant
-              section.
-            </p>
-
-            <ReviewSection
-              title="Startup Information"
-              data={{
-                "Startup Name": form.getValues("startupName"),
-                "College Name": form.getValues("collegeName"),
-                "College District": form.getValues("collegeDistrict"),
-                "College Email": form.getValues("collegeEmail"),
-                "College Phone": form.getValues("collegePhone"),
-                "Same Institution": form.getValues("sameInstitution"),
-              }}
-            />
-
-            <ReviewSection
-              title="Team Members"
-              data={form
-                .getValues("teamMembers")
-                .reduce((acc: Record<string, string>, member, index) => {
-                  acc[`Member ${index + 1}`] =
-                    `${member.name} (${member.email})`;
-                  return acc;
-                }, {})}
-            />
-
-            <ReviewSection
-              title="Project Details"
-              data={{
-                "Sustainable Development Goal": form.getValues("sdg"),
-                "Problem Statement": form.getValues("problemStatement"),
-                Solution: form.getValues("solution"),
-              }}
-              className="sm:grid-cols-1"
-            />
-          </div>
-        )}
-
         <FormActions
           currentStep={step}
           totalSteps={totalSteps}
           onPrevious={prevStep}
           onNext={nextStep}
+          onOpen={onPaymentBtnOpen}
+          callbackFn={handleSubmit}
+          event={{
+            amount: "500",
+            name: "Startup Cafe Prototyping Hackathon",
+          }}
         />
       </FormLayout>
     </div>

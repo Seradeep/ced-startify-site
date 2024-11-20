@@ -1,5 +1,5 @@
 import AboutEvent from "@/components/about-event";
-import CMQuote from "@/components/cm_quote";
+import CMQuote from "@/components/cm-quote";
 import FAQSection from "@/components/faq-section";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";

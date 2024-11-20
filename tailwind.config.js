@@ -85,6 +85,9 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         shine: "shine var(--duration) infinite linear",
       },
+      fontFamily: {
+        spaceGrotesk: ["Space Grotesk", "sans-serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
