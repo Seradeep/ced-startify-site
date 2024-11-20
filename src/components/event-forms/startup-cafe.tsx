@@ -147,7 +147,10 @@ export default function StartupCafeForm({
       }),
       {
         loading: "Creating...",
-        success: () => "Application submitted successfully!!",
+        success: () => {
+          window.location.reload();
+          return "Application submitted successfully!!"
+        },
         error: () => "Failed to submit your application",
       }
     );
