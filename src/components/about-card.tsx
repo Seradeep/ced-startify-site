@@ -7,6 +7,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import StartupCafeForm from "@/components/event-forms/startup-cafe";
 import StartupMughavariForm from "@/components/event-forms/startup-mughavari";
+import InternHuntForm from "@/components/event-forms/intern-hunt";
+import StartupAtlasForm from "@/components/event-forms/startup-atlas";
 
 interface AboutCardProps {
   id: string;
@@ -22,6 +24,8 @@ export default function AboutCard({ id, description, title }: AboutCardProps) {
   } = {
     "startup-cafe": StartupCafeForm,
     "startup-mughavari": StartupMughavariForm,
+    "intern-hunt": InternHuntForm,
+    "startup-atlas": StartupAtlasForm,
   };
 
   const FormComponent = formComponents[id];

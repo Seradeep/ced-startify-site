@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { toast } from "sonner";
 
 import {
   FormStepper,
@@ -15,7 +16,6 @@ import {
   MemberDetails,
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
-import { toast } from "sonner";
 import { apiCreateStartupCafeProject } from "@/api/events";
 
 const teamMemberSchema = z.object({
