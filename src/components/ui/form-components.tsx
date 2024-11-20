@@ -21,7 +21,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -31,6 +37,7 @@ import {
 } from "@/components/ui/select";
 
 import { cn, SeparateAndCapitalize } from "@/lib/utils";
+import PaymentButton from "../payment-button";
 
 export const FormStepper = ({
   currentStep,
@@ -44,7 +51,7 @@ export const FormStepper = ({
       {Array.from({ length: totalSteps }, (_, i) => (
         <div
           key={i}
-          className={`w-1/4 h-2 rounded ${
+          className={`w-full h-2 rounded ${
             i + 1 <= currentStep ? "bg-purple-500" : "bg-gray-200"
           }`}
         />
@@ -59,17 +66,14 @@ export const FormStepper = ({
 export const FormLayout = <T extends FieldValues>({
   children,
   form,
-  onSubmit,
+  // onSubmit,
 }: {
   children: React.ReactNode;
   form: UseFormReturn<T>;
-  onSubmit?: (values: T) => void;
+  // onSubmit: (values: T) => void;
 }) => (
   <Form {...form}>
-    <form
-      onSubmit={form ? form.handleSubmit(onSubmit!) : () => null}
-      className="space-y-8"
-    >
+    <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
       {children}
     </form>
   </Form>
@@ -80,11 +84,20 @@ export const FormActions = ({
   totalSteps,
   onPrevious,
   onNext,
+  onOpen,
+  callbackFn,
+  event,
 }: {
   currentStep: number;
   totalSteps: number;
   onPrevious: () => void;
   onNext: () => void;
+  event: {
+    amount: string;
+    name: string;
+  };
+  onOpen: (value: boolean) => void;
+  callbackFn: (paymentId: string) => void;
 }) => (
   <div className="flex justify-between mt-8">
     {currentStep > 1 && (
@@ -93,16 +106,16 @@ export const FormActions = ({
       </Button>
     )}
     {currentStep < totalSteps ? (
-      <Button
-        type="button"
-        disabled
-        className="cursor-not-allowed"
-        onClick={onNext}
-      >
-        Coming Soon
+      <Button type="button" onClick={onNext}>
+        Next
       </Button>
     ) : (
-      <Button type="submit">Submit Application</Button>
+      <PaymentButton
+        amount={event.amount}
+        onOpen={onOpen}
+        callbackFn={callbackFn}
+        eventName={event.name}
+      />
     )}
   </div>
 );
@@ -353,18 +366,20 @@ export const MemberDetails = <T extends FieldValues>({
 
   return (
     <Card className="mb-4">
-      <CardHeader className="flex flex-row items-center justify-between">
+      <CardHeader className="flex flex-col items-start justify-between pb-0">
         <CardTitle>{label}</CardTitle>
         {canRemove && (
           <Button variant="destructive" size="sm" onClick={onRemove}>
             Remove
           </Button>
         )}
+        <CardDescription>
+          {description && (
+            <p className="text-sm text-muted-foreground mb-4">{description}</p>
+          )}
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {description && (
-          <p className="text-sm text-muted-foreground mb-4">{description}</p>
-        )}
         {Object.entries(shape).map(([fieldName, fieldSchema]) => {
           const name = `${prefix}.${fieldName}` as Path<T>;
 
