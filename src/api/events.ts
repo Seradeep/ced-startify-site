@@ -4,9 +4,9 @@ import { FormValues as StartupCafeSchema } from "@/components/event-forms/startu
 import { FormValues as StartupMughavariSchema } from "@/components/event-forms/startup-mughavari";
 import { FormValues as InternHuntSchema } from "@/components/event-forms/intern-hunt";
 import { FormValues as StartupAtlasSchema } from "@/components/event-forms/startup-atlas";
-import { FormValues as PitchXSchema } from "@/components/event-forms/pitch-x";
-import { FormValues as GurusPitchSchema } from "@/components/event-forms/guru-pitch";
-import { FormValues as StartupDistrictSchema } from "@/components/event-forms/startup-district";
+// import { FormValues as PitchXSchema } from "@/components/event-forms/pitch-x";
+// import { FormValues as GurusPitchSchema } from "@/components/event-forms/guru-pitch";
+// import { FormValues as StartupDistrictSchema } from "@/components/event-forms/startup-district";
 import { FormValues as ScholarSpinoffSchema } from "@/components/event-forms/scholar-spinoff";
 
 export async function apiCreateStartupCafeProject(
@@ -77,56 +77,56 @@ export async function apiCreateStartupAtlasProject(
   }
 }
 
-export async function apiCreatePitchXProject(
-  body: PitchXSchema & { paymentId: string }
-) {
-  try {
-    let response = await api.post("/v1/pitch-x/create-project", body);
+// export async function apiCreatePitchXProject(
+//   body: PitchXSchema & { paymentId: string }
+// ) {
+//   try {
+//     let response = await api.post("/v1/pitch-x/create-project", body);
 
-    const { success, data } = response.data;
+//     const { success, data } = response.data;
 
-    if (!success) throw new Error("Server Error, Try again later!!");
+//     if (!success) throw new Error("Server Error, Try again later!!");
 
-    return data.message;
-  } catch (error: any) {
-    if (error.response) throw error.response.data;
-    throw error;
-  }
-}
+//     return data.message;
+//   } catch (error: any) {
+//     if (error.response) throw error.response.data;
+//     throw error;
+//   }
+// }
 
-export async function apiCreateGurusPitchProject(
-  body: GurusPitchSchema & { paymentId: string }
-) {
-  try {
-    let response = await api.post("/v1/gurus-pitch/create-project", body);
+// export async function apiCreateGurusPitchProject(
+//   body: GurusPitchSchema & { paymentId: string }
+// ) {
+//   try {
+//     let response = await api.post("/v1/gurus-pitch/create-project", body);
 
-    const { success, data } = response.data;
+//     const { success, data } = response.data;
 
-    if (!success) throw new Error("Server Error, Try again later!!");
+//     if (!success) throw new Error("Server Error, Try again later!!");
 
-    return data.message;
-  } catch (error: any) {
-    if (error.response) throw error.response.data;
-    throw error;
-  }
-}
+//     return data.message;
+//   } catch (error: any) {
+//     if (error.response) throw error.response.data;
+//     throw error;
+//   }
+// }
 
-export async function apiCreateStartupDistrictProject(
-  body: StartupDistrictSchema & { paymentId: string }
-) {
-  try {
-    let response = await api.post("/v1/startup-district/create-project", body);
+// export async function apiCreateStartupDistrictProject(
+//   body: StartupDistrictSchema & { paymentId: string }
+// ) {
+//   try {
+//     let response = await api.post("/v1/startup-district/create-project", body);
 
-    const { success, data } = response.data;
+//     const { success, data } = response.data;
 
-    if (!success) throw new Error("Server Error, Try again later!!");
+//     if (!success) throw new Error("Server Error, Try again later!!");
 
-    return data.message;
-  } catch (error: any) {
-    if (error.response) throw error.response.data;
-    throw error;
-  }
-}
+//     return data.message;
+//   } catch (error: any) {
+//     if (error.response) throw error.response.data;
+//     throw error;
+//   }
+// }
 
 export async function apiCreateScholarSpinOffProject(
   body: ScholarSpinoffSchema & { paymentId: string }
