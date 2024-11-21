@@ -40,23 +40,23 @@ const formSchema = z.object({
     required_error:
       "Please select if all team members are from the same institution.",
   }),
-  memberCount: z.string().refine((val) => ["3", "4"].includes(val), {
-    message: "Please select either 3 or 4 team members.",
+  memberCount: z.string().refine((val) => ["1", "2", "3", "4"].includes(val), {
+    message: "Please select the no. of team members.",
   }),
   teamMembers: z
     .array(teamMemberSchema)
-    .min(3, { message: "At least three team members are required." })
+    .min(1, { message: "At least 1 team member is required." })
     .max(4, { message: "Maximum 4 team members allowed." }),
   sdg: z
     .string()
     .min(2, { message: "Sustainable Development Goal is required." }),
   problemStatement: z
     .string()
-    .max(100, { message: "Problem statement should not exceed 100 words." })
+    .max(1000, { message: "Problem statement should not exceed 100 words." })
     .describe("textarea"),
   solution: z
     .string()
-    .max(100, { message: "Solution should not exceed 100 words." })
+    .max(1000, { message: "Solution should not exceed 100 words." })
     .describe("textarea"),
 });
 
@@ -73,8 +73,8 @@ export default function StartupCafeForm({
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      memberCount: "3",
-      teamMembers: [{}, {}, {}],
+      memberCount: "1",
+      teamMembers: [{}],
     },
   });
 
@@ -146,10 +146,10 @@ export default function StartupCafeForm({
         ...form.getValues(),
       }),
       {
-        loading: "Creating...",
+        loading: "Submitting...",
         success: () => {
           window.location.reload();
-          return "Application submitted successfully!!"
+          return "Application submitted successfully!!";
         },
         error: () => "Failed to submit your application",
       }
@@ -160,8 +160,8 @@ export default function StartupCafeForm({
     <div className="max-w-2xl mx-auto p-4 sm:p-6">
       <h1 className="text-3xl font-bold mb-2">Startup Cafe Application</h1>
       <TypographyP className="!mt-0 mb-4">
-        You need to pay Rs.625/-(including all taxes) at the time of submission of
-        your applications
+        You need to pay Rs.625/-(including all taxes) at the time of submission
+        of your applications
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
@@ -208,6 +208,8 @@ export default function StartupCafeForm({
               name="memberCount"
               label="Number of Team Members"
               options={[
+                { value: "1", label: "1 Member" },
+                { value: "2", label: "2 Members" },
                 { value: "3", label: "3 Members" },
                 { value: "4", label: "4 Members" },
               ]}

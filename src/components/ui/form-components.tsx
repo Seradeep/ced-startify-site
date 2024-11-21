@@ -8,7 +8,7 @@ import {
 } from "react-hook-form";
 import { z } from "zod";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -44,7 +44,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { cn, SeparateAndCapitalize } from "@/lib/utils";
+import { cn, SeparateAndCapitalize, UploadToCloudinary } from "@/lib/utils";
 import PaymentButton from "../payment-button";
 
 export const FormStepper = ({
@@ -164,11 +164,13 @@ export const TextInput = ({
   label,
   placeholder,
   description,
+  type = "text",
 }: {
   name: string;
   label: string;
   placeholder: string;
   description?: string;
+  type?: string;
 }) => (
   <FormField
     name={name}
@@ -178,6 +180,7 @@ export const TextInput = ({
         <FormControl>
           <Input
             placeholder={placeholder}
+            type={type}
             className="placeholder:max-sm:text-sm"
             {...field}
           />
@@ -523,8 +526,8 @@ export const MemberDetails = <T extends FieldValues>({
 
   return (
     <Card className="mb-4">
-      <CardHeader className="flex flex-col items-start justify-between pb-0">
-        <CardTitle>{label}</CardTitle>
+      <CardHeader className="flex items-center flex-row pb-0">
+        <CardTitle className="flex-1 mb-2">{label}</CardTitle>
         {canRemove && (
           <Button variant="destructive" size="sm" onClick={onRemove}>
             Remove
@@ -653,3 +656,78 @@ export const InfiniteMemberDetails = <T extends FieldValues>({
     </div>
   );
 };
+
+export function MultiImageUpload({
+  name,
+  label,
+  form,
+}: {
+  name: string;
+  label: string;
+  form: any;
+}) {
+  const [uploadedImages, setUploadedImages] = React.useState<string[]>([]);
+
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const { success, url } = await UploadToCloudinary(file);
+        if (success && url) {
+          setUploadedImages((prev) => [...prev, url]);
+          const currentValue = form.getValues(name) || [];
+          form.setValue(name, [...currentValue, url]);
+        }
+      }
+    }
+  };
+
+  const removeImage = (index: number) => {
+    const newImages = uploadedImages.filter((_, i) => i !== index);
+    setUploadedImages(newImages);
+    form.setValue(name, newImages);
+  };
+
+  return (
+    <FormField
+      name={name}
+      render={() => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <div className="space-y-4">
+            <Input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleFileUpload}
+            />
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              {uploadedImages.map((url, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={url}
+                    alt={`Uploaded image ${index + 1}`}
+                    className="w-full h-48 object-cover rounded"
+                  />
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="icon"
+                    className="absolute top-2 right-2"
+                    onClick={() => removeImage(index)}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
