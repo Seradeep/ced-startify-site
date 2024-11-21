@@ -130,10 +130,29 @@ export default function Footer() {
             © 2024 CED. All rights reserved.
           </p>
           <p className="flex items-center text-sm text-muted-foreground">
-            Designed with{" "}
-            <Heart className="mx-1 size-4 text-red-500" aria-label="love" /> by
-            <span className="ml-1 font-bold italic"> Cibi & Om</span>
-          </p>
+  Designed with{" "}
+  <Heart className="mx-1 size-4 text-red-500" aria-label="love" /> by
+  <span className="ml-1 font-bold italic">
+    <a
+      href="https://www.linkedin.com/in/cibisuryaa/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-purple-500"
+    >
+      Cibi
+    </a>{" "}
+    &{" "}
+    <a
+      href="https://www.linkedin.com/in/omprakash-d/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-purple-500"
+    >
+      Om
+    </a>
+  </span>
+</p>
+
         </div>
       </CardContent>
     </Card>
