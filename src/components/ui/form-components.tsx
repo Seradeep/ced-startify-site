@@ -7,6 +7,8 @@ import {
   Path,
 } from "react-hook-form";
 import { z } from "zod";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +30,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -314,11 +322,13 @@ export const FileInput = ({
   label,
   accept,
   description,
+  onFileSelect,
 }: {
   name: string;
   label: string;
   accept: string;
   description?: string;
+  onFileSelect?: (file: File) => void;
 }) => (
   <FormField
     name={name}
@@ -331,7 +341,10 @@ export const FileInput = ({
             accept={accept}
             onChange={(e) => {
               const file = e.target.files?.[0];
-              onChange(file);
+              if (file && onFileSelect) {
+                onFileSelect(file);
+              }
+              onChange(e);
             }}
             {...field}
           />
@@ -346,6 +359,150 @@ export const FileInput = ({
     )}
   />
 );
+
+export function DatePicker({
+  className,
+  onChange,
+  name,
+  label,
+  placeholder,
+}: {
+  className?: string;
+  onChange: (date: Date | undefined) => void;
+  name: string;
+  label: string;
+  placeholder: string;
+}) {
+  const [date, setDate] = React.useState<Date>();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [selectedYear, setSelectedYear] = React.useState<number>();
+  const [selectedMonth, setSelectedMonth] = React.useState<number>();
+
+  const handleSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+    if (selectedDate) {
+      setSelectedYear(selectedDate.getFullYear());
+      setSelectedMonth(selectedDate.getMonth());
+    }
+    onChange(selectedDate);
+  };
+
+  const years = Array.from(
+    { length: 100 },
+    (_, i) => new Date().getFullYear() - i
+  );
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  React.useEffect(() => {
+    if (date) {
+      setSelectedYear(date.getFullYear());
+      setSelectedMonth(date.getMonth());
+    }
+  }, [date]);
+
+  return (
+    <FormField
+      name={name}
+      render={() => (
+        <FormItem className="flex flex-col">
+          <FormLabel>{label}</FormLabel>
+          <Popover open={isOpen} onOpenChange={setIsOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-full justify-start text-left font-normal",
+                  !date && "text-muted-foreground",
+                  className
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {date ? format(date, "PPP") : <span>{placeholder}</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <div className="flex items-center justify-between p-3">
+                <Select
+                  value={selectedYear?.toString()}
+                  onValueChange={(value) => {
+                    const year = parseInt(value);
+                    setSelectedYear(year);
+                    const newDate = new Date(date || new Date());
+                    newDate.setFullYear(year);
+                    handleSelect(newDate);
+                  }}
+                >
+                  <SelectTrigger className="w-[110px]">
+                    <SelectValue placeholder="Year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {years.map((year) => (
+                      <SelectItem key={year} value={year.toString()}>
+                        {year}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select
+                  value={months[selectedMonth || 0]}
+                  onValueChange={(value) => {
+                    const monthIndex = months.indexOf(value);
+                    setSelectedMonth(monthIndex);
+                    const newDate = new Date(date || new Date());
+                    newDate.setMonth(monthIndex);
+                    handleSelect(newDate);
+                  }}
+                >
+                  <SelectTrigger className="w-[110px]">
+                    <SelectValue placeholder="Month" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {months.map((month) => (
+                      <SelectItem key={month} value={month}>
+                        {month}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={handleSelect}
+                initialFocus
+                month={
+                  date ||
+                  new Date(
+                    selectedYear || new Date().getFullYear(),
+                    selectedMonth || 0
+                  )
+                }
+                onMonthChange={(newMonth) => {
+                  setSelectedMonth(newMonth.getMonth());
+                  setSelectedYear(newMonth.getFullYear());
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
 
 export const MemberDetails = <T extends FieldValues>({
   prefix,

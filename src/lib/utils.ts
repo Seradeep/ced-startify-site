@@ -12,16 +12,37 @@ export function SeparateAndCapitalize(str: string): string {
     .join(" ");
 }
 
-export function LoadScript(src: string) {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = src;
-    script.onload = () => {
-      resolve(true);
+export async function UploadToCloudinary(file: File): Promise<{
+  success: boolean;
+  url?: string;
+}> {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append(
+    "upload_preset",
+    import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET as string
+  );
+
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${
+      import.meta.env.VITE_CLOUDINARY_NAME
+    }/image/upload`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  if (!response.ok) {
+    return {
+      success: false,
     };
-    script.onerror = () => {
-      resolve(false);
-    };
-    document.body.appendChild(script);
-  });
+  }
+
+  const data = await response.json();
+  console.log(data)
+  return {
+    success: true,
+    url: data.secure_url,
+  };
 }

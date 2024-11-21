@@ -40,7 +40,6 @@ export default function PaymentButton({
           razorpay_order_id: string;
           razorpay_payment_id: string;
         }) => {
-          console.log(response);
           try {
             await apiVerifyPayment({
               order_id: response.razorpay_order_id,
