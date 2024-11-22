@@ -12,6 +12,8 @@ import InternHuntForm from "@/components/event-forms/intern-hunt";
 import ScholarSpinOffForm from "@/components/event-forms/scholar-spinoff";
 import StartUpPathFinderForm from "@/components/event-forms/startup-path-finder";
 import PitchXForm from "@/components/event-forms/pitch-x";
+// import GurusPitchForm from "@/components/event-forms/guru-pitch";
+// import StartupDistrictForm from "@/components/event-forms/startup-district";
 
 interface AboutCardProps {
   id: string;
@@ -32,6 +34,8 @@ export default function AboutCard({ id, description, title }: AboutCardProps) {
     "scholars-spin-off": ScholarSpinOffForm,
     "path-finder": StartUpPathFinderForm,
     "pitch-x": PitchXForm,
+    // "gurus-pitch": GurusPitchForm,
+    // "startup-district": StartupDistrictForm,
   };
 
   const FormComponent = formComponents[id];

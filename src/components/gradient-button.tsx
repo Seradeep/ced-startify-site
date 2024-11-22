@@ -1,16 +1,32 @@
 import { Button } from "@/components/ui/button";
-
 import { cn } from "@/lib/utils";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function GradientButton({
   label,
   onClick,
   className,
+  href,
 }: {
   label: string | React.ReactNode;
   onClick?: () => void;
   className?: string;
+  href?: string;
 }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (href) {
+      navigate({
+        to: href,
+      });
+    }
+
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <Button
       className={cn(
@@ -18,7 +34,7 @@ export default function GradientButton({
         "hover:opacity-90 transition-opacity",
         className
       )}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <div className="absolute inset-0 rounded-lg">
         <div className="absolute inset-0 border rounded-lg border-white/20 [mask-image:linear-gradient(to_bottom,black,transparent)]" />

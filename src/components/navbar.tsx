@@ -111,6 +111,7 @@ export default function Navbar() {
                 <GradientButton
                   className="max-sm:w-full"
                   label={"Register Now"}
+                  href="#about"
                 />
               </motion.div>
             </div>
@@ -140,6 +141,7 @@ export default function Navbar() {
                     <GradientButton
                       className="max-sm:w-full"
                       label={"Register Now"}
+                      href="#about"
                     />
                   </nav>
                 </SheetContent>
