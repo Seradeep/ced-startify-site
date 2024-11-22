@@ -10,6 +10,7 @@ import StartupMughavariForm from "@/components/event-forms/startup-mughavari";
 import InternHuntForm from "@/components/event-forms/intern-hunt";
 import StartupAtlasForm from "@/components/event-forms/startup-atlas";
 import ScholarSpinOffForm from "@/components/event-forms/scholar-spinoff";
+import StartUpPathFinderForm from "@/components/event-forms/startup-path-finder";
 
 interface AboutCardProps {
   id: string;
@@ -28,6 +29,7 @@ export default function AboutCard({ id, description, title }: AboutCardProps) {
     "intern-hunt": InternHuntForm,
     "startup-atlas": StartupAtlasForm,
     "scholars-spin-off": ScholarSpinOffForm,
+    "path-finder": StartUpPathFinderForm,
   };
 
   const FormComponent = formComponents[id];

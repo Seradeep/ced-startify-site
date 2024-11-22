@@ -103,7 +103,7 @@ export default function ScholarSpinOffForm({
         Scholar's Spin-Off Application
       </h1>
       <TypographyP className="!mt-0 mb-4">
-        You need to pay Rs.625/-(including all taxes) at the time of submission
+        You need to pay Rs.6250/-(including all taxes) at the time of submission
         of your applications
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
@@ -192,7 +192,7 @@ export default function ScholarSpinOffForm({
           onOpen={onPaymentBtnOpen}
           callbackFn={handleSubmit}
           event={{
-            amount: "625",
+            amount: "6250",
             name: "Scholar's Spin-Off",
           }}
         />

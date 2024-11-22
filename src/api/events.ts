@@ -8,6 +8,7 @@ import { FormValues as StartupAtlasSchema } from "@/components/event-forms/start
 // import { FormValues as GurusPitchSchema } from "@/components/event-forms/guru-pitch";
 // import { FormValues as StartupDistrictSchema } from "@/components/event-forms/startup-district";
 import { FormValues as ScholarSpinoffSchema } from "@/components/event-forms/scholar-spinoff";
+import { FormValues as StartupPathFinderSchema } from "@/components/event-forms/startup-path-finder";
 
 export async function apiCreateStartupCafeProject(
   body: StartupCafeSchema & { paymentId: string }
@@ -133,6 +134,23 @@ export async function apiCreateScholarSpinOffProject(
 ) {
   try {
     let response = await api.post("/v1/scholar-spinoff/create-project", body);
+
+    const { success, data } = response.data;
+
+    if (!success) throw new Error("Server Error, Try again later!!");
+
+    return data.message;
+  } catch (error: any) {
+    if (error.response) throw error.response.data;
+    throw error;
+  }
+}
+
+export async function apiCreateStartupPathFinderProject(
+  body: StartupPathFinderSchema & { paymentId: string }
+) {
+  try {
+    let response = await api.post("/v1/startup-path-finder/create-project", body);
 
     const { success, data } = response.data;
 
