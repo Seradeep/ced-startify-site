@@ -13,7 +13,7 @@ import {
   FormActions,
   InfiniteMemberDetails,
   MultiImageUpload,
-  MemberDetails,
+  // MemberDetails,
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
 
@@ -182,7 +182,7 @@ export default function GoldenStarECellAwardsForm() {
                 { value: "Others", label: "Others" },
               ]}
             />
-            <MemberDetails
+            {/* <MemberDetails
               name="ecellCoordinator"
               label="E-Cell Coordinator Details"
               schema={z.object({
@@ -195,7 +195,7 @@ export default function GoldenStarECellAwardsForm() {
                 email: z.string().email({ message: "Invalid email address." }),
               })}
               form={form}
-            />
+            /> */}
             <TextInput
               name="ecellStartYear"
               label="E-Cell Start Year"
