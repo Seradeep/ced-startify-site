@@ -8,9 +8,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import StartupCafeForm from "@/components/event-forms/startup-cafe";
 import StartupMughavariForm from "@/components/event-forms/startup-mughavari";
 import InternHuntForm from "@/components/event-forms/intern-hunt";
-import StartupAtlasForm from "@/components/event-forms/startup-atlas";
+// import StartupAtlasForm from "@/components/event-forms/startup-atlas";
 import ScholarSpinOffForm from "@/components/event-forms/scholar-spinoff";
 import StartUpPathFinderForm from "@/components/event-forms/startup-path-finder";
+import PitchXForm from "@/components/event-forms/pitch-x";
 
 interface AboutCardProps {
   id: string;
@@ -27,9 +28,10 @@ export default function AboutCard({ id, description, title }: AboutCardProps) {
     "startup-cafe": StartupCafeForm,
     "startup-mughavari": StartupMughavariForm,
     "intern-hunt": InternHuntForm,
-    "startup-atlas": StartupAtlasForm,
+    // "startup-atlas": StartupAtlasForm,
     "scholars-spin-off": ScholarSpinOffForm,
     "path-finder": StartUpPathFinderForm,
+    "pitch-x": PitchXForm,
   };
 
   const FormComponent = formComponents[id];
@@ -60,7 +62,7 @@ export default function AboutCard({ id, description, title }: AboutCardProps) {
       <DialogTrigger>
         <div
           key={title}
-          className="relative flex flex-col text-left bg-purple-700 p-6 rounded-3xl border border-purple-900 overflow-hidden"
+          className="relative h-full flex flex-col text-left bg-purple-700 p-6 rounded-3xl border border-purple-900 overflow-hidden"
         >
           <Grid size={20} />
           <TypographyH4 className="text-[22px] underline underline-offset-2 decoration-purple-300 text-white">
