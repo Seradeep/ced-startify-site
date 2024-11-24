@@ -187,6 +187,26 @@ export default function HeroSection() {
                 />
               </div>
             </motion.div>
+            <motion.div
+              variants={fadeInUp}
+              className="mt-8 flex flex-col items-start lg:w-3/4"
+            >
+              <p className="text-lg text-white text-left">
+                In Association with
+              </p>
+              <div className="flex flex-row items-center justify-between gap-10">
+                <img
+                  src="/images/startuptn_logo.webp"
+                  alt="StartupTN Logo"
+                  className="w-40 h-auto"
+                />
+                <img
+                  src="/images/edii_logo.webp"
+                  alt="Edii Logo"
+                  className="w-16 sm:w-20 h-16 sm:h-20"
+                />
+              </div>
+            </motion.div>
             <motion.div variants={fadeInUp}>
               <Separator className="my-6 bg-gray-400" />
             </motion.div>
@@ -241,26 +261,6 @@ export default function HeroSection() {
                 </div>
               </motion.div>
             </div> */}{" "}
-            <motion.div
-              variants={fadeInUp}
-              className="mt-8 flex flex-col items-start lg:w-3/4"
-            >
-              <p className="text-lg text-white text-left">
-                In Association with
-              </p>
-              <div className="flex flex-row items-center justify-between gap-10">
-                <img
-                  src="/images/startuptn_logo.webp"
-                  alt="StartupTN Logo"
-                  className="w-40 h-auto"
-                />
-                <img
-                  src="/images/edii_logo.webp"
-                  alt="Edii Logo"
-                  className="w-16 sm:w-20 h-16 sm:h-20"
-                />
-              </div>
-            </motion.div>
           </motion.div>
 
           <motion.div
