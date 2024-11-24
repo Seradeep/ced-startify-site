@@ -145,7 +145,7 @@ export default function HeroSection() {
               <img
                 src="/images/hero_logo.webp"
                 alt="Startify Logo"
-                className="h-16 w-auto sm:h-20 md:h-24"
+                className="h-16 w-auto sm:h-20 md:h-32"
               />
               <span className="text-yellow-400 text-6xl sm:text-5xl md:text-6xl md:mt-2">
                 3.0
@@ -171,7 +171,7 @@ export default function HeroSection() {
             </motion.div> */}
 
             {/* TODO: remove in the next commit */}
-            <div className="flex flex-col lg:flex-row items-center justify-between">
+            <div className="flex flex-col lg:flex-row items-center justify-between -ml-20">
               <motion.div
                 variants={fadeInUp}
                 className="mt-4 flex flex-col items-center lg:w-3/4"
