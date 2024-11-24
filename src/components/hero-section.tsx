@@ -69,7 +69,7 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
   }, [targetDate]);
 
   if (eventStarted) {
-    return ;
+    return;
   }
 
   const timeUnits = [
@@ -151,7 +151,6 @@ export default function HeroSection() {
                 3.0
               </span>
             </motion.h1>
-
             <motion.p
               variants={fadeInUp}
               className="text-sm font-bold uppercase"
@@ -169,47 +168,25 @@ export default function HeroSection() {
                 }
               />
             </motion.div> */}
-
             {/* TODO: remove in the next commit */}
-            <div className="flex flex-col lg:flex-row items-center justify-between -ml-20">
-              <motion.div
-                variants={fadeInUp}
-                className="mt-4 flex flex-col items-center lg:w-3/4"
-              >
-                <p className="text-lg text-white">An Initiative by</p>
-                <div className="mt-4 flex flex-row items-center justify-between gap-10">
-                  <img
-                    src="/images/anna_univ_logo.webp"
-                    alt="Anna University Logo"
-                    className="size-16"
-                  />
-                  <img
-                    src="/images/ced_logo.webp"
-                    alt="CED Logo"
-                    className="size-16"
-                  />
-                </div>
-              </motion.div>
-              <motion.div
-                variants={fadeInUp}
-                className="mt-8 flex flex-col items-center lg:w-3/4"
-              >
-                <p className="text-lg text-white">In Association with</p>
-                <div className="flex flex-row items-center justify-between gap-10">
-                  <img
-                    src="/images/startuptn_logo.webp"
-                    alt="StartupTN Logo"
-                    className="w-40 h-auto"
-                  />
-                  <img
-                    src="/images/edii_logo.webp"
-                    alt="Edii Logo"
-                    className="w-16 sm:w-24 h-16 sm:h-24"
-                  />
-                </div>
-              </motion.div>
-            </div>
-            
+            <motion.div
+              variants={fadeInUp}
+              className="mt-4 flex flex-col items-start lg:w-3/4"
+            >
+              <p className="text-lg text-white">An Initiative by</p>
+              <div className="mt-4 flex flex-row items-center justify-between gap-10">
+                <img
+                  src="/images/anna_univ_logo.webp"
+                  alt="Anna University Logo"
+                  className="size-16"
+                />
+                <img
+                  src="/images/ced_logo.webp"
+                  alt="CED Logo"
+                  className="size-16"
+                />
+              </div>
+            </motion.div>
             <motion.div variants={fadeInUp}>
               <Separator className="my-6 bg-gray-400" />
             </motion.div>
@@ -263,7 +240,27 @@ export default function HeroSection() {
                   />
                 </div>
               </motion.div>
-            </div> */}
+            </div> */}{" "}
+            <motion.div
+              variants={fadeInUp}
+              className="mt-8 flex flex-col items-start lg:w-3/4"
+            >
+              <p className="text-lg text-white text-left">
+                In Association with
+              </p>
+              <div className="flex flex-row items-center justify-between gap-10">
+                <img
+                  src="/images/startuptn_logo.webp"
+                  alt="StartupTN Logo"
+                  className="w-40 h-auto"
+                />
+                <img
+                  src="/images/edii_logo.webp"
+                  alt="Edii Logo"
+                  className="w-16 sm:w-20 h-16 sm:h-20"
+                />
+              </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
