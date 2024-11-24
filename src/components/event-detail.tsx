@@ -54,7 +54,7 @@ export default function EventDetailsDialog({
               <span className="font-medium underline underline-offset-1">
                 Registration Fee:
               </span>{" "}
-              Rs.{regFee}/-
+              Rs.{regFee}/-(Inclusive of all taxes)
             </TypographyP>
           </div>
           <Button onClick={onApply} className="mt-4 w-full md:w-auto">

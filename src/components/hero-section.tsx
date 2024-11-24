@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MapPin } from "lucide-react";
+// import { MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -158,7 +158,7 @@ export default function HeroSection() {
             >
               International Student Startup Ecosystem Conclave
             </motion.p>
-            <motion.div variants={fadeInUp} className="flex items-start mt-2">
+            {/* <motion.div variants={fadeInUp} className="flex items-start mt-2">
               <GradientButton
                 className="w-fit pointer-events-none"
                 label={
@@ -168,7 +168,48 @@ export default function HeroSection() {
                   </span>
                 }
               />
-            </motion.div>
+            </motion.div> */}
+
+            {/* TODO: remove in the next commit */}
+            <div className="flex flex-col lg:flex-row items-center justify-between">
+              <motion.div
+                variants={fadeInUp}
+                className="mt-4 flex flex-col items-center lg:w-3/4"
+              >
+                <p className="text-lg text-white">An Initiative by</p>
+                <div className="mt-4 flex flex-row items-center justify-between gap-10">
+                  <img
+                    src="/images/anna_univ_logo.webp"
+                    alt="Anna University Logo"
+                    className="size-16"
+                  />
+                  <img
+                    src="/images/ced_logo.webp"
+                    alt="CED Logo"
+                    className="size-16"
+                  />
+                </div>
+              </motion.div>
+              <motion.div
+                variants={fadeInUp}
+                className="mt-8 flex flex-col items-center lg:w-3/4"
+              >
+                <p className="text-lg text-white">In Association with</p>
+                <div className="flex flex-row items-center justify-between gap-10">
+                  <img
+                    src="/images/startuptn_logo.webp"
+                    alt="StartupTN Logo"
+                    className="w-40 h-auto"
+                  />
+                  <img
+                    src="/images/edii_logo.webp"
+                    alt="Edii Logo"
+                    className="w-16 sm:w-24 h-16 sm:h-24"
+                  />
+                </div>
+              </motion.div>
+            </div>
+            
             <motion.div variants={fadeInUp}>
               <Separator className="my-6 bg-gray-400" />
             </motion.div>
@@ -179,9 +220,13 @@ export default function HeroSection() {
               "Startify 3.0: Empowering Stupreneurs, Inspiring Innovations."
             </motion.p>
             <motion.div variants={fadeInUp} className="flex gap-4 mt-6">
-              <GradientButton href="#about" className="w-[30%]" label="Register Now" />
+              <GradientButton
+                href="#about"
+                className="w-[30%]"
+                label="Register Now"
+              />
             </motion.div>
-            <div className="flex flex-col lg:flex-row items-center justify-between">
+            {/* <div className="flex flex-col lg:flex-row items-center justify-between">
               <motion.div
                 variants={fadeInUp}
                 className="mt-4 flex flex-col items-center lg:w-3/4"
@@ -218,7 +263,7 @@ export default function HeroSection() {
                   />
                 </div>
               </motion.div>
-            </div>
+            </div> */}
           </motion.div>
 
           <motion.div
