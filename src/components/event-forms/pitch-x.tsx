@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
 import { UploadToCloudinary } from "@/lib/utils";
+import { events } from "@/data";
 
 const teamMemberSchema = z.object({
   name: z.string().min(2, { message: "Name is required." }),
@@ -58,6 +59,7 @@ export default function PitchXForm({
 }) {
   const [step, setStep] = useState(1);
   const totalSteps = 3;
+  const event = events.find((event) => event.id === "pitch-x");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -145,8 +147,8 @@ export default function PitchXForm({
     <div className="max-w-2xl mx-auto p-4 sm:p-6">
       <h1 className="text-3xl font-bold mb-2">Pitch-X</h1>
       <TypographyP className="!mt-0 mb-4">
-        You need to pay Event Registration fee of Rs.1250/-(including all taxes)
-        at the time of submission of your applications
+        {`You need to pay Event Registration fee of Rs.${event?.regFee}/-(including all taxes)
+        at the time of submission of your applications`}
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
@@ -263,7 +265,7 @@ export default function PitchXForm({
           onOpen={onPaymentBtnOpen}
           callbackFn={handleSubmit}
           event={{
-            amount: "1250",
+            amount: event?.regFee!,
             name: "Pitch-X",
           }}
         />

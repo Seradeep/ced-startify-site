@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
 import { apiCreateStartupPathFinderProject } from "@/api/events";
+import { events } from "@/data";
 
 const baseSchema = z.object({
   name: z.string().min(2, { message: "Name is required" }),
@@ -40,24 +41,23 @@ const entrepreneurSchema = z.object({
   sector: z.string().min(2, { message: "Sector is required" }),
 });
 
-const formSchema = z
-  .discriminatedUnion("role", [
-    z.object({
-      ...baseSchema.shape,
-      role: z.literal("Student"),
-      ...studentSchema.shape,
-    }),
-    z.object({
-      ...baseSchema.shape,
-      role: z.literal("Professional"),
-      ...professionalSchema.shape,
-    }),
-    z.object({
-      ...baseSchema.shape,
-      role: z.literal("Entrepreneur"),
-      ...entrepreneurSchema.shape,
-    }),
-  ]);
+const formSchema = z.discriminatedUnion("role", [
+  z.object({
+    ...baseSchema.shape,
+    role: z.literal("Student"),
+    ...studentSchema.shape,
+  }),
+  z.object({
+    ...baseSchema.shape,
+    role: z.literal("Professional"),
+    ...professionalSchema.shape,
+  }),
+  z.object({
+    ...baseSchema.shape,
+    role: z.literal("Entrepreneur"),
+    ...entrepreneurSchema.shape,
+  }),
+]);
 
 export type FormValues = z.infer<typeof formSchema>;
 
@@ -68,6 +68,7 @@ export default function StartUpPathFinderForm({
 }) {
   const [step, setStep] = useState(1);
   const totalSteps = 2;
+  const event = events.find((event) => event.id === "path-finder");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -135,8 +136,8 @@ export default function StartUpPathFinderForm({
         StartUp Path Finder - AI Mentor Connect Panel Discussion
       </h1>
       <TypographyP className="!mt-0 mb-4">
-        You need to pay Event Registration fee of Rs.3125/-(including all taxes)
-        at the time of submission of your applications
+        {`You need to pay Event Registration fee of Rs.${event?.regFee}/-(including all taxes)
+        at the time of submission of your applications`}
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
@@ -242,7 +243,7 @@ export default function StartUpPathFinderForm({
           onOpen={onPaymentBtnOpen}
           callbackFn={onSubmit}
           event={{
-            amount: "3125",
+            amount: event?.regFee!,
             name: "StartUp Path Finder",
           }}
         />

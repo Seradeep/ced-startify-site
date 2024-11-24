@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { toast } from "sonner";
 
 import {
   FormStepper,
@@ -17,9 +18,9 @@ import {
 } from "@/components/ui/form-components";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
+import { TypographyP } from "@/components/ui/typography";
 import { apiCreateStartupMughavariProject } from "@/api/events";
-import { TypographyP } from "../ui/typography";
+import { events } from "@/data";
 
 const coFounderSchema = z.object({
   name: z.string().min(2, { message: "Co-founder name is required." }),
@@ -54,6 +55,7 @@ export default function StartupMughavariForm({
 }) {
   const [step, setStep] = useState(1);
   const totalSteps = 2;
+  const event = events.find((event) => event.id === "startup-mughavari");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -107,8 +109,8 @@ export default function StartupMughavariForm({
     <div className="max-w-2xl mx-auto p-4 sm:p-6">
       <h1 className="text-3xl font-bold mb-2">Startup Mughavari Application</h1>
       <TypographyP className="!mt-0 mb-4">
-        You need to pay Event Registration fee of Rs.1250/-(including all taxes) at the time of submission of
-        your applications
+        {`You need to pay Event Registration fee of Rs.${event?.regFee}/-(including all taxes)
+        at the time of submission of your applications`}
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
@@ -206,7 +208,7 @@ export default function StartupMughavariForm({
           onOpen={onPaymentBtnOpen}
           callbackFn={handleSubmit}
           event={{
-            amount: "1250",
+            amount: event?.regFee!,
             name: "Startup Mughavari Application",
           }}
         />

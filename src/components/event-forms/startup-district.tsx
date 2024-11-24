@@ -15,6 +15,7 @@ import {
   InfiniteMemberDetails,
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
+import { events } from "@/data";
 
 const formSchema = z.object({
   startupName: z.string().min(2, { message: "Startup name is required." }),
@@ -53,6 +54,7 @@ export default function StartupDistrictForm({
 }) {
   const [step, setStep] = useState(1);
   const totalSteps = 3;
+  const event = events.find((event) => event.id === "startup-district");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -114,8 +116,8 @@ export default function StartupDistrictForm({
     <div className="max-w-2xl mx-auto p-4 sm:p-6">
       <h1 className="text-3xl font-bold mb-2">Startup District</h1>
       <TypographyP className="!mt-0 mb-4">
-        You need to pay Rs.625/-(including all taxes) at the time of submission
-        of your applications
+        {`You need to pay Rs.${event?.regFee}/-(including all taxes) at the time of submission
+        of your applications`}
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
@@ -209,8 +211,8 @@ export default function StartupDistrictForm({
           onOpen={onPaymentBtnOpen}
           callbackFn={handleSubmit}
           event={{
-            amount: "625",
-            name: "Startup District – Demo Day",
+            amount: event?.regFee!,
+            name: "Startup District",
           }}
         />
       </FormLayout>

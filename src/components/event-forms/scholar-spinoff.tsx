@@ -13,6 +13,7 @@ import {
   FormActions,
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
+import { events } from "@/data";
 
 const formSchema = z.object({
   scholarName: z.string().min(2, { message: "Scholar name is required." }),
@@ -44,6 +45,7 @@ export default function ScholarSpinOffForm({
 }) {
   const [step, setStep] = useState(1);
   const totalSteps = 3;
+  const event = events.find((event) => event.id === "scholars-spin-off");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -103,8 +105,8 @@ export default function ScholarSpinOffForm({
         Scholar's Spin-Off Application
       </h1>
       <TypographyP className="!mt-0 mb-4">
-        You need to pay Rs.6250/-(including all taxes) at the time of submission
-        of your applications
+        {`You need to pay Rs.${event?.regFee}/-(including all taxes) at the time of submission
+        of your applications`}
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
@@ -192,7 +194,7 @@ export default function ScholarSpinOffForm({
           onOpen={onPaymentBtnOpen}
           callbackFn={handleSubmit}
           event={{
-            amount: "6250",
+            amount: event?.regFee!,
             name: "Scholar's Spin-Off",
           }}
         />
