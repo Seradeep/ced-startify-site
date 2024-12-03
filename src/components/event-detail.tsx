@@ -69,7 +69,7 @@ export default function EventDetailsDialog({
                   View Reg. Fees
                 </a>
               ) : (
-                "Rs.{regFee}/-(Inclusive of all taxes)"
+                `Rs.${regFee}/-(Inclusive of all taxes)`
               )}
             </TypographyP>
           </div>
