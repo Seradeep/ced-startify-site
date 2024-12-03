@@ -291,29 +291,29 @@ export const tamilNaduDistricts = [
 ];
 
 export const eCellRegFee = {
-  international: "$375(USD)",
+  international: "$3540 ($3000 + 18% GST)",
   other: {
-    "1award": "Rs.50,000/-",
-    "8awards": "Rs.75,000/-",
+    "1award": "Rs.59,000/-",
+    "8awards": "Rs.88,500/-",
     "15awards": {
-      college: "Rs.1,20,000/-",
-      university: "Rs.1,50,000/-",
+      college: "Rs.1,41,600/-",
+      university: "Rs.1,77,000/-",
     },
   },
   tamilnadu: {
     stateLevel: {
-      "1award": "Rs.50,000/-",
-      "8awards": "Rs.75,000/-",
+      "1award": "Rs.59,000/-",
+      "8awards": "Rs.88,500/-",
       "19awards": {
-        college: "Rs.1,00,000/-",
-        university: "Rs.1,50,000/-",
+        college: "Rs.1,18,000/-",
+        university: "Rs.1,77,000/-",
       },
     },
     districtLevel: {
-      "1award": "Rs.40,000/-",
-      "8awards": "Rs.65,000/-",
+      "1award": "Rs.47,200/-",
+      "8awards": "Rs.76,700/-",
       "19awards": {
-        college: "Rs.1,00,000/-",
+        college: "Rs.1,18,000/-",
       },
     },
   },
