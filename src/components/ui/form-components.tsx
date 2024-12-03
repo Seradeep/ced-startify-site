@@ -55,6 +55,7 @@ import {
 
 import { cn, SeparateAndCapitalize, UploadToCloudinary } from "@/lib/utils";
 import PaymentButton from "../payment-button";
+import { ScrollArea } from "./scroll-area";
 
 export const FormStepper = ({
   currentStep,
@@ -412,43 +413,45 @@ export const MultiSelect = ({
                         Clear
                       </Button>
                     </div>
-                    <CommandList className="max-h-60 overflow-y-auto">
-                      {options.map((option) => (
-                        <CommandItem
-                          key={option.value}
-                          className="border-b"
-                          onSelect={() => {
-                            if (
-                              !isLimitReached ||
-                              field.value?.includes(option.value)
-                            ) {
-                              const newValue = field.value?.includes(
-                                option.value
-                              )
-                                ? field.value.filter(
-                                    (item: string) => item !== option.value
-                                  )
-                                : [...(field.value || []), option.value];
-                              field.onChange(newValue);
+                    <ScrollArea className="max-h-60">
+                      <CommandList>
+                        {options.map((option) => (
+                          <CommandItem
+                            key={option.value}
+                            className="border-b"
+                            onSelect={() => {
+                              if (
+                                !isLimitReached ||
+                                field.value?.includes(option.value)
+                              ) {
+                                const newValue = field.value?.includes(
+                                  option.value
+                                )
+                                  ? field.value.filter(
+                                      (item: string) => item !== option.value
+                                    )
+                                  : [...(field.value || []), option.value];
+                                field.onChange(newValue);
+                              }
+                            }}
+                            disabled={
+                              isLimitReached &&
+                              !field.value?.includes(option.value)
                             }
-                          }}
-                          disabled={
-                            isLimitReached &&
-                            !field.value?.includes(option.value)
-                          }
-                        >
-                          <Check
-                            className={cn(
-                              "size-4",
-                              field.value?.includes(option.value)
-                                ? "opacity-100"
-                                : "opacity-0"
-                            )}
-                          />
-                          <span>{option.label}</span>
-                        </CommandItem>
-                      ))}
-                    </CommandList>
+                          >
+                            <Check
+                              className={cn(
+                                "size-4",
+                                field.value?.includes(option.value)
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            <span>{option.label}</span>
+                          </CommandItem>
+                        ))}
+                      </CommandList>
+                    </ScrollArea>
                   </CommandGroup>
                 </Command>
                 {isLimitReached && (
