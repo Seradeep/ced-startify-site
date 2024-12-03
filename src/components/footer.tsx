@@ -51,36 +51,57 @@ const Address = () => (
     <div className="flex items-start">
       <MapPin className="mr-2 size-7 sm:size-10" />
       <span>
-      <a
-      href="https://www.google.com/maps/dir//302,+2nd+Floor,+Platinum+Jubilee+Building+AC+Tech+Campus,+Sardar+Patel+Rd,+Anna+University,+Guindy,+Chennai,+Tamil+Nadu+600025/@13.0087452,80.1550457,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a5267c89a1b24f9:0x7941fa43c361fff0!2m2!1d80.2374476!2d13.0087582?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="hover:text-purple-700"
-    >
-        302, 2nd Floor, Platinum Jubilee Building AC Tech Campus, Sardar Patel
-        Rd, Anna University, Guindy, Chennai, Tamil Nadu, 600025
+        <a
+          href="https://www.google.com/maps/dir//302,+2nd+Floor,+Platinum+Jubilee+Building+AC+Tech+Campus,+Sardar+Patel+Rd,+Anna+University,+Guindy,+Chennai,+Tamil+Nadu+600025/@13.0087452,80.1550457,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a5267c89a1b24f9:0x7941fa43c361fff0!2m2!1d80.2374476!2d13.0087582?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-700"
+        >
+          302, 2nd Floor, Platinum Jubilee Building AC Tech Campus, Sardar Patel
+          Rd, Anna University, Guindy, Chennai, Tamil Nadu, 600025
         </a>
       </span>
     </div>
     <div className="flex items-center">
       <Phone className="mr-2 size-4" />
       <a href="tel:044 22359289/87" className="hover:text-purple-700">
-      044 22359289
-        </a>
+        044 22359289
+      </a>
     </div>
     <div className="flex items-center">
       <Phone className="mr-2 size-4" />
       <a href="tel:044 22359287" className="hover:text-purple-700">
-      044 22359287
-        </a>
+        044 22359287
+      </a>
     </div>
     <div className="flex items-center">
       <Mail className="mr-2 size-4" />
-      <a href="mailto:cedau.outreach@gmail.com" className="hover:text-purple-700">
-      cedau.outreach@gmail.com
+      <a
+        href="mailto:cedau.outreach@gmail.com"
+        className="hover:text-purple-700"
+      >
+        cedau.outreach@gmail.com
       </a>
     </div>
   </address>
+);
+
+const PolicyLinks = () => (
+  <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end">
+    {[
+      { name: "Privacy Policy", href: "/privacy-policy" },
+      { name: "Refund Policy", href: "/refund-policy" },
+      { name: "Terms and Conditions", href: "/terms-and-conditions" },
+    ].map(({ name, href }) => (
+      <a
+        key={name}
+        href={href}
+        className="text-sm text-muted-foreground transition-all duration-300 ease-in-out hover:text-purple-700 hover:scale-110"
+      >
+        {name}
+      </a>
+    ))}
+  </div>
 );
 
 export default function Footer() {
@@ -129,30 +150,30 @@ export default function Footer() {
           <p className="text-sm text-muted-foreground">
             © 2024 CED. All rights reserved.
           </p>
+          <PolicyLinks />
           <p className="flex items-center text-sm text-muted-foreground">
-  Designed with{" "}
-  <Heart className="mx-1 size-4 text-red-500" aria-label="love" /> by
-  <span className="ml-1 font-bold italic">
-    <a
-      href="https://www.linkedin.com/in/cibisuryaa/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-purple-500"
-    >
-      Cibi
-    </a>{" "}
-    &{" "}
-    <a
-      href="https://www.linkedin.com/in/omprakash-d/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-purple-500"
-    >
-      Om
-    </a>
-  </span>
-</p>
-
+            Designed with{" "}
+            <Heart className="mx-1 size-4 text-red-500" aria-label="love" /> by
+            <span className="ml-1 font-bold italic">
+              <a
+                href="https://www.linkedin.com/in/cibisuryaa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-500"
+              >
+                Cibi
+              </a>{" "}
+              &{" "}
+              <a
+                href="https://www.linkedin.com/in/omprakash-d/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-500"
+              >
+                Om
+              </a>
+            </span>
+          </p>
         </div>
       </CardContent>
     </Card>

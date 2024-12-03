@@ -10,12 +10,13 @@ import Grid from "@/components/grid-bg";
 import StartupCafeForm from "@/components/event-forms/startup-cafe";
 import StartupMughavariForm from "@/components/event-forms/startup-mughavari";
 import InternHuntForm from "@/components/event-forms/intern-hunt";
-// import StartupAtlasForm from "@/components/event-forms/startup-atlas";
+import StartupAtlasForm from "@/components/event-forms/startup-atlas";
 import ScholarSpinOffForm from "@/components/event-forms/scholar-spinoff";
 import StartUpPathFinderForm from "@/components/event-forms/startup-path-finder";
 import PitchXForm from "@/components/event-forms/pitch-x";
 import GurusPitchForm from "@/components/event-forms/guru-pitch";
 import StartupDistrictForm from "@/components/event-forms/startup-district";
+import GoldenStarECellAwardsForm from "@/components/event-forms/golden-ecell";
 
 interface AboutCardProps {
   id: string;
@@ -43,12 +44,13 @@ export default function AboutCard({
     "startup-cafe": StartupCafeForm,
     "startup-mughavari": StartupMughavariForm,
     "intern-hunt": InternHuntForm,
-    // "startup-atlas": StartupAtlasForm,
+    "startup-atlas": StartupAtlasForm,
     "scholars-spin-off": ScholarSpinOffForm,
     "path-finder": StartUpPathFinderForm,
     "pitch-x": PitchXForm,
     "gurus-pitch": GurusPitchForm,
     "startup-district": StartupDistrictForm,
+    "e-cell-awards": GoldenStarECellAwardsForm,
   };
 
   const FormComponent = formComponents[id];

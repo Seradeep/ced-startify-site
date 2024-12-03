@@ -31,9 +31,9 @@ export const events = [
     title: "Golden Star E-Cell Awards",
     description:
       "Awards to recognize colleges with exceptional Entrepreneurship Cells that have demonstrated outstanding performance in promoting entrepreneurship activities. Award Categories: 1. Super Star 2. Rising Star",
-    prizeAmount: "TBD",
-    regFee: "1770",
-    imageSrc: "/images/e-cell-awards.webp",
+    prizeAmount: "19 Awards",
+    regFee: "/images/ecell-fees.webp",
+    imageSrc: "/images/ecell-awards.webp",
   },
   {
     id: "gurus-pitch",
@@ -96,6 +96,6 @@ export const events = [
       "The Research to Startup initiative aims to empower Ph.D. scholars from Tamil Nadu by bridging the gap between academic research and entrepreneurial ventures. This event is designed to provide a platform for 100 selected Ph.D. scholars to transform their research into viable startups through mentorship, networking, and hands-on guidance.",
     prizeAmount: "TBD",
     regFee: "6250",
-    imageSrc: "/images/scholars-spin-off.webp",
+    imageSrc: "/images/scholars-spinoff.webp",
   },
 ];

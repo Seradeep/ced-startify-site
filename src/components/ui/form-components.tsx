@@ -8,9 +8,17 @@ import {
 } from "react-hook-form";
 import { z } from "zod";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, X } from "lucide-react";
+import { CalendarIcon, X, Check, ChevronsUpDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import {
   Form,
   FormControl,
@@ -43,6 +51,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 
 import { cn, SeparateAndCapitalize, UploadToCloudinary } from "@/lib/utils";
 import PaymentButton from "../payment-button";
@@ -95,17 +104,19 @@ export const FormActions = ({
   onOpen,
   callbackFn,
   event,
+  hasPayment = true,
 }: {
   currentStep: number;
   totalSteps: number;
   onPrevious: () => void;
   onNext: () => void;
-  event: {
+  event?: {
     amount: string;
     name: string;
   };
   onOpen: (value: boolean) => void;
   callbackFn: (paymentId: string) => void;
+  hasPayment?: boolean;
 }) => (
   <div className="flex justify-between mt-8">
     {currentStep > 1 && (
@@ -117,13 +128,17 @@ export const FormActions = ({
       <Button type="button" onClick={onNext}>
         Next
       </Button>
-    ) : (
+    ) : hasPayment ? (
       <PaymentButton
-        amount={event.amount}
+        amount={event?.amount!}
         onOpen={onOpen}
         callbackFn={callbackFn}
-        eventName={event.name}
+        eventName={event?.name!}
       />
+    ) : (
+      <Button type="button" onClick={() => callbackFn("")}>
+        Submit Application
+      </Button>
     )}
   </div>
 );
@@ -204,7 +219,7 @@ export const RadioInput = ({
 }: {
   name: string;
   label: string;
-  options: { value: string; label: string }[];
+  options: { value: any; label: string }[];
   description?: string;
 }) => (
   <FormField
@@ -320,6 +335,164 @@ export const SelectInput = <T extends FieldValues>({
   />
 );
 
+export const MultiSelect = ({
+  name,
+  label,
+  options,
+  placeholder = "Select...",
+  description,
+  limit,
+  selectAll = false,
+}: {
+  name: string;
+  label: string;
+  options: { value: string; label: string }[];
+  placeholder?: string;
+  description?: string;
+  limit?: number;
+  selectAll?: boolean;
+}) => {
+  return (
+    <FormField
+      name={name}
+      defaultValue={selectAll ? options.map((option) => option.value) : []}
+      render={({ field }) => {
+        const isLimitReached = limit ? field.value?.length >= limit : false;
+
+        const handleSelectAll = () => {
+          if (limit) {
+            field.onChange(
+              options.slice(0, limit).map((option) => option.value)
+            );
+          } else {
+            field.onChange(options.map((option) => option.value));
+          }
+        };
+
+        const handleClear = () => {
+          field.onChange([]);
+        };
+
+        return (
+          <FormItem className="flex flex-col">
+            <FormLabel>{label}</FormLabel>
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className={cn(
+                      "w-full justify-between",
+                      !field.value?.length && "text-muted-foreground"
+                    )}
+                  >
+                    {field.value?.length
+                      ? `${field.value.length} selected`
+                      : placeholder}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+              <PopoverContent className="w-[300px] p-0">
+                <Command>
+                  <CommandInput placeholder={placeholder} />
+                  <CommandEmpty>No item found.</CommandEmpty>
+                  <CommandGroup>
+                    <div className="flex justify-between p-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleSelectAll}
+                        disabled={isLimitReached}
+                      >
+                        Select All
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={handleClear}>
+                        Clear
+                      </Button>
+                    </div>
+                    <CommandList className="max-h-60 overflow-y-auto">
+                      {options.map((option) => (
+                        <CommandItem
+                          key={option.value} className="border-b"
+                          onSelect={() => {
+                            if (
+                              !isLimitReached ||
+                              field.value?.includes(option.value)
+                            ) {
+                              const newValue = field.value?.includes(
+                                option.value
+                              )
+                                ? field.value.filter(
+                                    (item: string) => item !== option.value
+                                  )
+                                : [...(field.value || []), option.value];
+                              field.onChange(newValue);
+                            }
+                          }}
+                          disabled={
+                            isLimitReached &&
+                            !field.value?.includes(option.value)
+                          }
+                        >
+                          <Check
+                            className={cn(
+                              "size-4",
+                              field.value?.includes(option.value)
+                                ? "opacity-100"
+                                : "opacity-0"
+                            )}
+                          />
+                          <span>{option.label}</span>
+                        </CommandItem>
+                      ))}
+                    </CommandList>
+                  </CommandGroup>
+                </Command>
+                {isLimitReached && (
+                  <p className="text-sm text-muted-foreground p-2 text-center">
+                    Selection limit reached. No more selections allowed.
+                  </p>
+                )}
+              </PopoverContent>
+            </Popover>
+            {description && (
+              <FormDescription className="max-sm:text-sm">
+                {description}
+              </FormDescription>
+            )}
+            <FormMessage />
+            {field.value?.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {field.value.map((item: string) => (
+                  <Badge key={item} variant="secondary">
+                    {options.find((option) => option.value === item)?.label}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="h-auto p-0 ml-2"
+                      onClick={() => {
+                        const newValue = field.value.filter(
+                          (value: string) => value !== item
+                        );
+                        field.onChange(newValue);
+                      }}
+                    >
+                      <X className="h-3 w-3" />
+                    </Button>
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </FormItem>
+        );
+      }}
+    />
+  );
+};
+
 export const FileInput = ({
   name,
   label,
@@ -362,6 +535,81 @@ export const FileInput = ({
     )}
   />
 );
+
+export function MultiFileUpload({
+  name,
+  label,
+  form,
+}: {
+  name: string;
+  label: string;
+  form: any;
+}) {
+  const [uploadedFiles, setUploadedFiles] = React.useState<string[]>([]);
+
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const { success, url } = await UploadToCloudinary(file);
+        if (success && url) {
+          setUploadedFiles((prev) => [...prev, url]);
+          const currentValue = form.getValues(name) || [];
+          form.setValue(name, [...currentValue, url]);
+        }
+      }
+    }
+  };
+
+  const removeFile = (index: number) => {
+    const newFiles = uploadedFiles.filter((_, i) => i !== index);
+    setUploadedFiles(newFiles);
+    form.setValue(name, newFiles);
+  };
+
+  return (
+    <FormField
+      name={name}
+      render={() => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <div className="space-y-4">
+            <Input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleFileUpload}
+            />
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              {uploadedFiles.map((url, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={url}
+                    alt={`Uploaded image ${index + 1}`}
+                    className="w-full h-48 object-cover rounded"
+                  />
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="icon"
+                    className="absolute top-2 right-2"
+                    onClick={() => removeFile(index)}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
 
 export function DatePicker({
   className,
@@ -564,6 +812,16 @@ export const MemberDetails = <T extends FieldValues>({
                   placeholder={`Enter ${fieldName.toLowerCase()}`}
                 />
               );
+            } else if (fieldName.toLowerCase().includes("proof")) {
+              return (
+                <TextInput
+                  key={name}
+                  name={name}
+                  label={fieldName}
+                  placeholder={`Enter ${fieldName.toLowerCase()}`}
+                  description={fieldSchema.description}
+                />
+              );
             } else {
               return (
                 <TextInput
@@ -598,6 +856,32 @@ export const MemberDetails = <T extends FieldValues>({
                 />
               );
             }
+          } else if (fieldSchema instanceof z.ZodNumber) {
+            return (
+              <TextInput
+                key={name}
+                name={name}
+                label={fieldName}
+                placeholder={`Enter ${fieldName.toLowerCase()}`}
+                type="number"
+              />
+            );
+          } else if (fieldSchema instanceof z.ZodArray) {
+            const options = fieldSchema._def.type._def.values.map(
+              (value: string) => ({
+                value,
+                label: value,
+              })
+            );
+            return (
+              <MultiSelect
+                key={name}
+                name={name}
+                label={fieldName}
+                options={options}
+                placeholder={`Select ${fieldName.toLowerCase()}`}
+              />
+            );
           }
           return null;
         })}
@@ -656,78 +940,3 @@ export const InfiniteMemberDetails = <T extends FieldValues>({
     </div>
   );
 };
-
-export function MultiImageUpload({
-  name,
-  label,
-  form,
-}: {
-  name: string;
-  label: string;
-  form: any;
-}) {
-  const [uploadedImages, setUploadedImages] = React.useState<string[]>([]);
-
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const files = event.target.files;
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const { success, url } = await UploadToCloudinary(file);
-        if (success && url) {
-          setUploadedImages((prev) => [...prev, url]);
-          const currentValue = form.getValues(name) || [];
-          form.setValue(name, [...currentValue, url]);
-        }
-      }
-    }
-  };
-
-  const removeImage = (index: number) => {
-    const newImages = uploadedImages.filter((_, i) => i !== index);
-    setUploadedImages(newImages);
-    form.setValue(name, newImages);
-  };
-
-  return (
-    <FormField
-      name={name}
-      render={() => (
-        <FormItem>
-          <FormLabel>{label}</FormLabel>
-          <div className="space-y-4">
-            <Input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleFileUpload}
-            />
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              {uploadedImages.map((url, index) => (
-                <div key={index} className="relative">
-                  <img
-                    src={url}
-                    alt={`Uploaded image ${index + 1}`}
-                    className="w-full h-48 object-cover rounded"
-                  />
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    className="absolute top-2 right-2"
-                    onClick={() => removeImage(index)}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-              ))}
-            </div>
-          </div>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  );
-}

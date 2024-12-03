@@ -8,12 +8,42 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 
+// Create Virtual Routes
+
+const TermsAndConditionsLazyImport = createFileRoute('/terms-and-conditions')()
+const RefundPolicyLazyImport = createFileRoute('/refund-policy')()
+const PrivacyPolicyLazyImport = createFileRoute('/privacy-policy')()
+
 // Create/Update Routes
+
+const TermsAndConditionsLazyRoute = TermsAndConditionsLazyImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/terms-and-conditions.lazy').then((d) => d.Route),
+)
+
+const RefundPolicyLazyRoute = RefundPolicyLazyImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/refund-policy.lazy').then((d) => d.Route))
+
+const PrivacyPolicyLazyRoute = PrivacyPolicyLazyImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/privacy-policy.lazy').then((d) => d.Route),
+)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -32,6 +62,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +90,56 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/privacy-policy': typeof PrivacyPolicyLazyRoute
+  '/refund-policy': typeof RefundPolicyLazyRoute
+  '/terms-and-conditions': typeof TermsAndConditionsLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/privacy-policy': typeof PrivacyPolicyLazyRoute
+  '/refund-policy': typeof RefundPolicyLazyRoute
+  '/terms-and-conditions': typeof TermsAndConditionsLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/privacy-policy': typeof PrivacyPolicyLazyRoute
+  '/refund-policy': typeof RefundPolicyLazyRoute
+  '/terms-and-conditions': typeof TermsAndConditionsLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/privacy-policy'
+    | '/refund-policy'
+    | '/terms-and-conditions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/privacy-policy' | '/refund-policy' | '/terms-and-conditions'
+  id:
+    | '__root__'
+    | '/'
+    | '/privacy-policy'
+    | '/refund-policy'
+    | '/terms-and-conditions'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrivacyPolicyLazyRoute: typeof PrivacyPolicyLazyRoute
+  RefundPolicyLazyRoute: typeof RefundPolicyLazyRoute
+  TermsAndConditionsLazyRoute: typeof TermsAndConditionsLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrivacyPolicyLazyRoute: PrivacyPolicyLazyRoute,
+  RefundPolicyLazyRoute: RefundPolicyLazyRoute,
+  TermsAndConditionsLazyRoute: TermsAndConditionsLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +152,23 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/privacy-policy",
+        "/refund-policy",
+        "/terms-and-conditions"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/privacy-policy": {
+      "filePath": "privacy-policy.lazy.tsx"
+    },
+    "/refund-policy": {
+      "filePath": "refund-policy.lazy.tsx"
+    },
+    "/terms-and-conditions": {
+      "filePath": "terms-and-conditions.lazy.tsx"
     }
   }
 }

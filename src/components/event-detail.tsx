@@ -1,7 +1,8 @@
 import { DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { TypographyH3, TypographyP } from "@/components/ui/typography";
 import { Maximize2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface EventDetailsProps {
   id: string;
@@ -54,7 +55,22 @@ export default function EventDetailsDialog({
               <span className="font-medium underline underline-offset-1">
                 Registration Fee:
               </span>{" "}
-              Rs.{regFee}/-(Inclusive of all taxes)
+              {regFee[0] === "/" ? (
+                <a
+                  href={regFee}
+                  className={cn(
+                    buttonVariants({
+                      variant: "link",
+                    }),
+                    "p-0 pl-1"
+                  )}
+                  target="_blank"
+                >
+                  View Reg. Fees
+                </a>
+              ) : (
+                "Rs.{regFee}/-(Inclusive of all taxes)"
+              )}
             </TypographyP>
           </div>
           <Button onClick={onApply} className="mt-4 w-full md:w-auto">

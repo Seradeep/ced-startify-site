@@ -1,31 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { toast } from "sonner";
+import * as z from "zod";
+import { AlertCircle } from "lucide-react";
 
+import {
+  eCellAwards,
+  eCellRegFee,
+  indianStates,
+  tamilNaduDistricts,
+} from "@/data";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import {
   FormStepper,
   FormLayout,
   TextInput,
   RadioInput,
   SelectInput,
+  FileInput,
   FormActions,
   InfiniteMemberDetails,
-  MultiImageUpload,
-  // MemberDetails,
+  MultiSelect,
 } from "@/components/ui/form-components";
-import { TypographyP } from "@/components/ui/typography";
+import { TypographyH2, TypographyP } from "@/components/ui/typography";
+import { cn, UploadToCloudinary } from "@/lib/utils";
+import { apiCreateGoldenStarECellProject } from "@/api/events";
 
 const formSchema = z.object({
+  region: z.enum(["International", "Tamil Nadu", "Other State"]),
+  state: z.string().optional(),
+  district: z.string().optional(),
+  country: z.string().optional(),
+  institutionType: z.enum(["College", "University"]).optional(),
+  participateInDistrictLevel: z.boolean().optional(),
+  numberOfAwards: z.enum(["1", "8", "15", "16", "19"]),
+  selectedAwards: z.array(z.string()),
   institutionName: z
     .string()
-    .min(2, { message: "Institution name is required." }),
+    .min(2, { message: "Institution name is required" }),
   institutionDistrict: z
     .string()
-    .min(2, { message: "Institution district is required." }),
-  phoneNumber: z.string().min(10, { message: "Invalid phone number." }),
-  email: z.string().email({ message: "Invalid email address." }),
+    .min(2, { message: "Institution district is required" }),
+  phoneNumber: z.string().min(10, { message: "Invalid phone number" }),
+  email: z.string().email({ message: "Invalid email address" }),
   institutionCategory: z.enum([
     "Engineering",
     "Arts & Sciences",
@@ -35,71 +60,193 @@ const formSchema = z.object({
     "Others",
   ]),
   ecellCoordinator: z.object({
-    name: z.string().min(2, { message: "Coordinator name is required." }),
-    phoneNumber: z.string().min(10, { message: "Invalid phone number." }),
-    email: z.string().email({ message: "Invalid email address." }),
+    name: z.string().min(2, { message: "Coordinator name is required" }),
+    phoneNumber: z.string().min(10, { message: "Invalid phone number" }),
+    email: z.string().email({ message: "Invalid email address" }),
   }),
-  ecellStartYear: z.string().min(4, { message: "Valid year is required." }),
+  ecellStartYear: z.string({
+    required_error: "E-Cell start year is required",
+  }),
   entrepreneurshipFacilities: z.array(
     z.enum(["Makers Lab", "Incubator", "Others"])
   ),
-  awarenessPrograms: z.object({
-    count: z.number().min(0),
-    details: z.array(
+  activities: z.object({
+    awarenessPrograms: z.array(
       z.object({
-        name: z.string(),
-        beneficiaryCount: z.number(),
-        outcomes: z.string(),
-        proofImages: z.array(z.string().url()),
+        name: z.string().min(1, "Program name is required"),
+        beneficiaryCount: z.string({
+          required_error: "Beneficiary count is required",
+        }),
+        outcomes: z.string().min(1, "Outcomes are required"),
+        proofUrl: z
+          .string()
+          .url({ message: "Invalid drive url" })
+          .describe(
+            "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
+          ),
+      })
+    ),
+    workshops: z.array(
+      z.object({
+        name: z.string().min(1, "Workshop name is required"),
+        beneficiaryCount: z.string({
+          required_error: "Beneficiary count is required",
+        }),
+        outcomes: z.string().min(1, "Outcomes are required"),
+        proofUrl: z
+          .string()
+          .url({ message: "Invalid drive url" })
+          .describe(
+            "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
+          ),
+      })
+    ),
+    otherEvents: z.array(
+      z.object({
+        name: z.string().min(1, "Event name is required"),
+        beneficiaryCount: z.string({
+          required_error: "Beneficiary count is required",
+        }),
+        outcomes: z.string().min(1, "Outcomes are required"),
+        proofUrl: z
+          .string()
+          .url({ message: "Invalid drive url" })
+          .describe(
+            "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
+          ),
       })
     ),
   }),
-  workshops: z.object({
-    count: z.number().min(0),
-    details: z.array(
-      z.object({
-        name: z.string(),
-        beneficiaryCount: z.number(),
-        outcomes: z.string(),
-        proofImages: z.array(z.string().url()),
-      })
-    ),
+  institutionalFunding: z.string({
+    required_error: "Institutional Funding is required",
   }),
-  otherEvents: z.object({
-    count: z.number().min(0),
-    details: z.array(
-      z.object({
-        name: z.string(),
-        beneficiaryCount: z.number(),
-        outcomes: z.string(),
-        proofImages: z.array(z.string().url()),
-      })
-    ),
-  }),
-  institutionalFunding: z.object({
-    amount: z.number().min(0),
-    isYearly: z.boolean(),
+  payment: z.object({
+    bankScreenshot: z.string().url({ message: "Invalid drive url" }),
+    paymentId: z.string().min(1, "Payment ID is required"),
   }),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type FormValues = z.infer<typeof formSchema>;
 
-export default function GoldenStarECellAwardsForm() {
-  const [step, setStep] = useState(1);
-  const totalSteps = 4;
+export default function GoldenStarECellAwardsForm({
+  onPaymentBtnOpen,
+}: {
+  onPaymentBtnOpen: (value: boolean) => void;
+}) {
+  const [step, setStep] = useState<number>(1);
+  const [regFee, setRegFee] = useState<string | null>(null);
+  const [awardOptions, setAwardOptions] = useState<string[]>();
+  const totalSteps = 7;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      awarenessPrograms: { count: 0, details: [] },
-      workshops: { count: 0, details: [] },
-      otherEvents: { count: 0, details: [] },
+      region: "International",
+      numberOfAwards: "16",
+      selectedAwards: [],
+      institutionType: "College",
+      activities: {
+        awarenessPrograms: [
+          { name: "", beneficiaryCount: "0", outcomes: "", proofUrl: "" },
+        ],
+        workshops: [
+          { name: "", beneficiaryCount: "0", outcomes: "", proofUrl: "" },
+        ],
+        otherEvents: [
+          { name: "", beneficiaryCount: "0", outcomes: "", proofUrl: "" },
+        ],
+      },
+      entrepreneurshipFacilities: [],
     },
   });
 
+  const region = form.watch("region");
+  const numberOfAwards = form.watch("numberOfAwards");
+  const institutionType = form.watch("institutionType");
+  const participateInDistrictLevel = form.watch("participateInDistrictLevel");
+
+  useEffect(() => {
+    function calculateRegFee(): string | null {
+      const { international, other, tamilnadu } = eCellRegFee;
+      if (region === "International") {
+        return international;
+      } else if (region === "Other State") {
+        switch (numberOfAwards) {
+          case "1":
+            return other["1award"];
+          case "8":
+            return other["8awards"];
+          case "15":
+            return institutionType === "College"
+              ? other["15awards"].college
+              : other["15awards"].university;
+        }
+      } else if (region === "Tamil Nadu") {
+        const { stateLevel, districtLevel } = tamilnadu;
+        if (participateInDistrictLevel) {
+          switch (numberOfAwards) {
+            case "1":
+              return districtLevel["1award"];
+            case "8":
+              return districtLevel["8awards"];
+            case "19":
+              return institutionType === "College"
+                ? districtLevel["19awards"].college
+                : null;
+          }
+        } else {
+          switch (numberOfAwards) {
+            case "1":
+              return stateLevel["1award"];
+            case "8":
+              return stateLevel["8awards"];
+            case "19":
+              return institutionType === "College"
+                ? stateLevel["19awards"].college
+                : stateLevel["19awards"].university;
+          }
+        }
+      }
+      return null;
+    }
+
+    const fees = calculateRegFee();
+
+    setRegFee(fees);
+  }, [region, institutionType, participateInDistrictLevel, numberOfAwards]);
+
+  useEffect(() => {
+    function filterAwards() {
+      const awards = eCellAwards.filter((eCellAward) => {
+        const { international, other, tamilnadu } = eCellAward.region;
+        switch (region) {
+          case "International":
+            return international;
+          case "Tamil Nadu":
+            return tamilnadu;
+          case "Other State":
+            return other;
+        }
+      });
+
+      return awards.map((award) => award.award);
+    }
+
+    const awards = filterAwards();
+
+    if (region === "International") {
+      form.setValue("numberOfAwards", "16");
+      form.setValue("selectedAwards", awards);
+    } else if (region === "Tamil Nadu" || region === "Other State") {
+      form.setValue("selectedAwards", []);
+    }
+
+    setAwardOptions(awards);
+  }, [region]);
+
   const nextStep = async () => {
     const fields = getFieldsForStep(step);
-    const isValid = await form.trigger(fields as any);
+    const isValid = await form.trigger(fields);
     if (isValid) {
       setStep((prev) => Math.min(prev + 1, totalSteps));
     }
@@ -113,42 +260,228 @@ export default function GoldenStarECellAwardsForm() {
     switch (step) {
       case 1:
         return [
+          "region",
+          "state",
+          "district",
+          "country",
+          "institutionType",
+          "numberOfAwards",
+          "selectedAwards",
+          "participateInDistrictLevel",
+        ];
+      case 2:
+        return [];
+      case 3:
+        return [
           "institutionName",
           "institutionDistrict",
           "phoneNumber",
           "email",
           "institutionCategory",
+        ];
+      case 4:
+        return [
           "ecellCoordinator",
           "ecellStartYear",
           "entrepreneurshipFacilities",
         ];
-      case 2:
-        return ["awarenessPrograms"];
-      case 3:
-        return ["workshops", "otherEvents"];
-      case 4:
+      case 5:
+        return ["activities"];
+      case 6:
         return ["institutionalFunding"];
+      case 7:
+        return ["payment"];
       default:
         return [];
     }
   };
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
-    toast.success("Form submitted successfully!");
-  };
+  function handleSubmit() {
+    toast.promise(apiCreateGoldenStarECellProject(form.getValues()), {
+      loading: "Submitting...",
+      success: () => {
+        window.location.reload();
+        return "Application submitted successfully!";
+      },
+      error: () => "Failed to submit your application",
+    });
+  }
 
   return (
     <div className="max-w-2xl mx-auto p-4 sm:p-6">
       <h1 className="text-3xl font-bold mb-2">Golden Star E-Cell Awards</h1>
       <TypographyP className="!mt-0 mb-4">
-        Please fill out the form below to apply for the Golden Star E-Cell
-        Awards.
+        Fill out this form to apply for the Golden Star E-Cell Awards.
       </TypographyP>
       <FormStepper currentStep={step} totalSteps={totalSteps} />
 
       <FormLayout form={form}>
         {step === 1 && (
+          <div className="space-y-4">
+            <RadioInput
+              name="region"
+              label="Region"
+              options={[
+                { value: "International", label: "International" },
+                { value: "Tamil Nadu", label: "Tamil Nadu" },
+                { value: "Other State", label: "Other State" },
+              ]}
+            />
+            {region === "Tamil Nadu" && (
+              <>
+                <RadioInput
+                  name="participateInDistrictLevel"
+                  label="Would you like to participate at the district level?"
+                  options={[
+                    { value: true, label: "Yes" },
+                    { value: false, label: "No" },
+                  ]}
+                  description="If you are participating in district level, you cannot participate in Tamil Nadu level and University cannot participate."
+                />
+                <SelectInput
+                  name="district"
+                  label="District"
+                  options={tamilNaduDistricts.map((district) => ({
+                    value: district,
+                    label: district,
+                  }))}
+                />
+                <RadioInput
+                  name="institutionType"
+                  label="Institution Type"
+                  options={[
+                    { value: "College", label: "College" },
+                    { value: "University", label: "University" },
+                  ]}
+                />
+                <SelectInput
+                  name="numberOfAwards"
+                  label="How many awards category would you like to participate in?"
+                  options={[
+                    { value: "1", label: "1 Award" },
+                    { value: "8", label: "8 Awards" },
+                    { value: "19", label: "19 Awards" },
+                  ]}
+                />
+              </>
+            )}
+            {region === "Other State" && (
+              <>
+                <SelectInput
+                  name="state"
+                  label="State"
+                  options={indianStates.map((state) => ({
+                    value: state,
+                    label: state,
+                  }))}
+                />
+                <SelectInput
+                  name="numberOfAwards"
+                  label="How many awards category would you like to participate in?"
+                  options={[
+                    { value: "1", label: "1 Award" },
+                    { value: "8", label: "8 Awards" },
+                    { value: "15", label: "15 Awards" },
+                  ]}
+                />
+              </>
+            )}
+            {region === "International" && (
+              <>
+                <TextInput
+                  name="country"
+                  label="Country"
+                  placeholder="Enter your country"
+                />
+                <Alert>
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>Information</AlertTitle>
+                  <AlertDescription>
+                    You are participating for 16 awards.
+                  </AlertDescription>
+                </Alert>
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>
+                      What will be the award category you will be participating?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      {awardOptions?.join(", ")}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </>
+            )}
+            {region !== "International" && (
+              <div className="space-y-2">
+                <MultiSelect
+                  name="selectedAwards"
+                  label="Select Awards"
+                  options={
+                    awardOptions?.map((awardOption) => ({
+                      value: awardOption,
+                      label: awardOption,
+                    }))!
+                  }
+                  placeholder="Select awards..."
+                  description="Choose the awards you want to participate in"
+                  limit={parseInt(numberOfAwards)}
+                />
+              </div>
+            )}
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className="space-y-4">
+            <TypographyH2 className="text-xl font-semibold">
+              Registration Fee
+            </TypographyH2>
+            <TypographyP className={cn(regFee === null && "text-destructive")}>
+              <strong>Fee:</strong>{" "}
+              {regFee ? regFee : "Fill the previous step to calculate the fee"}
+            </TypographyP>
+            <Alert variant="destructive" className="mt-4">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Important</AlertTitle>
+              <AlertDescription>
+                Please ensure you have a screenshot of your payment and your
+                payment ID ready. You will need to upload the screenshot and
+                provide the payment ID in the final step of this form.
+              </AlertDescription>
+            </Alert>
+            <div>
+              <TypographyH2 className="text-lg font-semibold mt-4 mb-2">
+                Payment Details:
+              </TypographyH2>
+              {[
+                {
+                  label: "Account Name",
+                  value: "CENTRE FOR ENTREPRENEURSHIP DEVELOPMENT",
+                },
+                { label: "Account Number", value: "10496977837" },
+                { label: "Bank", value: "STATE BANK OF INDIA" },
+                { label: "IFSC", value: "SBIN0006463" },
+                {
+                  label: "Branch",
+                  value: "ANNA UNIVERSITY COLLEGE CAMPUS CHENNAI",
+                },
+              ].map((info, index) => (
+                <TypographyP className="!mt-2" key={index}>
+                  <strong>{info.label}:</strong> {info.value}
+                </TypographyP>
+              ))}
+            </div>
+            <Button
+              onClick={() => window.open("/images/ecell-fees.webp", "_blank")}
+              className="mt-4"
+            >
+              View Registration Fee Details
+            </Button>
+          </div>
+        )}
+
+        {step === 3 && (
           <div className="space-y-4">
             <TextInput
               name="institutionName"
@@ -182,28 +515,35 @@ export default function GoldenStarECellAwardsForm() {
                 { value: "Others", label: "Others" },
               ]}
             />
-            {/* <MemberDetails
-              name="ecellCoordinator"
-              label="E-Cell Coordinator Details"
-              schema={z.object({
-                name: z
-                  .string()
-                  .min(2, { message: "Coordinator name is required." }),
-                phoneNumber: z
-                  .string()
-                  .min(10, { message: "Invalid phone number." }),
-                email: z.string().email({ message: "Invalid email address." }),
-              })}
-              form={form}
-            /> */}
+          </div>
+        )}
+
+        {step === 4 && (
+          <div className="space-y-4">
+            <TextInput
+              name="ecellCoordinator.name"
+              label="E-Cell Coordinator Name"
+              placeholder="Enter coordinator name"
+            />
+            <TextInput
+              name="ecellCoordinator.phoneNumber"
+              label="E-Cell Coordinator Phone Number"
+              placeholder="Enter coordinator phone number"
+            />
+            <TextInput
+              name="ecellCoordinator.email"
+              label="E-Cell Coordinator Email"
+              placeholder="Enter coordinator email"
+            />
             <TextInput
               name="ecellStartYear"
               label="E-Cell Start Year"
-              placeholder="Enter the year E-Cell was started"
+              placeholder="Enter E-Cell start year"
             />
-            <SelectInput
+            <MultiSelect
               name="entrepreneurshipFacilities"
               label="Entrepreneurship Facilities"
+              description="Select all that apply"
               options={[
                 { value: "Makers Lab", label: "Makers Lab" },
                 { value: "Incubator", label: "Incubator" },
@@ -213,97 +553,65 @@ export default function GoldenStarECellAwardsForm() {
           </div>
         )}
 
-        {step === 2 && (
-          <div className="space-y-4">
-            <TextInput
-              name="awarenessPrograms.count"
-              label="Number of Entrepreneurship Awareness Programs"
-              placeholder="Enter the number of programs"
-              type="number"
-            />
+        {step === 5 && (
+          <div className="space-y-8">
             <InfiniteMemberDetails
-              name="awarenessPrograms.details"
-              label="Awareness Program Details"
-              schema={z.object({
-                name: z.string(),
-                beneficiaryCount: z.number(),
-                outcomes: z.string(),
-                proofImages: z.array(z.string().url()),
-              })}
+              name="activities.awarenessPrograms"
+              label="Entrepreneurship Awareness Programs"
+              description="Add details about your awareness programs"
+              schema={
+                formSchema.shape.activities.shape.awarenessPrograms.element
+              }
               form={form}
             />
-            <MultiImageUpload
-              name="awarenessPrograms.details.0.proofImages"
-              label="Upload Proof (Geo-Tagged Photos)"
+            <InfiniteMemberDetails
+              name="activities.workshops"
+              label="Entrepreneurship Workshops"
+              description="Add details about your workshops"
+              schema={formSchema.shape.activities.shape.workshops.element}
+              form={form}
+            />
+            <InfiniteMemberDetails
+              name="activities.otherEvents"
+              label="Other Entrepreneurship Events"
+              description="Add details about other entrepreneurship events"
+              schema={formSchema.shape.activities.shape.otherEvents.element}
               form={form}
             />
           </div>
         )}
 
-        {step === 3 && (
+        {step === 6 && (
           <div className="space-y-4">
             <TextInput
-              name="workshops.count"
-              label="Number of Entrepreneurship Workshops"
-              placeholder="Enter the number of workshops"
-              type="number"
-            />
-            <InfiniteMemberDetails
-              name="workshops.details"
-              label="Workshop Details"
-              schema={z.object({
-                name: z.string(),
-                beneficiaryCount: z.number(),
-                outcomes: z.string(),
-                proofImages: z.array(z.string().url()),
-              })}
-              form={form}
-            />
-            <MultiImageUpload
-              name="workshops.details.0.proofImages"
-              label="Upload Proof (Geo-Tagged Photos)"
-              form={form}
-            />
-            <TextInput
-              name="otherEvents.count"
-              label="Number of Other Entrepreneurship Events"
-              placeholder="Enter the number of other events"
-              type="number"
-            />
-            <InfiniteMemberDetails
-              name="otherEvents.details"
-              label="Other Event Details"
-              schema={z.object({
-                name: z.string(),
-                beneficiaryCount: z.number(),
-                outcomes: z.string(),
-                proofImages: z.array(z.string().url()),
-              })}
-              form={form}
-            />
-            <MultiImageUpload
-              name="otherEvents.details.0.proofImages"
-              label="Upload Proof (Geo-Tagged Photos)"
-              form={form}
+              name="institutionalFunding"
+              label="Institutional Funding for E-Cells (2024-25)"
+              placeholder="Enter funding amount"
             />
           </div>
         )}
 
-        {step === 4 && (
+        {step === 7 && (
           <div className="space-y-4">
-            <TextInput
-              name="institutionalFunding.amount"
-              label="Institutional Funding Amount"
-              placeholder="Enter the funding amount"
-              type="number"
+            <FileInput
+              name="payment.bankScreenshot"
+              label="Bank Payment Screenshot"
+              accept="image/*"
+              description="Upload a screenshot of your bank payment. Wait until the image is uploaded successfully."
+              onFileSelect={async (file) => {
+                const { success, url } = await UploadToCloudinary(file);
+                if (success) {
+                  form.setValue("payment.bankScreenshot", url!);
+                  toast.success("Screenshot uploaded successfully");
+                } else {
+                  toast.error("Failed to upload screenshot");
+                }
+              }}
             />
-            <RadioInput
-              name="institutionalFunding.isYearly"
-              label="Is the funding provided yearly?"
-              options={[
-                { value: "true", label: "Yes" },
-                { value: "false", label: "No" },
-              ]}
+            <TextInput
+              name="payment.paymentId"
+              label="Payment ID"
+              placeholder="Enter your payment ID"
             />
           </div>
         )}
@@ -313,12 +621,9 @@ export default function GoldenStarECellAwardsForm() {
           totalSteps={totalSteps}
           onPrevious={prevStep}
           onNext={nextStep}
-          onOpen={() => {}}
-          callbackFn={() => onSubmit(form.getValues())}
-          event={{
-            amount: "0",
-            name: "Golden Star E-Cell Awards",
-          }}
+          onOpen={onPaymentBtnOpen}
+          callbackFn={handleSubmit}
+          hasPayment={false}
         />
       </FormLayout>
     </div>

@@ -18,7 +18,7 @@ export const navlinks = [
   {
     name: "Contact",
     href: "#contact",
-  }
+  },
 ];
 
 export const stats = [
@@ -61,7 +61,7 @@ export const schedule = [
       {
         date: "21st Feb 2025",
         time: "11:30 AM to 6:00 PM",
-        name: "Innovators Grand Slam – Connect",
+        name: "Innovators Grand Slam - Connect",
         desc: "Innovators Grand Slam event focusing on global collaboration and prototyping.",
         location: "To Be Announced",
       },
@@ -82,14 +82,14 @@ export const schedule = [
       {
         date: "21st Feb 2025",
         time: "1:30 PM to 3:30 PM",
-        name: "Startup Avatar – Pitch",
+        name: "Startup Avatar - Pitch",
         desc: "Pitch session for the Startup Avatar event.",
         location: "To Be Announced",
       },
       {
         date: "21st Feb 2025",
         time: "1:15 PM to 2:00 PM",
-        name: "StartUp Path Finder – AI Mentor Connect Panel Discussion 3 (Closed Panel)",
+        name: "StartUp Path Finder - AI Mentor Connect Panel Discussion 3 (Closed Panel)",
         desc: "Panel discussion focused on AI mentorship, closed to specific participants.",
         location: "To Be Announced",
       },
@@ -101,7 +101,7 @@ export const schedule = [
       {
         date: "22nd Feb 2025",
         time: "9:00 AM to 11:30 AM",
-        name: "Innovators Grand Slam – Pitch",
+        name: "Innovators Grand Slam - Pitch",
         desc: "Pitch session of the Innovators Grand Slam event.",
         location: "To Be Announced",
       },
@@ -129,7 +129,7 @@ export const schedule = [
       {
         date: "22nd Feb 2025",
         time: "12:30 PM to 1:15 PM",
-        name: "CED – Institutions Connect",
+        name: "CED - Institutions Connect",
         desc: "CED panel for institutional connections.",
         location: "To Be Announced",
       },
@@ -183,7 +183,7 @@ export const faqs = [
   {
     question: "Are there any awards or recognition for participants?",
     answer:
-      "Yes! Startify 3.0 will recognize and reward outstanding participants in various categories, including the creation of innovative prototypes, outstanding entrepreneurial efforts, and contributions to the ecosystem. Special recognition will also be given to women entrepreneurs who have made significant contributions to the startup ecosystem.",
+      "Yes! Startify 3.0 will recognize and reward outstanding participants in various region, including the creation of innovative prototypes, outstanding entrepreneurial efforts, and contributions to the ecosystem. Special recognition will also be given to women entrepreneurs who have made significant contributions to the startup ecosystem.",
   },
   {
     question: "Will I receive mentorship or guidance during the event?",
@@ -216,5 +216,188 @@ export const faqs = [
       "To stay informed about Startify 3.0, including event updates, registration deadlines, and special announcements, we recommend following the official event website and social media pages. You can also sign up for our newsletter to receive direct updates.",
   },
 ];
+
+export const indianStates = [
+  "Andaman and Nicobar Islands",
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Delhi",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jammu and Kashmir",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttarakhand",
+  "Uttar Pradesh",
+  "West Bengal",
+  "Lakshadweep",
+];
+
+export const tamilNaduDistricts = [
+  "Ariyalur",
+  "Arni",
+  "Chengalpattu",
+  "Chennai",
+  "Coimbatore",
+  "Cuddalore",
+  "Dharmapuri",
+  "Dindigul",
+  "Erode",
+  "Karur",
+  "Karaikal",
+  "Kanchipuram",
+  "Kanniyakumari",
+  "Krishnagiri",
+  "Madurai",
+  "Nagapattinam",
+  "Namakkal",
+  "Perambalur",
+  "Pudukkottai",
+  "Ramanathapuram",
+  "Salem",
+  "Sivaganga",
+  "Sivaganga",
+  "Theni",
+  "Tiruchirappalli",
+  "Tirunelveli",
+  "Tirupur",
+  "Tiruvarur",
+  "Tiruvallur",
+  "Tiruvannamalai",
+  "Thoothukudi",
+  "Vellore",
+  "Vepampatti",
+  "Villupuram",
+  "Virudhunagar",
+];
+
+export const eCellRegFee = {
+  international: "$375(USD)",
+  other: {
+    "1award": "Rs.50,000/-",
+    "8awards": "Rs.75,000/-",
+    "15awards": {
+      college: "Rs.1,20,000/-",
+      university: "Rs.1,50,000/-",
+    },
+  },
+  tamilnadu: {
+    stateLevel: {
+      "1award": "Rs.50,000/-",
+      "8awards": "Rs.75,000/-",
+      "19awards": {
+        college: "Rs.1,00,000/-",
+        university: "Rs.1,50,000/-",
+      },
+    },
+    districtLevel: {
+      "1award": "Rs.40,000/-",
+      "8awards": "Rs.65,000/-",
+      "19awards": {
+        college: "Rs.1,00,000/-",
+      },
+    },
+  },
+};
+
+export const eCellAwards = [
+  {
+    award: "Best E-Cell for Innovative Startup Ideas",
+    region: { international: true, tamilnadu: true, other: false },
+  },
+  {
+    award: "Best E-Cell for Use of Emerging Technologies",
+    region: { international: true, tamilnadu: true, other: false },
+  },
+  {
+    award: "Best Social Impact Initiative by an E-Cell",
+    region: { international: true, tamilnadu: true, other: false },
+  },
+  {
+    award: "Highest Impact Startups Launched by Alumni",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Most Active E-Cell",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Excellence in Hackathons and Competitions",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Best E-Cell for Corporate Collaboration & Industry Partnership",
+    region: { international: false, tamilnadu: true, other: true },
+  },
+  {
+    award: "Best E-Cell for Most Effective Mentorship Program",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Best E-Cell for Startup Funding Support & Grants",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Best Resource Utilization for Student Startup Aspirants",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Excellence in Entrepreneurial Leadership Training",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Best E-Cell in Rural Development Initiatives",
+    region: { international: false, tamilnadu: true, other: true },
+  },
+  {
+    award: "Excellence in Promoting Sector-Specific Startups",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Best E-Cell for Promoting Sustainable Startups",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Excellence in Green Technology and Eco-Friendly Innovation",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Best Performing E-Cell of the Year",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "E-Cell with Outstanding Contribution to the Startup Ecosystem",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award: "Emerging E-Cell of the Year",
+    region: { international: true, tamilnadu: true, other: true },
+  },
+  {
+    award:
+      "Excellence in Supporting Govt. Startup Competitions & Initiatives",
+    region: { international: false, tamilnadu: true, other: false },
+  },
+];
+
 
 export * from "./events";
