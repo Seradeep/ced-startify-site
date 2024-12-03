@@ -393,11 +393,10 @@ export const eCellAwards = [
     region: { international: true, tamilnadu: true, other: true },
   },
   {
-    award:
-      "Excellence in Supporting Govt. Startup Competitions & Initiatives",
+    award: "Excellence in Supporting Govt. Startup Competitions & Initiatives",
     region: { international: false, tamilnadu: true, other: false },
   },
 ];
 
-
 export * from "./events";
+export * from "./countries";

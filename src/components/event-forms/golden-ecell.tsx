@@ -5,11 +5,13 @@ import { toast } from "sonner";
 import * as z from "zod";
 import { AlertCircle } from "lucide-react";
 
+import { apiCreateGoldenStarECellProject } from "@/api/events";
 import {
   eCellAwards,
   eCellRegFee,
   indianStates,
   tamilNaduDistricts,
+  countries,
 } from "@/data";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
@@ -32,7 +34,6 @@ import {
 } from "@/components/ui/form-components";
 import { TypographyH2, TypographyP } from "@/components/ui/typography";
 import { cn, UploadToCloudinary } from "@/lib/utils";
-import { apiCreateGoldenStarECellProject } from "@/api/events";
 
 const formSchema = z.object({
   region: z.enum(["International", "Tamil Nadu", "Other State"]),
@@ -237,12 +238,26 @@ export default function GoldenStarECellAwardsForm({
     if (region === "International") {
       form.setValue("numberOfAwards", "16");
       form.setValue("selectedAwards", awards);
-    } else if (region === "Tamil Nadu" || region === "Other State") {
-      form.setValue("selectedAwards", []);
+    } else {
+      form.setValue("country", "India");
+      if (region === "Tamil Nadu") {
+        form.setValue("state", "Tamil Nadu");
+        if (institutionType === "University") {
+          form.setValue("numberOfAwards", "19");
+          form.setValue("selectedAwards", awards);
+        } else {
+          form.setValue("selectedAwards", []);
+        }
+      } else if (region === "Other State" && institutionType === "University") {
+        form.setValue("numberOfAwards", "15");
+        form.setValue("selectedAwards", awards);
+      } else {
+        form.setValue("selectedAwards", []);
+      }
     }
 
     setAwardOptions(awards);
-  }, [region]);
+  }, [region, institutionType]);
 
   const nextStep = async () => {
     const fields = getFieldsForStep(step);
@@ -352,7 +367,12 @@ export default function GoldenStarECellAwardsForm({
                   options={[
                     { value: "College", label: "College" },
                     { value: "University", label: "University" },
-                  ]}
+                  ].filter((option) => {
+                    if (participateInDistrictLevel) {
+                      return option.value === "College";
+                    }
+                    return true;
+                  })}
                 />
                 <SelectInput
                   name="numberOfAwards"
@@ -361,7 +381,12 @@ export default function GoldenStarECellAwardsForm({
                     { value: "1", label: "1 Award" },
                     { value: "8", label: "8 Awards" },
                     { value: "19", label: "19 Awards" },
-                  ]}
+                  ].filter((option) => {
+                    if (institutionType === "University") {
+                      return option.value === "19";
+                    }
+                    return true;
+                  })}
                 />
               </>
             )}
@@ -375,6 +400,14 @@ export default function GoldenStarECellAwardsForm({
                     label: state,
                   }))}
                 />
+                <RadioInput
+                  name="institutionType"
+                  label="Institution Type"
+                  options={[
+                    { value: "College", label: "College" },
+                    { value: "University", label: "University" },
+                  ]}
+                />
                 <SelectInput
                   name="numberOfAwards"
                   label="How many awards category would you like to participate in?"
@@ -382,16 +415,25 @@ export default function GoldenStarECellAwardsForm({
                     { value: "1", label: "1 Award" },
                     { value: "8", label: "8 Awards" },
                     { value: "15", label: "15 Awards" },
-                  ]}
+                  ].filter((option) => {
+                    if (institutionType === "University") {
+                      return option.value === "15";
+                    }
+                    return true;
+                  })}
                 />
               </>
             )}
             {region === "International" && (
               <>
-                <TextInput
+                <SelectInput
                   name="country"
                   label="Country"
-                  placeholder="Enter your country"
+                  description="Select your country"
+                  options={countries.map((country) => ({
+                    value: country.name,
+                    label: country.name,
+                  }))}
                 />
                 <Alert>
                   <AlertCircle className="h-4 w-4" />

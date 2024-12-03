@@ -8,8 +8,9 @@ import {
 } from "react-hook-form";
 import { z } from "zod";
 import { format } from "date-fns";
-import { CalendarIcon, X, Check, ChevronsUpDown } from "lucide-react";
+import { CalendarIcon, X, Check, ChevronsUpDown, Loader2 } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -51,7 +52,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
 
 import { cn, SeparateAndCapitalize, UploadToCloudinary } from "@/lib/utils";
 import PaymentButton from "../payment-button";
@@ -415,7 +415,8 @@ export const MultiSelect = ({
                     <CommandList className="max-h-60 overflow-y-auto">
                       {options.map((option) => (
                         <CommandItem
-                          key={option.value} className="border-b"
+                          key={option.value}
+                          className="border-b"
                           onSelect={() => {
                             if (
                               !isLimitReached ||
@@ -504,37 +505,54 @@ export const FileInput = ({
   label: string;
   accept: string;
   description?: string;
-  onFileSelect?: (file: File) => void;
-}) => (
-  <FormField
-    name={name}
-    render={({ field: { value, onChange, ...field } }) => (
-      <FormItem>
-        <FormLabel>{label}</FormLabel>
-        <FormControl>
-          <Input
-            type="file"
-            accept={accept}
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file && onFileSelect) {
-                onFileSelect(file);
-              }
-              onChange(e);
-            }}
-            {...field}
-          />
-        </FormControl>
-        {description && (
-          <FormDescription className="max-sm:text-sm">
-            {description}
-          </FormDescription>
-        )}
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-);
+  onFileSelect?: (file: File) => Promise<void>;
+}) => {
+  const [isUploading, setIsUploading] = React.useState<boolean>(false);
+
+  return (
+    <FormField
+      name={name}
+      render={({ field: { value, onChange, ...field } }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <FormControl>
+            <div className="relative">
+              <Input
+                type="file"
+                accept={accept}
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (file && onFileSelect) {
+                    setIsUploading(true);
+                    try {
+                      await onFileSelect(file);
+                    } finally {
+                      setIsUploading(false);
+                    }
+                  }
+                  onChange(e);
+                }}
+                disabled={isUploading}
+                {...field}
+              />
+              {isUploading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-background/50">
+                  <Loader2 className="size-6 animate-spin" />
+                </div>
+              )}
+            </div>
+          </FormControl>
+          {description && (
+            <FormDescription className="max-sm:text-sm">
+              {description}
+            </FormDescription>
+          )}
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
 
 export function MultiFileUpload({
   name,
