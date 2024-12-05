@@ -14,6 +14,7 @@ import {
   FileInput,
   FormActions,
   InfiniteMemberDetails,
+  MultiSelect,
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
 import { UploadToCloudinary } from "@/lib/utils";
@@ -41,11 +42,35 @@ const formSchema = z.object({
   yearsLeadingStartup: z
     .string()
     .min(1, { message: "Please specify the number of years." }),
-  sdg: z.string().min(2, { message: "SDG selection is required." }),
+  sdg: z.array(z.string()).length(3, {
+    message: "Please specify 3 SDGs that your startup idea applies to.",
+  }),
   startupType: z.enum(["Manufacturing", "Services"], {
     required_error: "Startup type is required.",
   }),
-  sector: z.string().min(2, { message: "Sector is required." }),
+  sector: z.enum(
+    [
+      "Agriculture",
+      "Mining and Extraction",
+      "Manufacturing",
+      "Construction & Real Estate",
+      "Transportation and Logistics",
+      "Retail and Wholesale",
+      "Information Technology & Telecom",
+      "Financial Services & Tech",
+      "Healthcare & Tech",
+      "Education & Tech",
+      "Hospitality and Tourism",
+      "Media and Entertainment",
+      "Energy & Sustainability",
+      "Aerospace and Defense",
+      "Deep Tech",
+      "Others",
+    ],
+    {
+      required_error: "Sector is required.",
+    }
+  ),
   pitchDeck: z.string().url({ message: "Upload your pitch deck" }),
 });
 
@@ -197,10 +222,58 @@ export default function GurusPitchForm({
               placeholder="Enter number of years"
               type="number"
             />
-            <TextInput
+            <MultiSelect
               name="sdg"
-              label="Under which SDG does your Startup Idea Apply to?"
-              placeholder="Enter the relevant SDG"
+              label="SDGs"
+              options={[
+                { value: "No Poverty", label: "No Poverty" },
+                { value: "Zero Hunger", label: "Zero Hunger" },
+                {
+                  value: "Good Health and Well-Being",
+                  label: "Good Health and Well-Being",
+                },
+                { value: "Quality Education", label: "Quality Education" },
+                { value: "Gender Equality", label: "Gender Equality" },
+                {
+                  value: "Clean Water and Sanitation",
+                  label: "Clean Water and Sanitation",
+                },
+                {
+                  value: "Affordable and Clean Energy",
+                  label: "Affordable and Clean Energy",
+                },
+                {
+                  value: "Decent Work and Economic Growth",
+                  label: "Decent Work and Economic Growth",
+                },
+                {
+                  value: "Industry, Innovation, and Infrastructure",
+                  label: "Industry, Innovation, and Infrastructure",
+                },
+                {
+                  value: "Reduced Inequalities",
+                  label: "Reduced Inequalities",
+                },
+                {
+                  value: "Sustainable Cities and Communities",
+                  label: "Sustainable Cities and Communities",
+                },
+                {
+                  value: "Responsible Consumption and Production",
+                  label: "Responsible Consumption and Production",
+                },
+                { value: "Climate Action", label: "Climate Action" },
+                { value: "Life Below Water", label: "Life Below Water" },
+                { value: "Life on Land", label: "Life on Land" },
+                {
+                  value: "Peace, Justice and Strong Institutions",
+                  label: "Peace, Justice and Strong Institutions",
+                },
+                { value: "Partnerships", label: "Partnerships" },
+              ]}
+              description="Select 3 SDGs that your startup idea applies to"
+              limit={3}
+              placeholder="Select 3 SDGs"
             />
             <SelectInput
               name="startupType"
@@ -210,10 +283,57 @@ export default function GurusPitchForm({
                 { value: "Services", label: "Services" },
               ]}
             />
-            <TextInput
+            <SelectInput
               name="sector"
               label="Sector"
-              placeholder="Enter your startup's sector"
+              options={[
+                { value: "Agriculture", label: "Agriculture" },
+                {
+                  value: "Mining and Extraction",
+                  label: "Mining and Extraction",
+                },
+                { value: "Manufacturing", label: "Manufacturing" },
+                {
+                  value: "Construction & Real Estate",
+                  label: "Construction & Real Estate",
+                },
+                {
+                  value: "Transportation and Logistics",
+                  label: "Transportation and Logistics",
+                },
+                {
+                  value: "Retail and Wholesale",
+                  label: "Retail and Wholesale",
+                },
+                {
+                  value: "Information Technology & Telecom",
+                  label: "Information Technology & Telecom",
+                },
+                {
+                  value: "Financial Services & Tech",
+                  label: "Financial Services & Tech",
+                },
+                { value: "Healthcare & Tech", label: "Healthcare & Tech" },
+                { value: "Education & Tech", label: "Education & Tech" },
+                {
+                  value: "Hospitality and Tourism",
+                  label: "Hospitality and Tourism",
+                },
+                {
+                  value: "Media and Entertainment",
+                  label: "Media and Entertainment",
+                },
+                {
+                  value: "Energy & Sustainability",
+                  label: "Energy & Sustainability",
+                },
+                {
+                  value: "Aerospace and Defense",
+                  label: "Aerospace and Defense",
+                },
+                { value: "Deep Tech", label: "Deep Tech" },
+                { value: "Others", label: "Others" },
+              ]}
             />
           </div>
         )}
