@@ -17,6 +17,7 @@ import PitchXForm from "@/components/event-forms/pitch-x";
 import GurusPitchForm from "@/components/event-forms/guru-pitch";
 import StartupDistrictForm from "@/components/event-forms/startup-district";
 import GoldenStarECellAwardsForm from "@/components/event-forms/golden-ecell";
+import FounderFindForm from "@/components/event-forms/founder-find";
 
 interface AboutCardProps {
   id: string;
@@ -49,6 +50,7 @@ export default function AboutCard({
     "path-finder": StartUpPathFinderForm,
     "pitch-x": PitchXForm,
     "gurus-pitch": GurusPitchForm,
+    "founder-find": FounderFindForm,
     "startup-district": StartupDistrictForm,
     "e-cell-awards": GoldenStarECellAwardsForm,
   };

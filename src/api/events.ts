@@ -10,6 +10,7 @@ import { FormValues as StartupDistrictSchema } from "@/components/event-forms/st
 import { FormValues as ScholarSpinoffSchema } from "@/components/event-forms/scholar-spinoff";
 import { FormValues as StartupPathFinderSchema } from "@/components/event-forms/startup-path-finder";
 import { FormValues as GoldenStarECellSchema } from "@/components/event-forms/golden-ecell";
+import { FormValues as FounderFindSchema } from "@/components/event-forms/founder-find";
 
 export async function apiCreateStartupCafeProject(
   body: StartupCafeSchema & { paymentId: string }
@@ -171,10 +172,24 @@ export async function apiCreateGoldenStarECellProject(
   body: GoldenStarECellSchema
 ) {
   try {
-    let response = await api.post(
-      "/v1/golden-star-ecell/create-award",
-      body
-    );
+    let response = await api.post("/v1/golden-star-ecell/create-award", body);
+
+    const { success, data } = response.data;
+
+    if (!success) throw new Error("Server Error, Try again later!!");
+
+    return data.message;
+  } catch (error: any) {
+    if (error.response) throw error.response.data;
+    throw error;
+  }
+}
+
+export async function apiCreateFounderFindProject(
+  body: FounderFindSchema & { paymentId: string }
+) {
+  try {
+    let response = await api.post("/v1/founder-find/create-founder", body);
 
     const { success, data } = response.data;
 

@@ -413,8 +413,8 @@ export const MultiSelect = ({
                         Clear
                       </Button>
                     </div>
-                    <ScrollArea className="max-h-60">
-                      <CommandList>
+                    <ScrollArea>
+                      <CommandList className="max-h-60">
                         {options.map((option) => (
                           <CommandItem
                             key={option.value}
