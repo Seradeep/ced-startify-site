@@ -533,7 +533,7 @@ export const FileInput = ({
                       setIsUploading(false);
                     }
                   }
-                  onChange(e);
+                  // onChange(e);
                 }}
                 disabled={isUploading}
                 {...field}

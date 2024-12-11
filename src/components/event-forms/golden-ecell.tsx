@@ -29,10 +29,13 @@ import {
   SelectInput,
   FileInput,
   FormActions,
-  InfiniteMemberDetails,
   MultiSelect,
 } from "@/components/ui/form-components";
-import { TypographyH2, TypographyP } from "@/components/ui/typography";
+import {
+  TypographyH2,
+  TypographyLead,
+  TypographyP,
+} from "@/components/ui/typography";
 import { cn, UploadToCloudinary } from "@/lib/utils";
 
 const formSchema = z.object({
@@ -71,53 +74,6 @@ const formSchema = z.object({
   entrepreneurshipFacilities: z.array(
     z.enum(["Makers Lab", "Incubator", "Others"])
   ),
-  activities: z.object({
-    awarenessPrograms: z.array(
-      z.object({
-        name: z.string().min(1, "Program name is required"),
-        beneficiaryCount: z.string({
-          required_error: "Beneficiary count is required",
-        }),
-        outcomes: z.string().min(1, "Outcomes are required"),
-        proofUrl: z
-          .string()
-          .url({ message: "Invalid drive url" })
-          .describe(
-            "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
-          ),
-      })
-    ),
-    workshops: z.array(
-      z.object({
-        name: z.string().min(1, "Workshop name is required"),
-        beneficiaryCount: z.string({
-          required_error: "Beneficiary count is required",
-        }),
-        outcomes: z.string().min(1, "Outcomes are required"),
-        proofUrl: z
-          .string()
-          .url({ message: "Invalid drive url" })
-          .describe(
-            "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
-          ),
-      })
-    ),
-    otherEvents: z.array(
-      z.object({
-        name: z.string().min(1, "Event name is required"),
-        beneficiaryCount: z.string({
-          required_error: "Beneficiary count is required",
-        }),
-        outcomes: z.string().min(1, "Outcomes are required"),
-        proofUrl: z
-          .string()
-          .url({ message: "Invalid drive url" })
-          .describe(
-            "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
-          ),
-      })
-    ),
-  }),
   institutionalFunding: z.string({
     required_error: "Institutional Funding is required",
   }),
@@ -137,7 +93,7 @@ export default function GoldenStarECellAwardsForm({
   const [step, setStep] = useState<number>(1);
   const [regFee, setRegFee] = useState<string | null>(null);
   const [awardOptions, setAwardOptions] = useState<string[]>();
-  const totalSteps = 7;
+  const totalSteps = 6;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -146,17 +102,6 @@ export default function GoldenStarECellAwardsForm({
       numberOfAwards: "16",
       selectedAwards: [],
       institutionType: "College",
-      activities: {
-        awarenessPrograms: [
-          { name: "", beneficiaryCount: "0", outcomes: "", proofUrl: "" },
-        ],
-        workshops: [
-          { name: "", beneficiaryCount: "0", outcomes: "", proofUrl: "" },
-        ],
-        otherEvents: [
-          { name: "", beneficiaryCount: "0", outcomes: "", proofUrl: "" },
-        ],
-      },
       entrepreneurshipFacilities: [],
     },
   });
@@ -301,10 +246,8 @@ export default function GoldenStarECellAwardsForm({
           "entrepreneurshipFacilities",
         ];
       case 5:
-        return ["activities"];
-      case 6:
         return ["institutionalFunding"];
-      case 7:
+      case 6:
         return ["payment"];
       default:
         return [];
@@ -505,6 +448,10 @@ export default function GoldenStarECellAwardsForm({
                 { label: "Bank", value: "STATE BANK OF INDIA" },
                 { label: "IFSC", value: "SBIN0006463" },
                 {
+                  label: "Swift Code",
+                  value: "SBININBB291",
+                },
+                {
                   label: "Branch",
                   value: "ANNA UNIVERSITY COLLEGE CAMPUS CHENNAI",
                 },
@@ -596,34 +543,6 @@ export default function GoldenStarECellAwardsForm({
         )}
 
         {step === 5 && (
-          <div className="space-y-8">
-            <InfiniteMemberDetails
-              name="activities.awarenessPrograms"
-              label="Entrepreneurship Awareness Programs"
-              description="Add details about your awareness programs"
-              schema={
-                formSchema.shape.activities.shape.awarenessPrograms.element
-              }
-              form={form}
-            />
-            <InfiniteMemberDetails
-              name="activities.workshops"
-              label="Entrepreneurship Workshops"
-              description="Add details about your workshops"
-              schema={formSchema.shape.activities.shape.workshops.element}
-              form={form}
-            />
-            <InfiniteMemberDetails
-              name="activities.otherEvents"
-              label="Other Entrepreneurship Events"
-              description="Add details about other entrepreneurship events"
-              schema={formSchema.shape.activities.shape.otherEvents.element}
-              form={form}
-            />
-          </div>
-        )}
-
-        {step === 6 && (
           <div className="space-y-4">
             <TextInput
               name="institutionalFunding"
@@ -633,7 +552,7 @@ export default function GoldenStarECellAwardsForm({
           </div>
         )}
 
-        {step === 7 && (
+        {step === 6 && (
           <div className="space-y-4">
             <FileInput
               name="payment.bankScreenshot"
@@ -655,6 +574,20 @@ export default function GoldenStarECellAwardsForm({
               label="Payment ID"
               placeholder="Enter your payment ID"
             />
+            <Button
+              onClick={() => window.open("/forms/ecell-form.pdf", "_blank")}
+            >
+              Download Document
+            </Button>
+            <TypographyLead className="text-md">
+              **Kindly download this document and fill in the necessary
+              information mentioned in the document for the awards which you
+              have opted previously. You will receive the submission link for
+              the document in your email after submitting your application.
+              <span className="text-red-600 block">
+                The deadline for submission is January 30, 2025.
+              </span>
+            </TypographyLead>
           </div>
         )}
 
