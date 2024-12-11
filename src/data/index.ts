@@ -323,78 +323,97 @@ export const eCellAwards = [
   {
     award: "Best E-Cell for Innovative Startup Ideas",
     region: { international: true, tamilnadu: true, other: false },
+    image: "/images/ecell-awards/innovative-startup-ideas.jpg",
   },
   {
     award: "Best E-Cell for Use of Emerging Technologies",
     region: { international: true, tamilnadu: true, other: false },
+    image: "/images/ecell-awards/emerging-tech.jpg",
   },
   {
     award: "Best Social Impact Initiative by an E-Cell",
     region: { international: true, tamilnadu: true, other: false },
+    image: "/images/ecell-awards/social-impact-initiatives.jpg",
   },
   {
     award: "Highest Impact Startups Launched by Alumni",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/startups-by-alumni.jpg",
   },
   {
     award: "Most Active E-Cell",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/active-ecell.jpg",
   },
   {
     award: "Excellence in Hackathons and Competitions",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/hackathons.jpg",
   },
   {
     award: "Best E-Cell for Corporate Collaboration & Industry Partnership",
     region: { international: false, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/industry-partnership.jpg",
   },
   {
     award: "Best E-Cell for Most Effective Mentorship Program",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/mentorship-program.jpg",
   },
   {
     award: "Best E-Cell for Startup Funding Support & Grants",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/startup-funding.jpg",
   },
   {
     award: "Best Resource Utilization for Student Startup Aspirants",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/student-startup-aspirations.jpg",
   },
   {
     award: "Excellence in Entrepreneurial Leadership Training",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/leadership-training.jpg",
   },
   {
     award: "Best E-Cell in Rural Development Initiatives",
     region: { international: false, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/rural-development-initiatives.jpg",
   },
   {
     award: "Excellence in Promoting Sector-Specific Startups",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/sector-startups.jpg",
   },
   {
     award: "Best E-Cell for Promoting Sustainable Startups",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/sustainable-startups.jpg",
   },
   {
     award: "Excellence in Green Technology and Eco-Friendly Innovation",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/ecofriendly-innovation.jpg",
   },
   {
     award: "Best Performing E-Cell of the Year",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/best-performing-ecell.jpg",
   },
   {
     award: "E-Cell with Outstanding Contribution to the Startup Ecosystem",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/startup-ecosystem.jpg",
   },
   {
     award: "Emerging E-Cell of the Year",
     region: { international: true, tamilnadu: true, other: true },
+    image: "/images/ecell-awards/emerging-ecell.jpg",
   },
   {
     award: "Excellence in Supporting Govt. Startup Competitions & Initiatives",
     region: { international: false, tamilnadu: true, other: false },
+    image: "/images/ecell-awards/supporting-govt-startup-ideas.jpg",
   },
 ];
 
