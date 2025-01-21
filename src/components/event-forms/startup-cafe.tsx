@@ -14,9 +14,13 @@ import {
   TextareaInput,
   FormActions,
   MemberDetails,
+  SelectInput,
 } from "@/components/ui/form-components";
 import { TypographyP } from "@/components/ui/typography";
-import { apiCreateStartupCafeProject } from "@/api/events";
+import {
+  apiCreateStartupCafeProject,
+  apiGetCollegesForStartupCafe,
+} from "@/api/events";
 import { events } from "@/data";
 
 const teamMemberSchema = z.object({
@@ -35,6 +39,7 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "Startup name must be at least 2 characters." }),
   collegeName: z.string().min(2, { message: "College name is required." }),
+  otherCollegeName: z.string().optional(),
   collegeEmail: z.string().email({ message: "Invalid email address." }),
   collegePhone: z.string().min(10, { message: "Invalid phone number." }),
   sameInstitution: z.enum(["yes", "no"], {
@@ -48,17 +53,14 @@ const formSchema = z.object({
     .array(teamMemberSchema)
     .min(1, { message: "At least 1 team member is required." })
     .max(4, { message: "Maximum 4 team members allowed." }),
+  skipSubmission: z.boolean({
+    required_error: "Please make your choice of idea submission.",
+  }),
   sdg: z
     .string()
-    .min(2, { message: "Sustainable Development Goal is required." }),
-  problemStatement: z
-    .string()
-    .max(1000, { message: "Problem statement should not exceed 100 words." })
-    .describe("textarea"),
-  solution: z
-    .string()
-    .max(1000, { message: "Solution should not exceed 100 words." })
-    .describe("textarea"),
+    .min(1, { message: "Sustainable Development Goal is required." }),
+  problemStatement: z.string().describe("textarea"),
+  solution: z.string().describe("textarea"),
 });
 
 export type FormValues = z.infer<typeof formSchema>;
@@ -69,14 +71,20 @@ export default function StartupCafeForm({
   onPaymentBtnOpen: (value: boolean) => void;
 }) {
   const [step, setStep] = useState(1);
+  const [colleges, setColleges] = useState<string[]>([]);
   const totalSteps = 3;
   const event = events.find((event) => event.id === "startup-cafe");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      otherCollegeName: "",
       memberCount: "1",
       teamMembers: [{}],
+      skipSubmission: false,
+      sdg: "-",
+      problemStatement: "-",
+      solution: "-",
     },
   });
 
@@ -92,7 +100,17 @@ export default function StartupCafeForm({
   const nextStep = async () => {
     const fields = getFieldsForStep(step);
     const isValid = await form.trigger(fields);
-    if (isValid) {
+    let otherCollegeName = true;
+    if (step === 1) {
+      otherCollegeName = form.watch("otherCollegeName") === "" ? false : true;
+    }
+    if (!otherCollegeName) {
+      form.setError("otherCollegeName", {
+        type: "required",
+        message: "College name is required.",
+      })
+    }
+    if (isValid && otherCollegeName) {
       setStep((prev) => Math.min(prev + 1, totalSteps));
     }
   };
@@ -107,6 +125,7 @@ export default function StartupCafeForm({
         return [
           "startupName",
           "collegeName",
+          "otherCollegeName",
           "collegeEmail",
           "collegePhone",
           "sameInstitution",
@@ -114,7 +133,7 @@ export default function StartupCafeForm({
       case 2:
         return ["memberCount", "teamMembers"];
       case 3:
-        return ["sdg", "problemStatement", "solution"];
+        return ["skipSubmission", "sdg", "problemStatement", "solution"];
       default:
         return [];
     }
@@ -146,6 +165,11 @@ export default function StartupCafeForm({
       apiCreateStartupCafeProject({
         paymentId,
         ...form.getValues(),
+        collegeName:
+          form.getValues("collegeName") === "Other"
+            ? form.getValues("otherCollegeName")!
+            : form.getValues("collegeName"),
+        otherCollegeName: undefined,
       }),
       {
         loading: "Submitting...",
@@ -157,6 +181,12 @@ export default function StartupCafeForm({
       }
     );
   }
+
+  useEffect(() => {
+    apiGetCollegesForStartupCafe().then((data) =>
+      setColleges(["Other", ...data])
+    );
+  }, []);
 
   return (
     <div className="max-w-2xl mx-auto p-4 sm:p-6">
@@ -176,11 +206,22 @@ export default function StartupCafeForm({
               placeholder="Enter startup name"
               description="The name of your student startup team"
             />
-            <TextInput
+            <SelectInput
               name="collegeName"
               label="College Name"
-              placeholder="Enter your college name"
+              options={colleges.map((college) => ({
+                value: college,
+                label: college,
+              }))}
+              description="Select your college from the list or choose 'Other' if not listed"
             />
+            {form.watch("collegeName") === "Other" && (
+              <TextInput
+                name="otherCollegeName"
+                label="College Name"
+                placeholder="Enter your college name"
+              />
+            )}
             <TextInput
               name="collegeEmail"
               label="College Email ID"
@@ -235,24 +276,36 @@ export default function StartupCafeForm({
 
         {step === 3 && (
           <div className="space-y-4">
-            <TextInput
-              name="sdg"
-              label="Under which Sustainable Development Goal does your Idea Apply to?"
-              placeholder="Enter your Sustainable Development Goal"
-              description="Specify the Sustainable Development Goal that aligns with your idea"
+            <RadioInput
+              name="skipSubmission"
+              label="You can submit your idea later once the Bootcamp that will be conducted once 150 students register for the event. Do you want to skip the idea submission for now?"
+              options={[
+                { value: true, label: "Yes" },
+                { value: false, label: "No" },
+              ]}
             />
-            <TextareaInput
-              name="problemStatement"
-              label="Problem Statement (Not more than 100 words)"
-              placeholder="Describe the problem you're addressing"
-              description="Clearly state the problem your startup aims to solve"
-            />
-            <TextareaInput
-              name="solution"
-              label="Solution (Not more than 100 words)"
-              placeholder="Describe your proposed solution"
-              description="Briefly explain your innovative solution to the stated problem"
-            />
+            {!form.watch("skipSubmission") && (
+              <>
+                <TextInput
+                  name="sdg"
+                  label="Under which Sustainable Development Goal does your Idea Apply to?"
+                  placeholder="Enter your Sustainable Development Goal"
+                  description="Specify the Sustainable Development Goal that aligns with your idea"
+                />
+                <TextareaInput
+                  name="problemStatement"
+                  label="Problem Statement (Not more than 100 words)"
+                  placeholder="Describe the problem you're addressing"
+                  description="Clearly state the problem your startup aims to solve"
+                />
+                <TextareaInput
+                  name="solution"
+                  label="Solution (Not more than 100 words)"
+                  placeholder="Describe your proposed solution"
+                  description="Briefly explain your innovative solution to the stated problem"
+                />
+              </>
+            )}
           </div>
         )}
 

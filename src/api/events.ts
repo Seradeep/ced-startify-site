@@ -29,6 +29,21 @@ export async function apiCreateStartupCafeProject(
   }
 }
 
+export async function apiGetCollegesForStartupCafe() {
+  try {
+    let response = await api.get("/v1/startup-cafe/colleges");
+
+    const { success, data } = response.data;
+
+    if (!success) throw new Error("Server Error, Try again later!!");
+
+    return data.colleges;
+  } catch (error: any) {
+    if (error.response) throw error.response.data;
+    throw error;
+  }
+}
+
 export async function apiCreateStartupMughavariProject(
   body: StartupMughavariSchema & { paymentId: string }
 ) {
