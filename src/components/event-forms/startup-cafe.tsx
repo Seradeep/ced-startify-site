@@ -102,13 +102,17 @@ export default function StartupCafeForm({
     const isValid = await form.trigger(fields);
     let otherCollegeName = true;
     if (step === 1) {
-      otherCollegeName = form.watch("otherCollegeName") === "" ? false : true;
+      otherCollegeName =
+        form.watch("collegeName") === "Other" &&
+        form.watch("otherCollegeName") === ""
+          ? false
+          : true;
     }
     if (!otherCollegeName) {
       form.setError("otherCollegeName", {
         type: "required",
         message: "College name is required.",
-      })
+      });
     }
     if (isValid && otherCollegeName) {
       setStep((prev) => Math.min(prev + 1, totalSteps));
