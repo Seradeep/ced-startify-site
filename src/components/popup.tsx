@@ -25,6 +25,9 @@ const Popup = () => {
           </p>
           <p className="text-gray-600 mt-2 text-lg">
             We will send the confirmation mail on <strong className="text-blue-500">February 3rd</strong>.
+          <p className="text-gray-600 mt-4 text-lg font-medium">
+            For any doubts, WhatsApp on this number: <strong className="text-blue-500">9363300704</strong>
+          </p>
           </p>
         </div>
       </div>
