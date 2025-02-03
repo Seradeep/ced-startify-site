@@ -5,7 +5,7 @@ import FAQSection from "@/components/faq-section";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
 import OurStats from "@/components/our-stats";
-//import Popup from "@/components/popup";
+import Popup from "@/components/popup";
 
 {
   /*import Schedule from "@/components/schedule";*/
@@ -21,6 +21,7 @@ export default function Home() {
       <OurStats />
       <FAQSection />
       <Footer />
+      <Popup />
     </>
   );
 }
