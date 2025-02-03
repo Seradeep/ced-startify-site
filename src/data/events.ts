@@ -95,7 +95,7 @@ export const events = [
     description:
       "The Research to Startup initiative aims to empower Ph.D. scholars from Tamil Nadu by bridging the gap between academic research and entrepreneurial ventures. This event is designed to provide a platform for 100 selected Ph.D. scholars to transform their research into viable startups through mentorship, networking, and hands-on guidance.",
     prizeAmount: "TBD",
-    regFee: "6250",
+    regFee: "1",
     imageSrc: "/images/scholars-spinoff.webp",
   },
 ];
