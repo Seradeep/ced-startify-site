@@ -5,7 +5,7 @@ export const events = [
     description:
       "This hackathon is a multi-stage event designed to guide participants from ideation to prototyping. Participants will engage in workshops, mentorship sessions, and periodic evaluations to refine their prototypes.",
     prizeAmount: "Upto Rs. 2 Lakh Seed Grant per Idea",
-    regFee: "1",
+    regFee: "625",
     imageSrc: "/images/startup-cafe.webp",
   },
   {
