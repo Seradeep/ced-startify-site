@@ -5,52 +5,8 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import GradientButton from "@/components/gradient-button";
-
 import { navlinks } from "@/data";
 import { cn } from "@/lib/utils";
-
-const NavLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <Link href={href}>
-      <motion.a
-        className="relative text-neutral-100 transition-colors duration-200"
-        whileHover="hover"
-      >
-        {children}
-        <motion.span
-          className="absolute left-0 bottom-0 w-full h-0.5 bg-gray-900"
-          initial={{ scaleX: 0 }}
-          variants={{
-            hover: { scaleX: 1 },
-          }}
-          transition={{ duration: 0.2 }}
-        />
-      </motion.a>
-    </Link>
-  );
-};
-
-const MobileNavLink = ({
-  href,
-  children,
-  onClick,
-}: {
-  href: string;
-  children: React.ReactNode;
-  onClick: () => void;
-}) => (
-  <Link to={href}>
-    <Button variant="ghost" className="w-full justify-start" onClick={onClick}>
-      {children}
-    </Button>
-  </Link>
-);
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -84,65 +40,43 @@ export default function Navbar() {
           )}
         >
           <nav className="flex items-center justify-between">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, type: "spring" }}
-            >
+            {/* Logo */}
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, type: "spring" }}>
               <Link href="/" className="flex items-center">
-                <img
-                  src="/images/logo.webp"
-                  alt="Startify Logo"
-                  className="size-14 w-auto"
-                />
+                <img src="/images/logo.webp" alt="Startify Logo" className="size-14 w-auto" />
               </Link>
             </motion.div>
 
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 text-white">
               {navlinks.map((item) => (
-                <NavLink key={item.name} href={item.href}>
+                <Link key={item.name} href={item.href} className="relative text-neutral-100 transition-colors duration-200">
                   {item.name}
-                </NavLink>
+                </Link>
               ))}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <GradientButton
-                  className="max-sm:w-full"
-                  label={"Register Now"}
-                  href="#about"
-                />
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <GradientButton className="max-sm:w-full" label="Register Now" href="#about" />
               </motion.div>
             </div>
 
-            <div className="md:hidden">
+            {/* Mobile Navigation */}
+            <div className="md:hidden flex items-center space-x-4">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="icon">
                     <Menu className="size-6" />
-                    <span className="sr-only">Toggle menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent
-                  className="w-1/2 rounded-tl-md rounded-bl-md"
-                  side="right"
-                >
+                <SheetContent className="w-1/2 rounded-tl-md rounded-bl-md" side="right">
                   <nav className="flex flex-col space-y-4 mt-6">
                     {navlinks.map((item) => (
-                      <MobileNavLink
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.name}
-                      </MobileNavLink>
+                      <Link key={item.name} href={item.href}>
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => setIsOpen(false)}>
+                          {item.name}
+                        </Button>
+                      </Link>
                     ))}
-                    <GradientButton
-                      className="max-sm:w-full"
-                      label={"Register Now"}
-                      href="#about"
-                    />
+                    <GradientButton className="max-sm:w-full" label="Register Now" href="#about" />
                   </nav>
                 </SheetContent>
               </Sheet>
