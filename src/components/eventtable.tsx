@@ -10,10 +10,10 @@ const events = [
   { category: 'Finals', name: 'Pitch-X', dates: 'May 3, 4' },
   { category: 'Finals', name: 'GurusPitch', dates: 'May 3, 4' },
   { category: 'Finals', name: 'Scholar Spinoff', dates: 'May 3, 4' },
-  { category: 'March Last Week Events', name: 'Startup Mughavari', dates: 'March Last Week' },
-  { category: 'March Last Week Events', name: 'Startup Path Finder', dates: 'March Last Week' },
-  { category: 'March Last Week Events', name: 'Intern Hunt', dates: 'March Last Week' },
-  { category: 'March Last Week Events', name: 'Founder Find', dates: 'March Last Week' }
+  { category: 'Events', name: 'Startup Mughavari', dates: 'March 31' },
+  { category: 'Events', name: 'Startup Atlas', dates: 'March 31' },
+  { category: 'Events', name: 'Intern Hunt', dates: 'March 31' },
+  { category: 'Events', name: 'Founder Find', dates: 'March 31' }
 ];
 
 export default function AutoEventPopup() {
