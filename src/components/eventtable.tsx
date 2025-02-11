@@ -34,7 +34,9 @@ export default function AutoEventPopup() {
           initial={{ x: 0 }}
         >
           <Calendar className="w-5 h-5 md:w-6 md:h-6" />
-          <span className="writing-mode-vertical text-xs md:text-sm font-medium hidden md:block">View Schedule</span>
+          <span className="hidden md:block [writing-mode:vertical-rl] [text-orientation:mixed] rotate-180 text-xs md:text-sm font-medium">
+            View Schedule
+          </span>
         </motion.button>
       </div>
 
@@ -109,14 +111,6 @@ export default function AutoEventPopup() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style jsx global>{`
-        .writing-mode-vertical {
-          writing-mode: vertical-rl;
-          text-orientation: mixed;
-          transform: rotate(180deg);
-        }
-      `}</style>
     </>
   );
 }
