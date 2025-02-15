@@ -387,19 +387,34 @@ export default function InternHuntForm({
               name="internshipDuration"
               label="Duration of Internship"
               options={[
-                { value: "Less than 1 month", label: "Less than 1 month" },
-                { value: "1-3 months", label: "1-3 months" },
-                { value: "3-6 months", label: "3-6 months" },
-                { value: "More than 6 months", label: "More than 6 months" },
+                {
+                  value: "Full-time (3 months or more)",
+                  label: "Full-time (3 months or more)",
+                },
+                {
+                  value: "Part-time (3-6 months)",
+                  label: "Part-time (3-6 months)",
+                },
+                {
+                  value: "Short-term (1-3 months)",
+                  label: "Short-term (1-3 months)",
+                },
+                {
+                  value: "Long Term (More than 6 Months)",
+                  label: "Long Term (More than 6 Months)",
+                },
               ]}
             />
             <RadioInput
               name="internshipMode"
               label="Internship Mode"
               options={[
-                { value: "On-site", label: "On-site" },
-                { value: "Remote", label: "Remote" },
-                { value: "Hybrid", label: "Hybrid" },
+                { value: "Virtual Internship", label: "Virtual Internship" },
+                { value: "On-site Internship", label: "On-site Internship" },
+                {
+                  value: "Both Virtual and On-site",
+                  label: "Both Virtual and On-site",
+                },
               ]}
             />
             <TextareaInput
