@@ -382,6 +382,7 @@ export default function InternHuntForm({
               name="internshipPositions"
               label="Number of Internship Positions Available"
               placeholder="Enter number of positions"
+              type="number"
             />
             <SelectInput
               name="internshipDuration"
