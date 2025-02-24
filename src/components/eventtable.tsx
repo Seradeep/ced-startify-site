@@ -17,57 +17,75 @@ interface MobileEventCardProps {
 const events: Event[] = [
   { 
     category: "Bootcamps", 
-    name: "Bootcamp Slot 1", 
+    name: "Cohort 1 (Feb 25 - Mar 1)", 
     dates: "Feb 25 - Mar 1, 2025", 
     mode: "Online", 
     time: "6:30 PM - 8:30 PM", 
     mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
-• Sessions run daily during the slot period (Feb 25 - Mar 1)
+• Sessions run daily during the assigned dates
 • Be online 5 minutes before start time (6:30 PM)
 • Ensure you have a stable internet connection
-• Check your assigned slot in the member list
+• Check your assigned dates in the member list
 • Mark your calendar for all dates
 
-Please confirm your attendance by responding to the slot coordinator.
+Please confirm your attendance by responding to the cohort coordinator.
 For any scheduling conflicts, inform organizers immediately.`
   },
   { 
     category: "Bootcamps", 
-    name: "Bootcamp Slot 2", 
+    name: "Cohort 1 (Mar 4 - Mar 8)", 
     dates: "Mar 4 - Mar 8, 2025", 
     mode: "Online", 
     time: "6:30 PM - 8:30 PM", 
     mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
-• Sessions run daily during the slot period (Mar 4 - Mar 8)
+• Sessions run daily during the assigned dates
 • Be online 5 minutes before start time (6:30 PM)
 • Ensure you have a stable internet connection
-• Check your assigned slot in the member list
+• Check your assigned dates in the member list
 • Mark your calendar for all dates
 
-Please confirm your attendance by responding to the slot coordinator.
+Please confirm your attendance by responding to the cohort coordinator.
 For any scheduling conflicts, inform organizers immediately.`
   },
   { 
     category: "Bootcamps", 
-    name: "Bootcamp Slot 3", 
+    name: "Cohort 1 (Mar 11 - Mar 15)", 
     dates: "Mar 11 - Mar 15, 2025", 
     mode: "Online", 
     time: "6:30 PM - 8:30 PM", 
     mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
-• Sessions run daily during the slot period (Mar 11 - Mar 15)
+• Sessions run daily during the assigned dates
 • Be online 5 minutes before start time (6:30 PM)
 • Ensure you have a stable internet connection
-• Check your assigned slot in the member list
+• Check your assigned dates in the member list
 • Mark your calendar for all dates
 
-Please confirm your attendance by responding to the slot coordinator.
+Please confirm your attendance by responding to the cohort coordinator.
 For any scheduling conflicts, inform organizers immediately.`
+  },
+  { 
+    category: "Important Announcement", 
+    name: "Cohort 2 Details", 
+    dates: "To Be Announced", 
+    mode: "Online", 
+    time: "Schedule Pending", 
+    mandatory: `📢 Round 2 Information:
+
+Details for Cohort 2 will be announced shortly. All participants of Cohort 1 should:
+
+• Complete their assigned Cohort 1 sessions
+• Stay tuned for Cohort 2 dates and schedule
+• Watch for official communications about Cohort 2 format
+• Prepare to participate in advanced activities
+
+Further information about Cohort 2 will be shared through official channels.
+Teams must successfully complete their Cohort 1 sessions to be eligible for Cohort 2.`
   },
   { category: "Pre-Finals", name: "Startup Cafe, GurusPitch, Pitch-X", dates: "April 28 - April 30, 2025" },
   { category: "Finals", name: "Startup Cafe", dates: "May 3 - May 4, 2025" },
@@ -80,6 +98,7 @@ For any scheduling conflicts, inform organizers immediately.`
   { category: "Events", name: "Founder Find", dates: "March 31, 2025" }
 ];
 
+// Rest of the component remains unchanged
 const MobileEventCard = ({ event }: MobileEventCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -118,7 +137,7 @@ const MobileEventCard = ({ event }: MobileEventCardProps) => {
             >
               <div className="flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                <span>{expanded ? 'Hide Details' : 'View Attendance Requirements'}</span>
+                <span>{expanded ? 'Hide Details' : 'View Requirements'}</span>
               </div>
               {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
@@ -220,7 +239,7 @@ export default function AutoEventPopup() {
                             <div className="text-sm">
                               <div className="flex items-center gap-1 text-red-600 mb-2">
                                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                                <span>Attendance Requirements:</span>
+                                <span>Requirements:</span>
                               </div>
                               <div className="bg-gray-50 p-3 rounded whitespace-pre-wrap text-gray-700">
                                 {event.mandatory}
