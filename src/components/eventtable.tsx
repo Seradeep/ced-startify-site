@@ -1,14 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Calendar, Clock, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
-const events = [
+interface Event {
+  category: string;
+  name: string;
+  dates: string;
+  mode?: string;
+  time?: string;
+  mandatory?: string;
+}
+
+interface MobileEventCardProps {
+  event: Event;
+}
+
+const events: Event[] = [
   { 
-    "category": "Bootcamps", 
-    "name": "Bootcamp Slot 1", 
-    "dates": "Feb 25 - Mar 1, 2025", 
-    "mode": "Online", 
-    "time": "6:30 PM - 8:30 PM", 
-    "mandatory": `🎓 Important Attendance Requirements:
+    category: "Bootcamps", 
+    name: "Bootcamp Slot 1", 
+    dates: "Feb 25 - Mar 1, 2025", 
+    mode: "Online", 
+    time: "6:30 PM - 8:30 PM", 
+    mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
 • Sessions run daily during the slot period (Feb 25 - Mar 1)
@@ -21,12 +34,12 @@ Please confirm your attendance by responding to the slot coordinator.
 For any scheduling conflicts, inform organizers immediately.`
   },
   { 
-    "category": "Bootcamps", 
-    "name": "Bootcamp Slot 2", 
-    "dates": "Mar 4 - Mar 8, 2025", 
-    "mode": "Online", 
-    "time": "6:30 PM - 8:30 PM", 
-    "mandatory": `🎓 Important Attendance Requirements:
+    category: "Bootcamps", 
+    name: "Bootcamp Slot 2", 
+    dates: "Mar 4 - Mar 8, 2025", 
+    mode: "Online", 
+    time: "6:30 PM - 8:30 PM", 
+    mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
 • Sessions run daily during the slot period (Mar 4 - Mar 8)
@@ -39,12 +52,12 @@ Please confirm your attendance by responding to the slot coordinator.
 For any scheduling conflicts, inform organizers immediately.`
   },
   { 
-    "category": "Bootcamps", 
-    "name": "Bootcamp Slot 3", 
-    "dates": "Mar 11 - Mar 15, 2025", 
-    "mode": "Online", 
-    "time": "6:30 PM - 8:30 PM", 
-    "mandatory": `🎓 Important Attendance Requirements:
+    category: "Bootcamps", 
+    name: "Bootcamp Slot 3", 
+    dates: "Mar 11 - Mar 15, 2025", 
+    mode: "Online", 
+    time: "6:30 PM - 8:30 PM", 
+    mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
 • Sessions run daily during the slot period (Mar 11 - Mar 15)
@@ -56,18 +69,18 @@ For any scheduling conflicts, inform organizers immediately.`
 Please confirm your attendance by responding to the slot coordinator.
 For any scheduling conflicts, inform organizers immediately.`
   },
-  { "category": "Pre-Finals", "name": "Startup Cafe, GurusPitch, Pitch-X", "dates": "April 28 - April 30, 2025" },
-  { "category": "Finals", "name": "Startup Cafe", "dates": "May 3 - May 4, 2025" },
-  { "category": "Finals", "name": "Pitch-X", "dates": "May 3 - May 4, 2025" },
-  { "category": "Finals", "name": "GurusPitch", "dates": "May 3 - May 4, 2025" },
-  { "category": "Finals", "name": "Scholar Spinoff", "dates": "May 3 - May 4, 2025" },
-  { "category": "Events", "name": "Startup Mughavari", "dates": "March 31, 2025" },
-  { "category": "Events", "name": "Startup Atlas", "dates": "March 31, 2025" },
-  { "category": "Events", "name": "Intern Hunt", "dates": "March 31, 2025" },
-  { "category": "Events", "name": "Founder Find", "dates": "March 31, 2025" }
+  { category: "Pre-Finals", name: "Startup Cafe, GurusPitch, Pitch-X", dates: "April 28 - April 30, 2025" },
+  { category: "Finals", name: "Startup Cafe", dates: "May 3 - May 4, 2025" },
+  { category: "Finals", name: "Pitch-X", dates: "May 3 - May 4, 2025" },
+  { category: "Finals", name: "GurusPitch", dates: "May 3 - May 4, 2025" },
+  { category: "Finals", name: "Scholar Spinoff", dates: "May 3 - May 4, 2025" },
+  { category: "Events", name: "Startup Mughavari", dates: "March 31, 2025" },
+  { category: "Events", name: "Startup Atlas", dates: "March 31, 2025" },
+  { category: "Events", name: "Intern Hunt", dates: "March 31, 2025" },
+  { category: "Events", name: "Founder Find", dates: "March 31, 2025" }
 ];
 
-const MobileEventCard = ({ event }) => {
+const MobileEventCard = ({ event }: MobileEventCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
