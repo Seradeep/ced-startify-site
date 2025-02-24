@@ -38,7 +38,7 @@ For any scheduling conflicts, inform organizers immediately.`
     name: "Cohort 2 ", 
     dates: "To Be Announced", 
     mode: "Online", 
-    time: "6:30 PM - 8:30 PM", 
+    time: "To Be Announced", 
     mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
@@ -56,7 +56,7 @@ For any scheduling conflicts, inform organizers immediately.`
     name: "Cohort 3", 
     dates: "To Be Announced", 
     mode: "Online", 
-    time: "6:30 PM - 8:30 PM", 
+    time: "To Be Announced", 
     mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
