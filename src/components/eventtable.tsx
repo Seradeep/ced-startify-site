@@ -16,7 +16,7 @@ interface MobileEventCardProps {
 
 const events: Event[] = [
   { 
-    category: "Bootcamps", 
+    category: "Bootcamps(Round 1)", 
     name: "Cohort 1 (Feb 25 - Mar 1)", 
     dates: "Feb 25 - Mar 1, 2025", 
     mode: "Online", 
@@ -27,16 +27,16 @@ const events: Event[] = [
 • Sessions run daily during the assigned dates
 • Be online 5 minutes before start time (6:30 PM)
 • Ensure you have a stable internet connection
-• Check your assigned dates in the member list
+• Check your assigned dates in the member list and verify your startup name in the previously shared name list on WhatsApp.
 • Mark your calendar for all dates
 
 Please confirm your attendance by responding to the cohort coordinator.
 For any scheduling conflicts, inform organizers immediately.`
   },
   { 
-    category: "Bootcamps", 
-    name: "Cohort 1 (Mar 4 - Mar 8)", 
-    dates: "Mar 4 - Mar 8, 2025", 
+    category: "Bootcamps(Round 1)", 
+    name: "Cohort 2 ", 
+    dates: "To Be Announced", 
     mode: "Online", 
     time: "6:30 PM - 8:30 PM", 
     mandatory: `🎓 Important Attendance Requirements:
@@ -45,16 +45,16 @@ For any scheduling conflicts, inform organizers immediately.`
 • Sessions run daily during the assigned dates
 • Be online 5 minutes before start time (6:30 PM)
 • Ensure you have a stable internet connection
-• Check your assigned dates in the member list
+• The list will be released soon
 • Mark your calendar for all dates
 
 Please confirm your attendance by responding to the cohort coordinator.
 For any scheduling conflicts, inform organizers immediately.`
   },
   { 
-    category: "Bootcamps", 
-    name: "Cohort 1 (Mar 11 - Mar 15)", 
-    dates: "Mar 11 - Mar 15, 2025", 
+    category: "Bootcamps(Round 1)", 
+    name: "Cohort 3", 
+    dates: "To Be Announced", 
     mode: "Online", 
     time: "6:30 PM - 8:30 PM", 
     mandatory: `🎓 Important Attendance Requirements:
@@ -63,7 +63,7 @@ For any scheduling conflicts, inform organizers immediately.`
 • Sessions run daily during the assigned dates
 • Be online 5 minutes before start time (6:30 PM)
 • Ensure you have a stable internet connection
-• Check your assigned dates in the member list
+• The list will be released soon
 • Mark your calendar for all dates
 
 Please confirm your attendance by responding to the cohort coordinator.
@@ -71,21 +71,21 @@ For any scheduling conflicts, inform organizers immediately.`
   },
   { 
     category: "Important Announcement", 
-    name: "Cohort 2 Details", 
+    name: "Round 2 Details", 
     dates: "To Be Announced", 
     mode: "Online", 
     time: "Schedule Pending", 
     mandatory: `📢 Round 2 Information:
 
-Details for Cohort 2 will be announced shortly. All participants of Cohort 1 should:
+Details for Round 2 will be announced shortly. All participants of Round 1 should:
 
-• Complete their assigned Cohort 1 sessions
-• Stay tuned for Cohort 2 dates and schedule
-• Watch for official communications about Cohort 2 format
+• Complete their assigned Round 1 sessions
+• Stay tuned for Round 2 dates and schedule
+• Watch for official communications about Round 2 format
 • Prepare to participate in advanced activities
 
-Further information about Cohort 2 will be shared through official channels.
-Teams must successfully complete their Cohort 1 sessions to be eligible for Cohort 2.`
+Further information about Round 2 will be shared through official channels.
+Teams must successfully complete their Round 1 sessions to be eligible for Round 2.`
   },
   { category: "Pre-Finals", name: "Startup Cafe, GurusPitch, Pitch-X", dates: "April 28 - April 30, 2025" },
   { category: "Finals", name: "Startup Cafe", dates: "May 3 - May 4, 2025" },
