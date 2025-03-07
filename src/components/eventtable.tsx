@@ -36,9 +36,9 @@ For any scheduling conflicts, inform organizers immediately.`
   { 
     category: "Bootcamps(Round 1)", 
     name: "Cohort 2 ", 
-    dates: "To Be Announced", 
+    dates: "Mar 7 - Mar 11, 2025", 
     mode: "Online", 
-    time: "Schedule Pending", 
+    time: "6:30 PM - 8:30 PM", 
     mandatory: `🎓 Important Attendance Requirements:
 
 • All team members must attend every day
