@@ -23,7 +23,7 @@ export default function AboutEvent() {
           <AboutCard key={index} {...event} />
         ))}
         <div className="flex flex-col md:flex-row items-center justify-center gap-5 w-full md:col-span-3">
-          {events.slice(9, 12).map((event, index) => (
+          {events.slice(9, 11).map((event, index) => (
             <AboutCard key={index} {...event} />
           ))}
         </div>
