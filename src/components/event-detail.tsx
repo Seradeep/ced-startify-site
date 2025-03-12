@@ -15,6 +15,7 @@ interface EventDetailsProps {
 }
 
 export default function EventDetailsDialog({
+  id,
   title,
   description,
   prizeAmount,
@@ -45,6 +46,14 @@ export default function EventDetailsDialog({
           <div>
             <TypographyH3 className="mb-2">{title}</TypographyH3>
             <TypographyP className="mb-4">{description}</TypographyP>
+            {id === "startup-cafe" && (
+              <TypographyP className="!mt-2">
+                <span className="font-medium underline underline-offset-1">
+                  Theme:
+                </span>{" "}
+                Artificial Intelligence and Machine Learning
+              </TypographyP>
+            )}
             <TypographyP className="!mt-2">
               <span className="font-medium underline underline-offset-1">
                 Prize Amount:
