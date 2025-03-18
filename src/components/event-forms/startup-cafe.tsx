@@ -56,14 +56,6 @@ const formSchema = z.object({
   skipSubmission: z.boolean({
     required_error: "Please make your choice of idea submission.",
   }),
-  theme: z
-    .string()
-    .refine(
-      (val) => ["Artificial Intelligence", "Machine Learning"].includes(val),
-      {
-        message: "Please select the theme of your startup",
-      }
-    ),
   sdg: z
     .string()
     .min(1, { message: "Sustainable Development Goal is required." }),
@@ -294,20 +286,6 @@ export default function StartupCafeForm({
               options={[
                 { value: true, label: "Yes" },
                 { value: false, label: "No" },
-              ]}
-            />
-            <RadioInput
-              name="theme"
-              label="Select the theme of your startup"
-              options={[
-                {
-                  value: "Artificial Intelligence",
-                  label: "Artificial Intelligence",
-                },
-                {
-                  value: "Machine Learning",
-                  label: "Machine Learning",
-                },
               ]}
             />
             {!form.watch("skipSubmission") && (
