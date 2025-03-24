@@ -63,15 +63,6 @@ export const events = [
     imageSrc: "/images/founder-find.webp",
   },
   {
-    id: "startup-atlas",
-    title: "StartUp Atlas",
-    description:
-      "To encourage global collaboration and cross-cultural innovation among international students. This intensive weekend will involve brainstorming, prototyping, and pitching startup ideas.",
-    prizeAmount: "Upto Rs. 10 Lakh for Winner of Startup Atlas",
-    regFee: "6250(Indian Students) & $875(International Students)",
-    imageSrc: "/images/startup-atlas.webp",
-  },
-  {
     id: "path-finder",
     title: "StartUp Path Finder",
     description:
