@@ -180,7 +180,7 @@ export default function EventSchedule() {
                 <td className="border px-3 py-2 font-semibold text-red-600">{event.time}</td>
                 <td className="border px-3 py-2 text-left whitespace-pre-wrap bg-red-50 p-2 rounded-lg relative">
                   <div className="max-h-20 overflow-y-auto pr-2 flex items-start gap-2">
-                    <AlertTriangle size={18} weight="bold" className="text-red-600 mt-1" />
+                  <AlertTriangle size={18} className="text-red-600 mt-1" />
                     <span>{event.mandatory}</span>
                   </div>
                   

@@ -42,7 +42,7 @@ export default function Navbar() {
           <nav className="flex items-center justify-between">
             {/* Logo */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, type: "spring" }}>
-              <Link href="/" className="flex items-center">
+              <Link to="/" className="flex items-center">
                 <img src="/images/logo.webp" alt="Startify Logo" className="size-14 w-auto" />
               </Link>
             </motion.div>
@@ -50,7 +50,7 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 text-white">
               {navlinks.map((item) => (
-                <Link key={item.name} href={item.href} className="relative text-neutral-100 transition-colors duration-200">
+                <Link key={item.name} to={item.href} className="relative text-neutral-100 transition-colors duration-200">
                   {item.name}
                 </Link>
               ))}
@@ -70,7 +70,7 @@ export default function Navbar() {
                 <SheetContent className="w-1/2 rounded-tl-md rounded-bl-md" side="right">
                   <nav className="flex flex-col space-y-4 mt-6">
                     {navlinks.map((item) => (
-                      <Link key={item.name} href={item.href}>
+                      <Link key={item.name} to={item.href}>
                         <Button variant="ghost" className="w-full justify-start" onClick={() => setIsOpen(false)}>
                           {item.name}
                         </Button>
