@@ -20,12 +20,13 @@ export default function Home() {
       <HeroSection />
       <CMQuote />
       <AboutEvent />
+      <EventTablePopup/>
       <ECellAwards />
       <OurStats />
       <FAQSection />
       <Footer />
       <NotificationButton />
-      <EventTablePopup/>
+      
       
      </> 
   );
