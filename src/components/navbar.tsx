@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import GradientButton from "@/components/gradient-button";
 
@@ -17,22 +17,21 @@ const NavLink = ({
   children: React.ReactNode;
 }) => {
   return (
-    <Link href={href}>
-      <motion.a
-        className="relative text-neutral-100 transition-colors duration-200"
-        whileHover="hover"
-      >
-        {children}
-        <motion.span
-          className="absolute left-0 bottom-0 w-full h-0.5 bg-gray-900"
-          initial={{ scaleX: 0 }}
-          variants={{
-            hover: { scaleX: 1 },
-          }}
-          transition={{ duration: 0.2 }}
-        />
-      </motion.a>
-    </Link>
+    <motion.a
+      className="relative text-neutral-100 transition-colors duration-200"
+      whileHover="hover"
+      href={href}
+    >
+      {children}
+      <motion.span
+        className="absolute left-0 bottom-0 w-full h-0.5 bg-gray-900"
+        initial={{ scaleX: 0 }}
+        variants={{
+          hover: { scaleX: 1 },
+        }}
+        transition={{ duration: 0.2 }}
+      />
+    </motion.a>
   );
 };
 
@@ -45,11 +44,18 @@ const MobileNavLink = ({
   children: React.ReactNode;
   onClick: () => void;
 }) => (
-  <Link to={href}>
-    <Button variant="ghost" className="w-full justify-start" onClick={onClick}>
-      {children}
-    </Button>
-  </Link>
+  <a
+    href={href}
+    className={cn(
+      buttonVariants({
+        variant: "ghost",
+      }),
+      "w-full justify-start"
+    )}
+    onClick={onClick}
+  >
+    {children}
+  </a>
 );
 
 export default function Navbar() {
@@ -89,7 +95,7 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, type: "spring" }}
             >
-              <Link href="/" className="flex items-center">
+              <Link to="/" className="flex items-center">
                 <img
                   src="/images/logo.webp"
                   alt="Startify Logo"
