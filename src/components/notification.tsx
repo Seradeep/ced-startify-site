@@ -31,21 +31,21 @@ const notificationsData: Notification[] = [
     name: "Important Update!", 
     action: "", 
     post: "Startup Cafe registration", 
-    time: "10/02/2025", 
+    time: "10/03/2025", 
     unread: true,
-    fullDetails: "The Startup Cafe registration deadline has been extended to February 28, 2025. Don't miss this opportunity to register!",
+    fullDetails: "The Startup Cafe registration deadline has been extended to April 30, 2025. Don't miss this opportunity to register!",
   },
   {
     id: 2,
     name: "Important Update!",
     action: "",
     post: "Email Confirmation Update & WhatsApp Group Invitation",
-    time: "11/02/2025",
+    time: "01/04/2025",
     unread: true,
     fullDetails: `From: Austartify Team <no-reply@austartify.com>
 To: Dear Participants
 Subject: Email Confirmation Update & WhatsApp Group Invitation
-Date: 11/02/2025
+Date: 01/04/2025
 ------------------------
 Dear Participants,
 We have received your responses, and email confirmation messages are being sent out. Some of you have already received them, while others will receive them by the end of this week.
