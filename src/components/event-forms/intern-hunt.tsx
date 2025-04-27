@@ -39,29 +39,12 @@ const startupSchema = z.object({
     "Other",
   ]),
   otherIndustryDomain: z.string().optional(),
-  internshipRoles: z.array(
-    z.enum([
-      "Business Development",
-      "Marketing & Social Media",
-      "Web Development & UI/UX Design",
-      "Data Science & Analytics",
-      "Finance & Accounting",
-      "Operations & Supply Chain",
-      "HR & Talent Management",
-      "Product Management",
-      "Other",
-    ])
-  ),
+  internshipRoles: z.string().min(1, "Internship roles are required"),
   otherInternshipRole: z.string().optional(),
   preferredSkills: z.string().min(1, "Preferred skills are required"),
-  internshipPositions: z.number().min(1, "Number of positions is required"),
-  internshipDuration: z.enum([
-    "Less than 1 month",
-    "1-3 months",
-    "3-6 months",
-    "More than 6 months",
-  ]),
-  internshipMode: z.enum(["On-site", "Remote", "Hybrid"]),
+  internshipPositions: z.string().min(1, "Number of positions is required"),
+  internshipDuration: z.string().min(1, "Internship duration is required"),
+  internshipMode: z.string().min(1, "Internship mode is required"),
   stipendDetails: z.string().optional(),
   isPaid: z.enum(["Paid", "Unpaid"]),
 });
@@ -332,7 +315,7 @@ export default function InternHuntForm({
           <div className="space-y-4">
             <SelectInput
               name="internshipRoles"
-              label="Internship Role(s) Offered"
+              label="Internship Role Offered"
               options={[
                 {
                   value: "Business Development",
