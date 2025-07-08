@@ -29,7 +29,15 @@ const teamMemberSchema = z.object({
   phone: z.string().min(10, { message: "Invalid phone number." }),
   degree: z.string().min(2, { message: "Degree is required." }),
   department: z.string().min(2, { message: "Department is required." }),
-  yearOfStudy: z.enum(["1", "2", "3", "4", "5"], {
+  gender: z
+    .string({ message: "Gender is required(male/female/trans-gender)" })
+    .min(1),
+  diffAbled: z
+    .string({
+      message: "Mention if you are differently abled with the reason.",
+    })
+    .min(1),
+  yearOfStudy: z.enum(["1", "2", "3", "4", "5", "Not a student"], {
     required_error: "Year of study is required.",
   }),
 });
@@ -155,6 +163,8 @@ export default function StartupCafeForm({
           degree: "",
           department: "",
           yearOfStudy: "1",
+          gender: "",
+          diffAbled: "",
         });
       }
     } else if (memberCount < currentMembers) {
