@@ -1,106 +1,11 @@
-import { useState, useEffect } from "react";
-// import { MapPin } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import GradientButton from "@/components/gradient-button";
 import { MapPin } from "lucide-react";
 
-function AnimatedDigit({ value }: { value: number }) {
-  return (
-    <div className="relative w-16 h-20 bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden">
-      <AnimatePresence mode="popLayout">
-        <motion.span
-          key={value}
-          initial={{ y: "100%" }}
-          animate={{ y: "0%" }}
-          exit={{ y: "-100%" }}
-          transition={{
-            duration: 0.5,
-            type: "spring",
-            stiffness: 300,
-            damping: 30,
-          }}
-          className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white"
-        >
-          {value}
-        </motion.span>
-      </AnimatePresence>
-    </div>
-  );
-}
 
-function CountdownTimer({ targetDate }: { targetDate: Date }) {
-  const calculateTimeLeft = () => {
-    const difference = +targetDate - +new Date();
-    let timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    }
-
-    return timeLeft;
-  };
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [eventStarted, setEventStarted] = useState(false);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const newTimeLeft = calculateTimeLeft();
-      setTimeLeft(newTimeLeft);
-      if (
-        newTimeLeft.days === 0 &&
-        newTimeLeft.hours === 0 &&
-        newTimeLeft.minutes === 0 &&
-        newTimeLeft.seconds === 0
-      ) {
-        setEventStarted(true);
-        clearInterval(timer);
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [targetDate]);
-
-  if (eventStarted) {
-    return;
-  }
-
-  const timeUnits = [
-    { label: "Days", value: timeLeft.days },
-    { label: "Hours", value: timeLeft.hours },
-    { label: "Minutes", value: timeLeft.minutes },
-    { label: "Seconds", value: timeLeft.seconds },
-  ];
-
-  return (
-    <div className="w-full max-w-md">
-      <motion.p
-        className="mb-4 text-lg text-center font-semibold text-white"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Event Starts In:
-      </motion.p>
-      <div className="flex justify-between">
-        {timeUnits.map((unit) => (
-          <div key={unit.label} className="flex flex-col items-center">
-            <AnimatedDigit value={unit.value} />
-            <span className="text-xs mt-2 text-white">{unit.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -109,14 +14,49 @@ const fadeInUp = {
 };
 
 export default function HeroSection() {
-  const targetDate = new Date("2024-11-12T10:30:00");
+
 
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full bg-[#a81d8e] text-white rounded-b-lg"
+      className="relative min-h-screen w-full text-white rounded-b-[2rem] overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #5b0080 0%, #a81d8e 50%, #c0135a 100%)" }}
     >
-      <div className="absolute inset-0 h-full w-full bg-gray-900/60 rounded-b-lg" />
+      {/* Animated grid background */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px",
+        }}
+      />
+
+      {/* Animated glow orbs */}
+      <motion.div
+        className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none"
+        animate={{ scale: [1, 1.15, 1], opacity: [0.25, 0.4, 0.25] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background: "radial-gradient(circle, rgba(200,40,200,0.4) 0%, transparent 70%)",
+          transform: "translate(-30%, -30%)",
+        }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.35, 0.2] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        style={{
+          background: "radial-gradient(circle, rgba(100,0,180,0.5) 0%, transparent 70%)",
+          transform: "translate(30%, 30%)",
+        }}
+      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/30 rounded-b-[2rem]" />
+
       <div className="relative z-10 container mx-auto px-4 lg:px-16 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
         <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-x-10">
           <motion.div
@@ -129,13 +69,13 @@ export default function HeroSection() {
           >
             <motion.h3
               variants={fadeInUp}
-              className="max-sm:mt-4 mt-2 text-xl sm:text-2xl font-bold text-white-500"
+              className="max-sm:mt-4 mt-2 text-xl sm:text-2xl font-bold text-white/90"
             >
               Centre for Entrepreneurship Development, Anna University
             </motion.h3>
             <motion.p
               variants={fadeInUp}
-              className="text-sm uppercase tracking-wide text-white"
+              className="text-sm uppercase tracking-widest text-purple-200 mt-1"
             >
               Presents
             </motion.p>
@@ -146,19 +86,26 @@ export default function HeroSection() {
               <img
                 src="/images/hero_logo.webp"
                 alt="Startify Logo"
-                className="h-16 w-auto sm:h-20 md:h-32"
+                className="h-16 w-auto sm:h-20 md:h-32 drop-shadow-2xl"
               />
-              <span className="text-yellow-400 text-6xl sm:text-5xl md:text-6xl md:mt-2">
-                3.0
+              <span
+                className="text-6xl sm:text-5xl md:text-6xl md:mt-2 drop-shadow-lg"
+                style={{
+                  background: "linear-gradient(90deg, #fde68a, #fbbf24, #f59e0b)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                4.0
               </span>
             </motion.h1>
             <motion.p
               variants={fadeInUp}
-              className="text-sm font-bold uppercase"
+              className="text-sm font-bold uppercase tracking-widest text-white/80"
             >
               International Student Startup Ecosystem Conclave
             </motion.p>
-            <motion.div variants={fadeInUp} className="flex items-start mt-2">
+            <motion.div variants={fadeInUp} className="flex items-start mt-3">
               <GradientButton
                 className="w-fit pointer-events-none"
                 label={
@@ -170,13 +117,13 @@ export default function HeroSection() {
               />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <Separator className="my-6 bg-gray-400" />
+              <Separator className="my-6 bg-white/20" />
             </motion.div>
             <motion.p
               variants={fadeInUp}
-              className="italic text-left text-md sm:text-lg"
+              className="italic text-left text-md sm:text-lg text-white/85"
             >
-              "Startify 3.0: Empowering Stupreneurs, Inspiring Innovations."
+              "Startify 4.0: Empowering Stupreneurs, Inspiring Innovations."
             </motion.p>
             <motion.div variants={fadeInUp} className="flex gap-4 mt-6">
               <GradientButton
@@ -185,40 +132,59 @@ export default function HeroSection() {
                 label="Register Now"
               />
             </motion.div>
-            <div className="flex flex-col lg:flex-row items-center justify-between">
+
+            {/* Logos row */}
+            <div className="flex flex-col lg:flex-row items-center justify-between mt-6 gap-6">
               <motion.div
                 variants={fadeInUp}
-                className="mt-4 flex flex-col items-center lg:w-3/4"
+                className="flex flex-col items-center"
               >
-                <p className="text-lg text-white">An Initiative by</p>
-                <div className="mt-4 flex flex-row items-center justify-between gap-10">
+                <p className="text-sm text-white/70 tracking-wider mb-2">An Initiative by</p>
+                <div className="flex flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 p-3 sm:p-4 rounded-xl max-w-full"
+                  style={{
+                    background: "rgba(255,255,255,0.08)",
+                    backdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                  }}
+                >
                   <img
                     src="/images/anna_univ_logo.webp"
                     alt="Anna University Logo"
-                    className="size-16"
+                    className="size-10 sm:size-12 md:size-14"
                   />
                   <img
                     src="/images/ced_logo.webp"
                     alt="CED Logo"
-                    className="size-16"
+                    className="size-10 sm:size-12 md:size-14"
                   />
                 </div>
               </motion.div>
               <motion.div
                 variants={fadeInUp}
-                className="mt-8 flex flex-col items-center lg:w-3/4"
+                className="flex flex-col items-center"
               >
-                <p className="text-lg text-white">In Association with</p>
-                <div className="flex flex-row items-center justify-between gap-10">
+                <p className="text-sm text-white/70 tracking-wider mb-2">In Association with</p>
+                <div className="flex flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 p-3 sm:p-4 rounded-xl max-w-full"
+                  style={{
+                    background: "rgba(255,255,255,0.08)",
+                    backdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                  }}
+                >
                   <img
                     src="/images/startuptn_logo.webp"
                     alt="StartupTN Logo"
-                    className="w-40 sm:w-60 h-auto"
+                    className="w-28 sm:w-36 md:w-44 h-auto object-contain"
                   />
                   <img
                     src="/images/edii_logo.webp"
                     alt="Edii Logo"
-                    className="w-16 sm:w-24 h-16 sm:h-24"
+                    className="w-12 sm:w-16 md:w-20 h-auto object-contain"
+                  />
+                  <img
+                    src="/hcl.png"
+                    alt="HCL Logo"
+                    className="h-5 sm:h-7 md:h-8 w-auto object-contain"
                   />
                 </div>
               </motion.div>
@@ -242,7 +208,8 @@ export default function HeroSection() {
                   <img
                     src="/images/cm_image.webp"
                     alt="Thiru. M.K. Stalin, Hon'ble Chief Minister of Tamil Nadu"
-                    className="max-w-full h-auto rounded-lg shadow-lg"
+                    className="max-w-full h-auto rounded-2xl"
+                    style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" }}
                     width={400}
                     height={600}
                   />
@@ -253,15 +220,13 @@ export default function HeroSection() {
                   <img
                     src="/images/dcm_image.webp"
                     alt="Thiru. Udhayanidhi Stalin, Hon'ble Deputy Chief Minister of Tamil Nadu"
-                    className="rounded-lg shadow-lg"
+                    className="rounded-2xl"
+                    style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" }}
                     width={170}
                   />
                 </CardContent>
               </Card>
             </motion.div>
-            <div className="mt-8 w-full flex items-center justify-center">
-              <CountdownTimer targetDate={targetDate} />
-            </div>
           </motion.div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import AboutEvent from "@/components/about-event";
 import CMQuote from "@/components/cm-quote";
-import ECellAwards from "@/components/ecell-awards";
-import EventTablePopup from "@/components/eventtable";
+
 import FAQSection from "@/components/faq-section";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
@@ -20,14 +19,13 @@ export default function Home() {
       <HeroSection />
       <CMQuote />
       <AboutEvent />
-      <EventTablePopup/>
-      <ECellAwards />
+
       <OurStats />
       <FAQSection />
       <Footer />
       <NotificationButton />
-      
-      
-     </> 
+
+
+    </>
   );
 }

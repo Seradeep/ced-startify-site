@@ -22,7 +22,7 @@ export default function FAQSection() {
           </TypographyH1>
           <TypographyP className="mx-auto mb-12 lg:w-3/5 !text-gray-500">
             We&apos;re here to address your most common queries and provide you
-            with the information you need to make the most of Startify 3.0
+            with the information you need to make the most of Startify 4.0
             experience.
           </TypographyP>
         </div>

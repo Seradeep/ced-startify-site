@@ -1,126 +1,94 @@
 import { useState } from "react";
-
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-import { TypographyH4, TypographyP } from "@/components/ui/typography";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import EventDetailsDialog from "@/components/event-detail";
+import { ExternalLink, ShoppingCart } from "lucide-react";
 import Grid from "@/components/grid-bg";
-
-import StartupCafeForm from "@/components/event-forms/startup-cafe";
-import StartupMughavariForm from "@/components/event-forms/startup-mughavari";
-import InternHuntForm from "@/components/event-forms/intern-hunt";
-import StartupAtlasForm from "@/components/event-forms/startup-atlas";
-import ScholarSpinOffForm from "@/components/event-forms/scholar-spinoff";
-import StartUpPathFinderForm from "@/components/event-forms/startup-path-finder";
-import PitchXForm from "@/components/event-forms/pitch-x";
-import GurusPitchForm from "@/components/event-forms/guru-pitch";
-import StartupDistrictForm from "@/components/event-forms/startup-district";
-import GoldenStarECellAwardsForm from "@/components/event-forms/golden-ecell";
-import FounderFindForm from "@/components/event-forms/founder-find";
-import IpToIpoForm from "./event-forms/ip-to-ipo";
 
 interface AboutCardProps {
   id: string;
   title: string;
   description: string;
-  prizeAmount: string;
-  regFee: string;
   imageSrc: string;
+  eventzgoUrl?: string;
 }
 
+const cardBase: React.CSSProperties = {
+  background: "linear-gradient(135deg, rgba(91,0,128,0.82) 0%, rgba(168,29,142,0.78) 60%, rgba(192,19,90,0.72) 100%)",
+  backdropFilter: "blur(18px)",
+  border: "1px solid rgba(255,255,255,0.15)",
+  boxShadow: "0 4px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1)",
+  transition: "transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease",
+};
+
+const cardHovered: React.CSSProperties = {
+  transform: "translateY(-8px) scale(1.025)",
+  boxShadow: "0 0 40px rgba(255,255,255,0.15), 0 12px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.2)",
+  borderColor: "rgba(255,255,255,0.35)",
+};
+
 export default function AboutCard({
-  id,
   title,
   description,
-  prizeAmount,
-  regFee,
-  imageSrc,
+  eventzgoUrl,
 }: AboutCardProps) {
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const [formOpen, setFormOpen] = useState(false);
-
-  const formComponents: {
-    [key: string]: React.FC<{ onPaymentBtnOpen: (open: boolean) => void }>;
-  } = {
-    "startup-cafe": StartupCafeForm,
-    "startup-mughavari": StartupMughavariForm,
-    "intern-hunt": InternHuntForm,
-    "startup-atlas": StartupAtlasForm,
-    "scholars-spin-off": ScholarSpinOffForm,
-    "path-finder": StartUpPathFinderForm,
-    "pitch-x": PitchXForm,
-    "gurus-pitch": GurusPitchForm,
-    "founder-find": FounderFindForm,
-    "startup-district": StartupDistrictForm,
-    "e-cell-awards": GoldenStarECellAwardsForm,
-    "ip-to-ipo": IpToIpoForm,
-  };
-
-  const FormComponent = formComponents[id];
-
-  const handleApply = () => {
-    setDetailsOpen(false);
-    setFormOpen(true);
-  };
-
-  if (!FormComponent) {
-    return (
-      <div className="relative flex flex-col text-left bg-purple-700 p-6 rounded-3xl border border-purple-900 overflow-hidden">
-        <Grid size={20} />
-        <TypographyH4 className="text-[22px] underline underline-offset-2 decoration-purple-300 text-white">
-          {title}
-        </TypographyH4>
-        <TypographyP className="text-white">{description}</TypographyP>
-        <Badge
-          variant="secondary"
-          className="absolute bottom-2 right-2 bg-purple-500 text-white hover:bg-purple-600"
-        >
-          Registration Opens Soon
-        </Badge>
-      </div>
-    );
-  }
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <>
-      <Dialog open={detailsOpen} onOpenChange={setDetailsOpen}>
-        <DialogTrigger asChild>
-          <div className="relative h-full flex flex-col text-left bg-purple-700 p-6 rounded-3xl border border-purple-900 overflow-hidden cursor-pointer">
-            <Grid size={20} />
-            <TypographyH4 className="text-[22px] underline underline-offset-2 decoration-purple-300 text-white">
-              {title}
-            </TypographyH4>
-            <TypographyP className="text-white">{description}</TypographyP>
-            <Badge
-              variant="secondary"
-              className="absolute bottom-2 right-2 bg-purple-500 text-white hover:bg-purple-600"
-            >
-              View Details
-            </Badge>
-          </div>
-        </DialogTrigger>
-        <EventDetailsDialog
-          id={id}
-          title={title}
-          description={description}
-          prizeAmount={prizeAmount}
-          regFee={regFee}
-          imageSrc={imageSrc}
-          onApply={handleApply}
-        />
-      </Dialog>
+    <div
+      className="relative flex flex-col text-left p-6 rounded-3xl overflow-hidden h-full"
+      style={{ ...cardBase, ...(hovered ? cardHovered : {}) }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Subtle grid overlay */}
+      <Grid size={24} />
 
-      <Dialog open={formOpen} onOpenChange={setFormOpen}>
-        <DialogTrigger asChild>
-          <span style={{ display: "none" }}></span>
-        </DialogTrigger>
-        <DialogContent className="h-[90%] p-2">
-          <ScrollArea>
-            <FormComponent onPaymentBtnOpen={setFormOpen} />
-          </ScrollArea>
-        </DialogContent>
-      </Dialog>
-    </>
+      {/* Top accent line */}
+      <div
+        className="absolute top-0 left-6 right-6 h-[2px] rounded-full"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
+      />
+
+      {/* Title */}
+      <h3 className="text-xl font-bold text-white mb-3 leading-snug">
+        {title}
+      </h3>
+
+      {/* Description */}
+      <p className="text-sm text-white/80 leading-relaxed flex-1 mb-5">
+        {description}
+      </p>
+
+      {/* Buy button */}
+      {eventzgoUrl ? (
+        <a
+          href={eventzgoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-bold text-white overflow-hidden transition-all duration-300"
+          style={{
+            background: "rgba(255,255,255,0.15)",
+            border: "1px solid rgba(255,255,255,0.35)",
+            backdropFilter: "blur(8px)",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.25)";
+            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.6)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(255,255,255,0.2)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.15)";
+            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.35)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "none";
+          }}
+        >
+          <ShoppingCart className="size-4 shrink-0" />
+          Buy Ticket
+          <ExternalLink className="size-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+        </a>
+      ) : (
+        <span className="flex items-center justify-center w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-white/50 border border-white/15">
+          Registration Opens Soon
+        </span>
+      )}
+    </div>
   );
 }

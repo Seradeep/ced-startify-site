@@ -15,11 +15,21 @@ export default function GradientButton({
 }) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
     if (href) {
-      navigate({
-        to: href,
-      });
+      if (href.startsWith("#")) {
+        // Handle anchor links manually for smooth scrolling
+        e.preventDefault();
+        const element = document.getElementById(href.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // Handle regular routes
+        navigate({
+          to: href,
+        });
+      }
     }
 
     if (onClick) {

@@ -12,6 +12,7 @@ interface EventDetailsProps {
   regFee: string;
   imageSrc: string;
   onApply: () => void;
+  eventzgoUrl?: string;
 }
 
 export default function EventDetailsDialog({
@@ -22,6 +23,7 @@ export default function EventDetailsDialog({
   regFee,
   imageSrc,
   onApply,
+  eventzgoUrl,
 }: EventDetailsProps) {
   return (
     <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto p-6">
@@ -82,9 +84,26 @@ export default function EventDetailsDialog({
               )}
             </TypographyP>
           </div>
-          <Button onClick={onApply} className="mt-4 w-full md:w-auto">
-            Apply Now
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3 mt-4">
+            {eventzgoUrl && (
+              <a
+                href={eventzgoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 inline-flex items-center justify-center gap-2 rounded-md text-sm font-semibold px-4 py-2 text-white transition-all duration-200"
+                style={{
+                  background: "linear-gradient(135deg, #7c3aed 0%, #db2777 100%)",
+                  boxShadow: "0 4px 14px rgba(168,85,247,0.4)",
+                }}
+              >
+                <img src="/eventzgo_logo.png" alt="Eventzgo" className="h-4 w-auto brightness-200" />
+                Register on Eventzgo
+              </a>
+            )}
+            <Button onClick={onApply} variant="outline" className="flex-1 mt-0">
+              Apply Now
+            </Button>
+          </div>
         </div>
       </div>
     </DialogContent>

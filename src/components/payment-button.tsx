@@ -32,7 +32,7 @@ export default function PaymentButton({
         key: import.meta.env.RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "Startify 3.0",
+        name: "Startify 4.0",
         description: eventName,
         order_id: order.id,
         handler: async (response: {

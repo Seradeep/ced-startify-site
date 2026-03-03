@@ -7,6 +7,7 @@ export const events = [
     prizeAmount: "TBD",
     regFee: "625",
     imageSrc: "/images/ip-to-ipo.jpg",
+    eventzgoUrl: "https://www.eventzgo.com/events/j573vx282xzem32bygp76k3vrh827fx5",
   },
   {
     id: "startup-cafe",
@@ -16,6 +17,7 @@ export const events = [
     prizeAmount: "Upto Rs. 2 Lakh Seed Grant per Idea",
     regFee: "625",
     imageSrc: "/images/startup-cafe.webp",
+    eventzgoUrl: "https://www.eventzgo.com/events/j57eawd6yzsz7s2xk3482mzrex8263yn",
   },
   {
     id: "pitch-x",
@@ -25,6 +27,7 @@ export const events = [
     prizeAmount: "TBD",
     regFee: "1250",
     imageSrc: "/images/pitch-x.webp",
+    eventzgoUrl: "https://www.eventzgo.com/events/j57ah57hny092mffkn12xnnern827n9b",
   },
   {
     id: "startup-mughavari",
@@ -34,6 +37,7 @@ export const events = [
     prizeAmount: "TBD",
     regFee: "1250",
     imageSrc: "/images/startup-mughavari.webp",
+    eventzgoUrl: "https://www.eventzgo.com/events/j57bq65wzwcb1gpaj9tfzvfbw5826wqt",
   },
   {
     id: "e-cell-awards",
@@ -52,6 +56,7 @@ export const events = [
     prizeAmount: "TBD",
     regFee: "6250",
     imageSrc: "/images/gurus-pitch.webp",
+    eventzgoUrl: "https://www.eventzgo.com/events/j573snp9c6mn44zqmdw8pqw8pn827nfk",
   },
   {
     id: "intern-hunt",
@@ -70,6 +75,7 @@ export const events = [
     prizeAmount: "TBD",
     regFee: "6250",
     imageSrc: "/images/founder-find.webp",
+    eventzgoUrl: "https://www.eventzgo.com/events/j57cw7629bjmeqct5w4vq1ywv18276ce",
   },
   {
     id: "path-finder",
@@ -97,5 +103,15 @@ export const events = [
     prizeAmount: "TBD",
     regFee: "1875",
     imageSrc: "/images/scholars-spinoff.webp",
+  },
+  {
+    id: "social-x",
+    title: "Social X – Innovation for Impact",
+    description:
+      "A platform bridging social innovation and entrepreneurship, bringing together change-makers, startups, and impact investors to co-create solutions for real-world challenges.",
+    prizeAmount: "TBD",
+    regFee: "TBD",
+    imageSrc: "/images/startup-district.webp",
+    eventzgoUrl: "https://www.eventzgo.com/events/j575txsvh8zt9q8qy556bjfph9827az8",
   },
 ];

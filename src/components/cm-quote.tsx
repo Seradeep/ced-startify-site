@@ -5,36 +5,79 @@ import ShineBorder from "@/components/shine-border";
 
 export default function CMQuote() {
   return (
-    <div className="container mx-auto px-4 sm:px-20 py-12">
+    <div className="relative container mx-auto px-4 sm:px-20 py-16 overflow-hidden">
+      {/* Soft radial glow behind section */}
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(168,85,247,0.1) 0%, transparent 70%)",
+        }}
+      />
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14 gap-y-6 items-center">
+        {/* Quote card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <ShineBorder
-            className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl p-12"
+            className="relative flex w-full flex-col items-start justify-center overflow-hidden rounded-2xl border md:shadow-xl p-10"
             color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+            style={{
+              background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
+              backdropFilter: "blur(20px)",
+              borderColor: "rgba(255,255,255,0.12)",
+            } as React.CSSProperties}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.93 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.4 }}
+              className="w-full"
             >
-              <svg
-                className="h-8 w-8 text-blue-600 mb-4"
-                fill="currentColor"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
+              {/* Custom open-quote marks */}
+              <div
+                className="text-7xl font-serif leading-none mb-2 -mt-2"
+                style={{
+                  background: "linear-gradient(135deg, #a855f7, #ec4899)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
               >
-                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-              </svg>
-              <p className="text-xl sm:text-2xl font-medium text-blue-800 mb-4">
+                "
+              </div>
+              <p
+                className="text-xl sm:text-2xl font-semibold leading-snug mb-4"
+                style={{
+                  background: "linear-gradient(135deg, #1e3a8a, #4c1d95)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
                 We have set ourselves an ambitious target of becoming a $1
                 Trillion economy by 2030
               </p>
-              <div className="flex items-center mt-6">
-                <Avatar className="h-12 w-12 mr-4">
+              <div className="text-right text-5xl font-serif leading-none mb-4"
+                style={{
+                  background: "linear-gradient(135deg, #a855f7, #ec4899)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                "
+              </div>
+
+              {/* Divider */}
+              <div className="h-px w-full mb-4"
+                style={{ background: "linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent)" }}
+              />
+
+              <div className="flex items-center mt-2">
+                <Avatar className="h-14 w-14 mr-4 ring-2 ring-purple-400/40">
                   <AvatarImage
                     src="/images/cm_image.webp"
                     alt="Thiru. M.K. Stalin"
@@ -42,7 +85,7 @@ export default function CMQuote() {
                   <AvatarFallback>MKS</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-base font-bold text-gray-700">
+                  <p className="text-base font-bold text-gray-800">
                     Thiru. M.K. Stalin
                   </p>
                   <p className="text-sm text-gray-500">
@@ -53,21 +96,34 @@ export default function CMQuote() {
             </motion.div>
           </ShineBorder>
         </motion.div>
-        <ShineBorder
-          className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl"
-          color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+
+        {/* Video card */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <video
-            className="w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
+          <ShineBorder
+            className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-2xl border md:shadow-xl"
+            color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+            style={{
+              background: "rgba(0,0,0,0.04)",
+              backdropFilter: "blur(10px)",
+            } as React.CSSProperties}
           >
-            <source src="/videos/hero_vid.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </ShineBorder>
+            <video
+              className="w-full h-full object-cover rounded-2xl"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src="/videos/hero_vid.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </ShineBorder>
+        </motion.div>
       </div>
     </div>
   );
