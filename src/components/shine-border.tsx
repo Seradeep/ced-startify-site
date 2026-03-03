@@ -6,6 +6,7 @@ interface ShineBorderProps {
   duration?: number;
   color?: string | string[];
   className?: string;
+  style?: React.CSSProperties;
   children: React.ReactNode;
 }
 
@@ -15,15 +16,15 @@ export default function ShineBorder({
   duration = 14,
   color = "#000000",
   className,
+  style,
   children,
 }: ShineBorderProps) {
   return (
     <div
-      style={
-        {
-          "--border-radius": `${borderRadius}px`,
-        } as React.CSSProperties
-      }
+      style={{
+        ...style,
+        "--border-radius": `${borderRadius}px`,
+      } as React.CSSProperties}
       className={cn(
         "relative grid min-h-[60px] w-fit min-w-[300px] place-items-center rounded-[--border-radius] bg-white p-3 text-black dark:bg-black dark:text-white",
         className
