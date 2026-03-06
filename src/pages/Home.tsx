@@ -1,5 +1,4 @@
 import AboutEvent from "@/components/about-event";
-import CMQuote from "@/components/cm-quote";
 
 import FAQSection from "@/components/faq-section";
 import Footer from "@/components/footer";
@@ -17,7 +16,6 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <CMQuote />
       <AboutEvent />
 
 
