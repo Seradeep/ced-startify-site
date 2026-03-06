@@ -133,10 +133,10 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Logos row */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mt-8 gap-8 w-full">
+            <div className="flex flex-row flex-wrap items-start justify-between mt-8 gap-4 w-full">
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-col items-center w-full sm:w-auto"
+                className="flex flex-col items-center flex-1 min-w-0"
               >
                 <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center">An Initiative by</p>
                 <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
@@ -160,7 +160,7 @@ export default function HeroSection() {
               </motion.div>
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-col items-center w-full sm:w-auto"
+                className="flex flex-col items-center flex-1 min-w-0"
               >
                 <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center">In Association with</p>
                 <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
