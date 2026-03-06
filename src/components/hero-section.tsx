@@ -56,7 +56,7 @@ export default function HeroSection() {
       {/* Subtle overlay */}
       <div className="absolute inset-0 rounded-b-[2rem]" />
 
-      <div className="relative z-10 container mx-auto px-4 lg:px-16 py-12 sm:py-20 flex flex-col items-center justify-center min-h-screen">
+      <div className="relative z-10 container mx-auto px-4 lg:px-16 pt-32 pb-12 sm:pt-40 sm:pb-20 flex flex-col items-center justify-center min-h-screen">
         <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-x-10">
           <motion.div
             className="lg:w-1/2 text-left max-w-3xl mt-4"
@@ -136,10 +136,10 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mt-8 gap-8 w-full">
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-col items-center sm:items-start w-full sm:w-auto"
+                className="flex flex-col items-center w-full sm:w-auto"
               >
-                <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center sm:text-left">An Initiative by</p>
-                <div className="flex flex-row flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
+                <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center">An Initiative by</p>
+                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
                   style={{
                     background: "rgba(124,58,237,0.06)",
                     backdropFilter: "blur(8px)",
@@ -160,10 +160,10 @@ export default function HeroSection() {
               </motion.div>
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-col items-center sm:items-start w-full sm:w-auto"
+                className="flex flex-col items-center w-full sm:w-auto"
               >
-                <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center sm:text-left">In Association with</p>
-                <div className="flex flex-row flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
+                <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center">In Association with</p>
+                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
                   style={{
                     background: "rgba(124,58,237,0.06)",
                     backdropFilter: "blur(8px)",

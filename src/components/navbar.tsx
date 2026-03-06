@@ -97,7 +97,7 @@ export default function Navbar() {
                 <img
                   src="/startify_logo.png"
                   alt="Startify Logo"
-                  className="size-14 w-auto"
+                  className="h-16 md:h-[4.5rem] w-auto py-1"
                 />
               </Link>
             </motion.div>
