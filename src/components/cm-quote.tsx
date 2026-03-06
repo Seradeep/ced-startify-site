@@ -15,13 +15,14 @@ export default function CMQuote() {
         }}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14 gap-y-6 items-center">
+      <div className="flex justify-center items-center">
         {/* Quote card */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="w-full max-w-2xl"
         >
           <ShineBorder
             className="relative flex w-full flex-col items-start justify-center overflow-hidden rounded-2xl border md:shadow-xl p-10"
@@ -97,33 +98,6 @@ export default function CMQuote() {
           </ShineBorder>
         </motion.div>
 
-        {/* Video card */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          <ShineBorder
-            className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-2xl border md:shadow-xl"
-            color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
-            style={{
-              background: "rgba(0,0,0,0.04)",
-              backdropFilter: "blur(10px)",
-            } as React.CSSProperties}
-          >
-            <video
-              className="w-full h-full object-cover rounded-2xl"
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              <source src="/videos/hero_vid.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </ShineBorder>
-        </motion.div>
       </div>
     </div>
   );

@@ -139,53 +139,77 @@ export default function HeroSection() {
                 className="flex flex-col items-center w-full sm:w-auto"
               >
                 <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center whitespace-nowrap">An Initiative by</p>
-                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full flex-1"
+                <div className="flex flex-col justify-center items-center gap-4 p-3 sm:p-4 rounded-xl w-full flex-1"
                   style={{
                     background: "rgba(124,58,237,0.06)",
                     backdropFilter: "blur(8px)",
                     border: "1px solid rgba(124,58,237,0.15)",
                   }}
                 >
-                  <img
-                    src="/images/anna_univ_logo.webp"
-                    alt="Anna University Logo"
-                    className="size-12 sm:size-12 md:size-14"
-                  />
-                  <img
-                    src="/images/ced_logo.webp"
-                    alt="CED Logo"
-                    className="size-12 sm:size-12 md:size-14"
-                  />
-                </div>
-              </motion.div>
-              <motion.div
-                variants={fadeInUp}
-                className="flex flex-col items-center w-full sm:w-auto"
-              >
-                <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center">In Association with</p>
-                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full flex-1"
-                  style={{
-                    background: "rgba(124,58,237,0.06)",
-                    backdropFilter: "blur(8px)",
-                    border: "1px solid rgba(124,58,237,0.15)",
-                  }}
-                >
+                  {/* Anna Univ + CED in same row */}
+                  <div className="flex flex-row items-center justify-center gap-4">
+                    <img
+                      src="/images/anna_univ_logo.webp"
+                      alt="Anna University Logo"
+                      className="size-12 sm:size-12 md:size-14"
+                    />
+                    <img
+                      src="/images/ced_logo.webp"
+                      alt="CED Logo"
+                      className="size-12 sm:size-12 md:size-14"
+                    />
+                  </div>
+                  {/* StartupTN below */}
                   <img
                     src="/startup_tn.png"
                     alt="StartupTN Logo"
                     className="h-10 sm:h-12 md:h-14 w-auto object-contain"
                   />
-                  <img
-                    src="/images/edii_logo.webp"
-                    alt="Edii Logo"
-                    className="h-10 sm:h-12 md:h-14 w-auto object-contain"
-                  />
-                  <img
-                    src="/hcl.png"
-                    alt="HCL Logo"
-                    className="h-6 sm:h-7 md:h-8 w-auto object-contain"
-                    style={{ mixBlendMode: "multiply" }}
-                  />
+                </div>
+              </motion.div>
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-col items-center gap-3 w-full sm:w-auto flex-1"
+              >
+                <div className="w-full">
+                  <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center">In Association with</p>
+                  <div className="flex flex-col justify-center items-center gap-3 p-3 sm:p-4 rounded-xl w-full overflow-hidden"
+                    style={{
+                      background: "rgba(124,58,237,0.06)",
+                      backdropFilter: "blur(8px)",
+                      border: "1px solid rgba(124,58,237,0.15)",
+                    }}
+                  >
+                    <img
+                      src="/images/edii_logo.webp"
+                      alt="Edii Logo"
+                      className="h-10 w-auto max-w-full object-contain"
+                    />
+                    <img
+                      src="/hcl.png"
+                      alt="HCL Logo"
+                      className="h-8 w-auto max-w-full object-contain"
+                      style={{ mixBlendMode: "multiply" }}
+                    />
+                  </div>
+                </div>
+                <div className="w-full">
+                  <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center whitespace-nowrap">Ticket Partner</p>
+                  <div className="flex flex-row flex-wrap justify-center items-center gap-4 p-3 sm:p-4 rounded-xl w-full"
+                    style={{
+                      background: "rgba(124,58,237,0.06)",
+                      backdropFilter: "blur(8px)",
+                      border: "1px solid rgba(124,58,237,0.15)",
+                    }}
+                  >
+                    <a href="https://eventzgo.com" target="_blank" rel="noopener noreferrer">
+                      <img
+                        src="/eventzgo_logo.png"
+                        alt="EventzGo — Ticket Partner"
+                        className="h-10 sm:h-12 w-auto object-contain"
+                      />
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             </div>
