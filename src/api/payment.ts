@@ -4,7 +4,7 @@ const url = "/payment";
 
 export async function apiCreateOrder(body: { amount: string }) {
   try {
-    let response = await api.post(`${url}/create-order`, body);
+    const response = await api.post(`${url}/create-order`, body);
 
     const { success, data } = response.data;
 
@@ -20,10 +20,10 @@ export async function apiCreateOrder(body: { amount: string }) {
 export async function apiVerifyPayment(body: {
   order_id: string;
   payment_id: string;
-  signature: string; 
+  signature: string;
 }) {
   try {
-    let response = await api.post(`${url}/verify-payment`, body);
+    const response = await api.post(`${url}/verify-payment`, body);
 
     const { success, data } = response.data;
 

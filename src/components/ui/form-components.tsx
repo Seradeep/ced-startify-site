@@ -69,9 +69,8 @@ export const FormStepper = ({
       {Array.from({ length: totalSteps }, (_, i) => (
         <div
           key={i}
-          className={`w-full h-2 rounded ${
-            i + 1 <= currentStep ? "bg-purple-500" : "bg-gray-200"
-          }`}
+          className={`w-full h-2 rounded ${i + 1 <= currentStep ? "bg-purple-500" : "bg-gray-200"
+            }`}
         />
       ))}
     </div>
@@ -239,11 +238,11 @@ export const RadioInput = ({
           >
             {options.map((option) => (
               <FormItem
-                key={option.value}
+                key={String(option.value)}
                 className="flex items-center space-x-3 space-y-0"
               >
                 <FormControl>
-                  <RadioGroupItem value={option.value} />
+                  <RadioGroupItem value={option.value as string} />
                 </FormControl>
                 <FormLabel className="font-normal">{option.label}</FormLabel>
               </FormItem>
@@ -431,8 +430,8 @@ export const MultiSelect = ({
                                   option.value
                                 )
                                   ? field.value.filter(
-                                      (item: string) => item !== option.value
-                                    )
+                                    (item: string) => item !== option.value
+                                  )
                                   : [...(field.value || []), option.value];
                                 field.onChange(newValue);
                               }

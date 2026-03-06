@@ -17,7 +17,7 @@ export async function apiCreateStartupCafeProject(
   body: StartupCafeSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/startup-cafe/create-project", body);
+    const response = await api.post("/v1/startup-cafe/create-project", body);
 
     const { success, data } = response.data;
 
@@ -32,7 +32,7 @@ export async function apiCreateStartupCafeProject(
 
 export async function apiGetCollegesForStartupCafe() {
   try {
-    let response = await api.get("/v1/startup-cafe/colleges");
+    const response = await api.get("/v1/startup-cafe/colleges");
 
     const { success, data } = response.data;
 
@@ -49,7 +49,7 @@ export async function apiCreateStartupMughavariProject(
   body: StartupMughavariSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/startup-mughavari/create-project", body);
+    const response = await api.post("/v1/startup-mughavari/create-project", body);
 
     const { success, data } = response.data;
 
@@ -66,7 +66,7 @@ export async function apiCreateInternHuntProject(
   body: InternHuntSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/intern-hunt/create-project", body);
+    const response = await api.post("/v1/intern-hunt/create-project", body);
 
     const { success, data } = response.data;
 
@@ -83,7 +83,7 @@ export async function apiCreateStartupAtlasProject(
   body: StartupAtlasSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/startup-atlas/create-project", body);
+    const response = await api.post("/v1/startup-atlas/create-project", body);
 
     const { success, data } = response.data;
 
@@ -100,7 +100,7 @@ export async function apiCreatePitchXProject(
   body: PitchXSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/pitch-x/create-project", body);
+    const response = await api.post("/v1/pitch-x/create-project", body);
 
     const { success, data } = response.data;
 
@@ -117,7 +117,7 @@ export async function apiCreateGurusPitchProject(
   body: GurusPitchSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/gurus-pitch/create-project", body);
+    const response = await api.post("/v1/gurus-pitch/create-project", body);
 
     const { success, data } = response.data;
 
@@ -134,7 +134,7 @@ export async function apiCreateStartupDistrictProject(
   body: StartupDistrictSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/startup-district/create-project", body);
+    const response = await api.post("/v1/startup-district/create-project", body);
 
     const { success, data } = response.data;
 
@@ -151,7 +151,7 @@ export async function apiCreateScholarSpinOffProject(
   body: ScholarSpinoffSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/scholar-spinoff/create-project", body);
+    const response = await api.post("/v1/scholar-spinoff/create-project", body);
 
     const { success, data } = response.data;
 
@@ -168,7 +168,7 @@ export async function apiCreateStartupPathFinderProject(
   body: StartupPathFinderSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post(
+    const response = await api.post(
       "/v1/startup-path-finder/create-project",
       body
     );
@@ -188,7 +188,7 @@ export async function apiCreateGoldenStarECellProject(
   body: GoldenStarECellSchema
 ) {
   try {
-    let response = await api.post("/v1/golden-star-ecell/create-award", body);
+    const response = await api.post("/v1/golden-star-ecell/create-award", body);
 
     const { success, data } = response.data;
 
@@ -205,7 +205,7 @@ export async function apiCreateFounderFindProject(
   body: FounderFindSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/founder-find/create-founder", body);
+    const response = await api.post("/v1/founder-find/create-founder", body);
 
     const { success, data } = response.data;
 
@@ -222,7 +222,7 @@ export async function apiCreateIpToIpoProject(
   body: IpToIpoSchema & { paymentId: string }
 ) {
   try {
-    let response = await api.post("/v1/ip-to-ipo/create-project", body);
+    const response = await api.post("/v1/ip-to-ipo/create-project", body);
 
     const { success, data } = response.data;
 
@@ -234,3 +234,4 @@ export async function apiCreateIpToIpoProject(
     throw error;
   }
 }
+

@@ -5,7 +5,7 @@ import FAQSection from "@/components/faq-section";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
 import NotificationButton from "@/components/notification";
-import OurStats from "@/components/our-stats";
+//import OurStats from "@/components/our-stats";
 
 
 
@@ -20,7 +20,7 @@ export default function Home() {
       <CMQuote />
       <AboutEvent />
 
-      <OurStats />
+
       <FAQSection />
       <Footer />
       <NotificationButton />
