@@ -80,15 +80,15 @@ export default function HeroSection() {
             </motion.p>
             <motion.h1
               variants={fadeInUp}
-              className="flex items-center justify-start text-6xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4"
+              className="flex flex-wrap items-center justify-start text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4 gap-2"
             >
               <img
                 src="/startify_logo.png"
                 alt="Startify Logo"
-                className="h-16 w-auto sm:h-20 md:h-32 drop-shadow-2xl"
+                className="h-12 w-auto sm:h-20 md:h-32 drop-shadow-2xl"
               />
               <span
-                className="text-6xl sm:text-5xl md:text-6xl drop-shadow-lg self-center translate-y-2 md:translate-y-4 -ml-2 sm:-ml-3 md:-ml-5"
+                className="text-5xl sm:text-5xl md:text-6xl drop-shadow-lg self-center translate-y-1 sm:translate-y-2 md:translate-y-4"
                 style={{
                   background: "linear-gradient(90deg, #c4b5fd, #8b5cf6, #6d28d9)",
                   WebkitBackgroundClip: "text",
@@ -120,26 +120,26 @@ export default function HeroSection() {
             </motion.div>
             <motion.p
               variants={fadeInUp}
-              className="italic text-left text-md sm:text-lg text-[#7C3AED]/85"
+              className="italic text-left text-sm sm:text-lg text-[#7C3AED]/85"
             >
               "Startify 4.0: Empowering Stupreneurs, Inspiring Innovations."
             </motion.p>
             <motion.div variants={fadeInUp} className="flex gap-4 mt-6">
               <GradientButton
                 href="#about"
-                className="w-[30%]"
+                className="w-full sm:w-[30%]"
                 label="Register Now"
               />
             </motion.div>
 
             {/* Logos row */}
-            <div className="flex flex-col lg:flex-row items-center justify-between mt-6 gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mt-8 gap-8 w-full">
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center sm:items-start w-full sm:w-auto"
               >
-                <p className="text-sm text-[#7C3AED]/70 tracking-wider mb-2">An Initiative by</p>
-                <div className="flex flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 p-3 sm:p-4 rounded-xl max-w-full"
+                <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center sm:text-left">An Initiative by</p>
+                <div className="flex flex-row flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
                   style={{
                     background: "rgba(124,58,237,0.06)",
                     backdropFilter: "blur(8px)",
@@ -149,21 +149,21 @@ export default function HeroSection() {
                   <img
                     src="/images/anna_univ_logo.webp"
                     alt="Anna University Logo"
-                    className="size-10 sm:size-12 md:size-14"
+                    className="size-12 sm:size-12 md:size-14"
                   />
                   <img
                     src="/images/ced_logo.webp"
                     alt="CED Logo"
-                    className="size-10 sm:size-12 md:size-14"
+                    className="size-12 sm:size-12 md:size-14"
                   />
                 </div>
               </motion.div>
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center sm:items-start w-full sm:w-auto"
               >
-                <p className="text-sm text-[#7C3AED]/70 tracking-wider mb-2">In Association with</p>
-                <div className="flex flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 p-3 sm:p-4 rounded-xl max-w-full"
+                <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center sm:text-left">In Association with</p>
+                <div className="flex flex-row flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
                   style={{
                     background: "rgba(124,58,237,0.06)",
                     backdropFilter: "blur(8px)",
@@ -173,17 +173,17 @@ export default function HeroSection() {
                   <img
                     src="/startup_tn.png"
                     alt="StartupTN Logo"
-                    className="w-28 sm:w-36 md:w-44 h-auto object-contain"
+                    className="h-10 sm:h-12 md:h-14 w-auto object-contain"
                   />
                   <img
                     src="/images/edii_logo.webp"
                     alt="Edii Logo"
-                    className="w-12 sm:w-16 md:w-20 h-auto object-contain"
+                    className="h-10 sm:h-12 md:h-14 w-auto object-contain"
                   />
                   <img
                     src="/hcl.png"
                     alt="HCL Logo"
-                    className="h-5 sm:h-7 md:h-8 w-auto object-contain"
+                    className="h-6 sm:h-7 md:h-8 w-auto object-contain"
                   />
                 </div>
               </motion.div>
