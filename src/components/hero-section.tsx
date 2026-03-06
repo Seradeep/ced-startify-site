@@ -184,6 +184,7 @@ export default function HeroSection() {
                     src="/hcl.png"
                     alt="HCL Logo"
                     className="h-6 sm:h-7 md:h-8 w-auto object-contain"
+                    style={{ mixBlendMode: "multiply" }}
                   />
                 </div>
               </motion.div>
