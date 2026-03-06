@@ -103,6 +103,7 @@ export const events = [
     prizeAmount: "TBD",
     regFee: "1875",
     imageSrc: "/images/scholars-spinoff.webp",
+    eventzgoUrl: "https://www.eventzgo.com/events/j572908d27454dzz73sd9s1f3s8295b9",
   },
   {
     id: "social-x",
