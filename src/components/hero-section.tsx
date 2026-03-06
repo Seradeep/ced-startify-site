@@ -18,7 +18,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full text-[#7C3AED] rounded-b-[2rem] overflow-hidden"
+      className="relative w-full text-[#7C3AED] rounded-b-[2rem] overflow-hidden"
       style={{ background: "#ffffff" }}
     >
       {/* Animated grid background */}
@@ -56,7 +56,7 @@ export default function HeroSection() {
       {/* Subtle overlay */}
       <div className="absolute inset-0 rounded-b-[2rem]" />
 
-      <div className="relative z-10 container mx-auto px-4 lg:px-16 pt-32 pb-12 sm:pt-40 sm:pb-20 flex flex-col items-center justify-center min-h-screen">
+      <div className="relative z-10 container mx-auto px-4 lg:px-16 pt-20 pb-10 sm:pt-24 sm:pb-14 flex flex-col items-center justify-center">
         <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-x-10">
           <motion.div
             className="lg:w-1/2 text-left max-w-3xl mt-4"
@@ -80,7 +80,7 @@ export default function HeroSection() {
             </motion.p>
             <motion.h1
               variants={fadeInUp}
-              className="flex flex-wrap items-center justify-start text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4 gap-2"
+              className="flex flex-wrap items-center justify-start text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight my-4 gap-0"
             >
               <img
                 src="/startify_logo.png"
@@ -88,7 +88,7 @@ export default function HeroSection() {
                 className="h-12 w-auto sm:h-20 md:h-32 drop-shadow-2xl"
               />
               <span
-                className="text-5xl sm:text-5xl md:text-6xl drop-shadow-lg self-center translate-y-1 sm:translate-y-2 md:translate-y-4"
+                className="text-3xl sm:text-5xl md:text-6xl drop-shadow-lg self-center translate-y-1 sm:translate-y-2 md:translate-y-4 -ml-1 sm:-ml-2 md:-ml-4"
                 style={{
                   background: "linear-gradient(90deg, #c4b5fd, #8b5cf6, #6d28d9)",
                   WebkitBackgroundClip: "text",
@@ -133,13 +133,13 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Logos row */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mt-8 gap-8 w-full">
+            <div className="flex flex-col sm:flex-row items-stretch justify-between mt-8 gap-8 w-full">
               <motion.div
                 variants={fadeInUp}
                 className="flex flex-col items-center w-full sm:w-auto"
               >
                 <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center whitespace-nowrap">An Initiative by</p>
-                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
+                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full flex-1"
                   style={{
                     background: "rgba(124,58,237,0.06)",
                     backdropFilter: "blur(8px)",
@@ -163,7 +163,7 @@ export default function HeroSection() {
                 className="flex flex-col items-center w-full sm:w-auto"
               >
                 <p className="text-xs sm:text-sm text-[#7C3AED]/70 tracking-wider mb-2 text-center">In Association with</p>
-                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full"
+                <div className="flex flex-row flex-wrap justify-center items-center gap-6 sm:gap-6 p-3 sm:p-4 rounded-xl w-full flex-1"
                   style={{
                     background: "rgba(124,58,237,0.06)",
                     backdropFilter: "blur(8px)",

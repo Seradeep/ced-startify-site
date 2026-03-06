@@ -80,7 +80,7 @@ export default function Navbar() {
       >
         <motion.div
           className={cn(
-            "w-full max-w-5xl px-4 sm:px-6 py-2 rounded-2xl sm:rounded-full flex items-center justify-between pointer-events-auto",
+            "w-full max-w-5xl px-4 sm:px-6 py-1 rounded-2xl sm:rounded-full flex items-center justify-between pointer-events-auto",
             "backdrop-blur-md shadow-xl border transition-all duration-300",
             isScrolled
               ? "bg-white/95 border-[#7C3AED]/20 shadow-[0_8px_32px_rgba(124,58,237,0.15)]"
@@ -97,7 +97,7 @@ export default function Navbar() {
                 <img
                   src="/startify_logo.png"
                   alt="Startify Logo"
-                  className="h-16 md:h-[4.5rem] w-auto py-1"
+                  className="h-10 md:h-12 w-auto"
                 />
               </Link>
             </motion.div>
